@@ -1,4 +1,4 @@
-package com.example.eventich_client
+package dti.g55.eventich_client.activité
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
