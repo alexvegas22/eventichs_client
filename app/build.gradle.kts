@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "dti.g55.eventich_client"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "dti.g55.eventich_client"
