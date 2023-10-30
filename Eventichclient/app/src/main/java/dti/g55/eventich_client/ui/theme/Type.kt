@@ -1,4 +1,4 @@
-package com.example.eventich_client.ui.theme
+package dti.g55.eventich_client.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
