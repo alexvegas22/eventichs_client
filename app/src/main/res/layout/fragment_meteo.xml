@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_meteo"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Meteo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:src="@drawable/btnretour" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="Prévisions météorologiques pour le" />
+
+        <TextView
+            android:id="@+id/tvDate"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Samedi 28 Octobre 2023"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tvTemp"
+                android:layout_width="174dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center|right"
+                android:text="20"
+                android:textSize="60sp" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="126dp"
+                android:layout_height="49dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center|center_horizontal|top|left"
+                android:text="°C"
+                android:textSize="20sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView55"
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Partiellement nuageux"
+            android:textSize="18sp" />
+
+        <ScrollView
+            android:id="@+id/svTempératures"
+            android:layout_width="match_parent"
+            android:layout_height="411dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:id="@+id/llTempératures"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"/>
+        </ScrollView>
+
+    </LinearLayout>
+</FrameLayout>
