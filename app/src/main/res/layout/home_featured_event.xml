@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="20dp"
+    tools:context="dti.g55.eventich_client.MainActivity"
+    android:background="@color/md_theme_light_tertiaryContainer"
+    android:layout_marginHorizontal="30dp"
+    android:layout_marginVertical="30dp"
+    android:radius="80dp"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="3dp"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/featured_evenement_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@android:drawable/ic_menu_gallery" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/featured_evenement_nom"
+            android:layout_width="match_parent"
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_medium"
+            android:text="Événement"
+            android:textColor="@color/md_theme_light_tertiary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/featured_evenement_date"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="bottom"
+            android:text="22 Octobre 2023 à 14h00"
+            android:textSize="12dp"
+            android:textColor="@color/md_theme_light_tertiary"/>
+
+        <TextView
+            android:id="@+id/featured_evenement_location"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="bottom"
+            android:text="123 rue Chemin, Montréal, QC"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_regular"
+            android:textFontWeight="500"
+            android:textColor="@color/md_theme_light_tertiary"/>
+    </LinearLayout>
+</LinearLayout>
