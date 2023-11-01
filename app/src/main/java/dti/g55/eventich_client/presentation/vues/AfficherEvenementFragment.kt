@@ -10,7 +10,7 @@ import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.presentateurs.PrésentateurAfficherÉvénement
+import dti.g55.eventich_client.presentation.presentateur.PrésentateurAfficherÉvénement
 
 class AfficherEvenementFragment : Fragment() {
 
