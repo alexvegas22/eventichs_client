@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
-import dti.g55.eventich_client.presentation.modeles.EvenementListeItem
+import dti.g55.eventich_client.domaine.entite.EvenementListeItem
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementViewModel
 import java.text.SimpleDateFormat
 import java.util.Calendar

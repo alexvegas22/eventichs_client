@@ -1,4 +1,4 @@
-package dti.g55.eventich_client
+package dti.g55.eventich_client.presentation.vues
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.navigation.fragment.findNavController
+import dti.g55.eventich_client.R
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER

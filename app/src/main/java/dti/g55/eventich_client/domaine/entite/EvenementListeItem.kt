@@ -1,4 +1,4 @@
-package dti.g55.eventich_client.presentation.modeles
+package dti.g55.eventich_client.domaine.entite
 
 import java.util.Date
 
