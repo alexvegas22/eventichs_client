@@ -15,14 +15,14 @@
         android:text="Vos prochains évènements"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:fontFamily="@font/poppins_bold"
-        app:layout_constraintBottom_toTopOf="@+id/carouselRecyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/SubscribedEventsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.551" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/carouselRecyclerView"
+        android:id="@+id/SubscribedEventsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="68dp"
@@ -38,30 +38,29 @@
 
 
     <TextView
-        android:id="@+id/MapEventsText"
+        android:id="@+id/OrganisationEventsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Évènements près de vous"
+        android:text="Évènements dans vos organisations"
         android:fontFamily="@font/poppins_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/carouselRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/SubscribedEventsRecyclerView" />
 
-    <ImageView
-        android:id="@+id/mapImg"
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:layout_marginBottom="16dp"
-        android:scaleX="0.7"
-        android:scaleY="0.7"
-        android:src="@drawable/map"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/OrganisationEventsRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MapEventsText"
-        app:layout_constraintVertical_bias="0.119" />
+        app:layout_constraintTop_toBottomOf="@+id/OrganisationEventsText">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

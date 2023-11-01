@@ -1,7 +1,6 @@
 package dti.g55.eventich_client.presentation.vues
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
