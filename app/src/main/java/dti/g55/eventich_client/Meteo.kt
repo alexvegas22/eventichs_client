@@ -9,9 +9,12 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 
 
 class Meteo : Fragment() {
+    lateinit var btnRetourImage: ImageView
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -93,5 +96,17 @@ class Meteo : Fragment() {
 
 
         return rootView
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        btnRetourImage = view.findViewById(R.id.imageView)
+
+        btnRetourImage.setOnClickListener { retour() }
+    }
+
+    fun retour() {
+        findNavController().navigate(R.id.action_meteo2_to_fragment_afficher_evenement)
     }
 }
