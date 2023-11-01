@@ -7,7 +7,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.presentation.modeles.EvenementListeItem
@@ -15,6 +17,7 @@ import dti.g55.eventich_client.presentation.modeles.EvenementListeItem
 class ListeEvenementRecyclerAdapter(var listeEvenements: List<EvenementListeItem>, var context: Context): RecyclerView.Adapter<ListeEvenementRecyclerAdapter.MyViewHolder>() {
 
     class MyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
+        val item: LinearLayout
         val image: ImageView
         val nom: TextView
         val date: TextView
@@ -22,6 +25,7 @@ class ListeEvenementRecyclerAdapter(var listeEvenements: List<EvenementListeItem
         val button: ImageButton
 
         init {
+            item = itemView.findViewById(R.id.evenement_liste_item)
             image = itemView.findViewById(R.id.evenement_liste_item_image)
             nom = itemView.findViewById(R.id.evenement_liste_item_nom)
             date = itemView.findViewById(R.id.evenement_liste_item_date)
@@ -45,12 +49,15 @@ class ListeEvenementRecyclerAdapter(var listeEvenements: List<EvenementListeItem
         holder.nom.text = nom
         holder.date.text = date.toString()
         holder.location.text = location
-        holder.button.setOnClickListener { v ->
-            // Ajouter l'instanticiation du fragment d'un événement
-        }
+
+        holder.item.setOnClickListener { goToEvent(holder.item) }
     }
 
     override fun getItemCount(): Int {
         return listeEvenements.size
+    }
+
+    fun goToEvent(item: LinearLayout) {
+        item.findNavController().navigate(R.id.action_liste_evenements_to_fragment_afficher_evenement)
     }
 }
