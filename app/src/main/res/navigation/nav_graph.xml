@@ -3,16 +3,49 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/accueilFragment">
+    app:startDestination="@id/accueil">
 
-    <fragment android:id="@+id/rvListeEvenements"
+    <fragment android:id="@+id/liste_evenements"
         android:name="dti.g55.eventich_client.presentation.vues.ListeEvenementFragment"
-        android:label="fragment_first"
+        android:label="liste_evenements"
         tools:layout="@layout/fragment_liste_evenement">
+        <action
+            android:id="@+id/action_liste_evenements_to_fragment_afficher_evenement"
+            app:destination="@id/fragment_afficher_evenement" />
     </fragment>
-    <fragment android:id="@+id/accueilFragment"
+    <fragment android:id="@+id/accueil"
         android:name="dti.g55.eventich_client.presentation.vues.accueilFragment"
-        android:label="fragment_first"
-        tools:layout="@layout/fragment_liste_evenement">
+        android:label="@string/accueil"
+        tools:layout="@layout/fragment_accueil">
+        <action
+            android:id="@+id/action_accueil_to_fragment_afficher_evenement"
+            app:destination="@id/fragment_afficher_evenement" />
     </fragment>
+    <fragment
+        android:id="@+id/meteo2"
+        android:name="dti.g55.eventich_client.Meteo"
+        android:label="fragment_meteo"
+        tools:layout="@layout/fragment_meteo" >
+        <action
+            android:id="@+id/action_meteo2_to_fragment_afficher_evenement"
+            app:destination="@id/fragment_afficher_evenement" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragment_afficher_evenement"
+        android:name="dti.g55.eventich_client.fragment_afficher_evenement"
+        android:label="fragment_afficher_evenement"
+        tools:layout="@layout/fragment_afficher_evenement" >
+        <action
+            android:id="@+id/action_fragment_afficher_evenement_to_meteo2"
+            app:destination="@id/meteo2" />
+        <action
+            android:id="@+id/action_fragment_afficher_evenement_to_liste_evenements"
+            app:destination="@id/liste_evenements" />
+    </fragment>
+    <action
+        android:id="@+id/action_aller_accueil"
+        app:destination="@id/accueil" />
+    <action
+        android:id="@+id/action_aller_recherche"
+        app:destination="@id/liste_evenements" />
 </navigation>

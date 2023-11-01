@@ -33,9 +33,9 @@
             <Button
                 android:id="@+id/btnDateDebut"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_border_edittext"
+                android:gravity="center"
                 android:text="22-09-2023" />
 
             <android.widget.Space
@@ -60,11 +60,10 @@
             <Button
                 android:id="@+id/btnDateFin"
                 android:layout_width="wrap_content"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/rounded_border_edittext"
-                android:text="25-10-2023"
-                />
+                android:gravity="center"
+                android:text="25-10-2023" />
         </LinearLayout>
 
         <View
