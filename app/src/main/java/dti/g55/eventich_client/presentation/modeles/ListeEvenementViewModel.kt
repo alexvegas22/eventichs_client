@@ -1,6 +1,7 @@
 package dti.g55.eventich_client.presentation.modeles
 
 import dti.g55.eventich_client.R
+import dti.g55.eventich_client.domaine.entite.EvenementListeItem
 import java.text.SimpleDateFormat
 import java.util.Date
 

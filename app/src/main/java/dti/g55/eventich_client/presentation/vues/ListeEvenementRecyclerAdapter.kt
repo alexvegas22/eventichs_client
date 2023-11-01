@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -12,7 +11,7 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
-import dti.g55.eventich_client.presentation.modeles.EvenementListeItem
+import dti.g55.eventich_client.domaine.entite.EvenementListeItem
 
 class ListeEvenementRecyclerAdapter(var listeEvenements: List<EvenementListeItem>, var context: Context): RecyclerView.Adapter<ListeEvenementRecyclerAdapter.MyViewHolder>() {
 

@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
                 fragmentContainerView.findNavController().navigate(R.id.action_aller_recherche)
                 return true
             }
+            R.id.item_profil -> {
+                fragmentContainerView.findNavController().navigate(R.id.action_aller_profil)
+                return true
+            }
         }
 
         return super.onOptionsItemSelected(item)

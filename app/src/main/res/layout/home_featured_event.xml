@@ -9,7 +9,6 @@
     android:padding="20dp"
     tools:context="dti.g55.eventich_client.MainActivity"
     android:background="@drawable/rounded_border_edittext"
-
     android:layout_marginHorizontal="30dp"
     android:layout_marginVertical="30dp"
     android:radius="80dp"
@@ -42,7 +41,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/poppins_medium"
             android:text="Événement"
-            android:textColor="@color/md_theme_light_tertiary"
+
             android:textSize="16sp" />
 
         <TextView
@@ -53,8 +52,7 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="bottom"
             android:text="22 Octobre 2023 à 14h00"
-            android:textSize="12dp"
-            android:textColor="@color/md_theme_light_tertiary"/>
+            android:textSize="12dp" />
 
         <TextView
             android:id="@+id/featured_evenement_location"
@@ -65,7 +63,6 @@
             android:text="123 rue Chemin, Montréal, QC"
             android:textSize="12sp"
             android:fontFamily="@font/poppins_regular"
-            android:textFontWeight="500"
-            android:textColor="@color/md_theme_light_tertiary"/>
+            android:textFontWeight="500" />
     </LinearLayout>
 </LinearLayout>

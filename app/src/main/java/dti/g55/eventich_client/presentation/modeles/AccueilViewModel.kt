@@ -2,8 +2,9 @@ package dti.g55.eventich_client.presentation.modeles
 
 import android.annotation.SuppressLint
 import dti.g55.eventich_client.R
+import dti.g55.eventich_client.domaine.entite.EvenementListeItem
 import java.text.SimpleDateFormat
-import java.util.Date
+
 class AccueilViewModel {
     @SuppressLint("SimpleDateFormat")
     fun listeEvenementsInscrits(/* code utilisateur*/ ): List<EvenementListeItem>{
