@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.presentation.modeles.AccueilViewModel
 import dti.g55.eventich_client.domaine.entite.EvenementListeItem
-
+import dti.g55.eventich_client.presentation.adapteur.AccueilEvenementRecyclerAdapter
 
 
 class accueilFragment : Fragment() {
@@ -35,7 +35,7 @@ class accueilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recycler = view.findViewById(R.id.carouselRecyclerView)
+        recycler = view.findViewById(R.id.SubscribedEventsRecyclerView)
         model = AccueilViewModel()
         listeEvenements = model.listeEvenementsInscrits()
         setInfoAdapter()

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import dti.g55.eventich_client.SourceDeDonnees.MockData
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 
-class FragmentProfilViewModel : ViewModel() {
+class ProfilViewModel : ViewModel() {
 
     private var profilConnecte = MockData.profilUtilisateur
 
