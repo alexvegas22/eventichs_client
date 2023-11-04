@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
-import dti.g55.eventich_client.domaine.entite.EvenementListeItem
+import dti.g55.eventich_client.domaine.entite.Evenement
 
-class AccueilEvenementRecyclerAdapter(var listeEvenements: List<EvenementListeItem>, var context: Context): RecyclerView.Adapter<AccueilEvenementRecyclerAdapter.AccueilViewHolder>()  {
+class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var context: Context): RecyclerView.Adapter<AccueilEvenementRecyclerAdapter.AccueilViewHolder>()  {
 
     class AccueilViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val item: LinearLayout
