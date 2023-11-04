@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementViewModel
+import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
@@ -65,13 +66,13 @@ class ListeEvenementFragment : Fragment() {
         btnDateFin.setOnClickListener { view: View -> ouvrirFinSelecteurDate(view) }
         btnDateDebut.text = makeDateString(jour, moisCourant, annee)
 
-        setInfoAdapter()
+        setupRecyclerView()
         updateAdapter(parseDate("10-09-2023"), parseDate("30-12-2023"))
     }
 
-    private fun setInfoAdapter(){
+    private fun setupRecyclerView(){
         listeEvenements = mutableListOf()
-        var adapter = ListeEvenementRecyclerAdapter(listeEvenements, context)
+        var adapter = CustomRecyclerAdapter(listeEvenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder)
         var layoutManager = LinearLayoutManager(context)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
@@ -88,7 +89,7 @@ class ListeEvenementFragment : Fragment() {
 
         println(listeEvenements);
 
-        recycler.adapter = ListeEvenementRecyclerAdapter(listeEvenements, context)
+        recycler.adapter = CustomRecyclerAdapter(listeEvenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder)
     }
 
     private fun initSelecteurDate(){

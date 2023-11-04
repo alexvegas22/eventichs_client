@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.modeles.AccueilViewModel
-
+import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
 
 class accueilFragment : Fragment() {
@@ -38,10 +38,11 @@ class accueilFragment : Fragment() {
         recycler = view.findViewById(R.id.carouselRecyclerView)
         model = AccueilViewModel()
         listeEvenements = model.listeEvenementsInscrits()
-        setInfoAdapter()
+        setupRecyclerView()
     }
-    private fun setInfoAdapter(){
-        var adapter = AccueilEvenementRecyclerAdapter(listeEvenements, context)
+
+    private fun setupRecyclerView(){
+        var adapter = CustomRecyclerAdapter(listeEvenements, R.layout.home_featured_event, ::AccueilEvenementViewHolder)
         var layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
