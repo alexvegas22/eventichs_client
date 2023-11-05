@@ -6,7 +6,7 @@
     app:startDestination="@id/accueil">
 
     <fragment android:id="@+id/liste_evenements"
-        android:name="dti.g55.eventich_client.presentation.vues.ListeEvenementFragment"
+        android:name="dti.g55.eventich_client.presentation.vues.ListeEvenementVue"
         android:label="liste_evenements"
         tools:layout="@layout/fragment_liste_evenement">
         <action
