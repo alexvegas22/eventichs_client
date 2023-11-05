@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_afficher_evenement"
-        android:name="dti.g55.eventich_client.presentation.vues.fragment_afficher_evenement"
+        android:name="dti.g55.eventich_client.presentation.vues.AfficherEvenementFragment"
         android:label="fragment_afficher_evenement"
         tools:layout="@layout/fragment_afficher_evenement" >
         <action
