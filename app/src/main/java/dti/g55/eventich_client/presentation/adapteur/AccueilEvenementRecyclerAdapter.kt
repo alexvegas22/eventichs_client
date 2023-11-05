@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.domaine.entite.EvenementListeItem
+import dti.g55.eventich_client.presentation.presentateur.RecyclerPresentateur
 
 class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var context: Context): RecyclerView.Adapter<AccueilEvenementRecyclerAdapter.AccueilViewHolder>()  {
 
@@ -21,6 +21,7 @@ class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var 
         val nom: TextView
         val date: TextView
         val location: TextView
+        val presentateur : RecyclerPresentateur
 
 
         init {
@@ -29,6 +30,7 @@ class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var 
             nom = itemView.findViewById(R.id.featured_evenement_nom)
             date = itemView.findViewById(R.id.featured_evenement_date)
             location = itemView.findViewById(R.id.featured_evenement_location)
+            presentateur = RecyclerPresentateur(this)
         }
     }
 
@@ -48,7 +50,10 @@ class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var 
         holder.date.text = date.toString()
         holder.location.text = location
 
-        holder.item.setOnClickListener { goToEvent(holder.item) }
+        holder.item.setOnClickListener {
+            holder.presentateur.passerEvenementChoisiAuModele(listeEvenements[position])
+            goToEvent(holder.item)
+        }
     }
 
     override fun getItemCount(): Int {

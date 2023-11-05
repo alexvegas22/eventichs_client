@@ -11,17 +11,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.modeles.AccueilViewModel
-import dti.g55.eventich_client.domaine.entite.EvenementListeItem
+import dti.g55.eventich_client.presentation.modeles.modele
 import dti.g55.eventich_client.presentation.adapteur.AccueilEvenementRecyclerAdapter
+import dti.g55.eventich_client.presentation.presentateur.AccueilPresentateur
 
 
 class accueilFragment : Fragment() {
 
-    private lateinit var listeEvenements: List<Evenement>
+    lateinit var listeEvenements: List<Evenement>
     private lateinit var recycler: RecyclerView
-    private lateinit var model: AccueilViewModel
     private lateinit var context: Context
+    private var presentateur =  AccueilPresentateur(this)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +36,8 @@ class accueilFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        presentateur.traiterDemarrage()
         recycler = view.findViewById(R.id.SubscribedEventsRecyclerView)
-        model = AccueilViewModel()
-        listeEvenements = model.listeEvenementsInscrits()
         setInfoAdapter()
     }
     private fun setInfoAdapter(){

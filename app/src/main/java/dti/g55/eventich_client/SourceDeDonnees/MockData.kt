@@ -8,6 +8,9 @@ import java.text.SimpleDateFormat
 class MockData {
     companion object {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+
+        val evenementChoisi =  Evenement(R.drawable.ic_search, "Spectacle de musique", dateFormat.parse("26-10-2023"), "1928 rue Rue, Montréal, QC","Lutins Inc")
+
         val profilUtilisateur: ProfilUtilisateur = ProfilUtilisateur(R.drawable.alistaire_cockburn, "Cockburn", "Alistaire", "agileKing@alliance.com","6400 16e Avenue, Montreal, Quebec")
         val evenements = arrayListOf(
             EvenementListeItem(R.drawable.ic_search, "Événement 1", dateFormat.parse("22-10-2023"), "123 rue Chemin, Montréal, QC"),

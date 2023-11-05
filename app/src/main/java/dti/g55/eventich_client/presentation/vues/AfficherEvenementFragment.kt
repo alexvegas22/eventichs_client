@@ -7,23 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import dti.g55.eventich_client.R
+import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.presentateur.EvenementPresentateur
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [fragment_afficher_evenement.newInstance] factory method to
- * create an instance of this fragment.
- */
 class fragment_afficher_evenement : Fragment() {
     lateinit var meteoLayout: LinearLayout
     lateinit var backButtonImage: ImageView
-
+    lateinit var nomEvenement : TextView
+    lateinit var organisationEvenement : TextView
+    lateinit var adresseEvenement: TextView
+    lateinit var dateLongue: TextView
+    lateinit var dateCourte: TextView
+    lateinit var imageEvenement : ImageView
+    private var presentateur : EvenementPresentateur = EvenementPresentateur(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,9 +41,15 @@ class fragment_afficher_evenement : Fragment() {
 
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
-
+        nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
+        organisationEvenement = view.findViewById(R.id.txtOrganisateur)
+        adresseEvenement = view.findViewById(R.id.txtAdresse)
+        dateCourte = view.findViewById(R.id.txtDateCourte)
+        dateLongue = view.findViewById(R.id.txtDateLongue)
+        imageEvenement = view.findViewById(R.id.imgÉvénement)
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { retour() }
+        presentateur.traiterDemarrage()
     }
 
     fun voirMeteo(){
@@ -55,23 +60,13 @@ class fragment_afficher_evenement : Fragment() {
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_liste_evenements)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment fragment_afficher_evenement.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            fragment_afficher_evenement().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun setEvenementInfo(evenement: Evenement){
+        nomEvenement.setText(evenement.nom)
+        organisationEvenement.setText(evenement.organisation)
+        adresseEvenement.setText(evenement.location)
+        dateCourte.setText(evenement.date.toString())
+        dateLongue.setText(evenement.date.toString())
+
     }
+
 }
