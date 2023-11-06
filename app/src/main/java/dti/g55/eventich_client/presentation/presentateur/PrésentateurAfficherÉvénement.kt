@@ -1,6 +1,6 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.presentation.modeles.AfficherEvenementModel
+import dti.g55.eventich_client.presentation.modeles.ModelDonnéesFactices
 import dti.g55.eventich_client.presentation.vues.AfficherEvenementFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +11,7 @@ class PrésentateurAfficherÉvénement(val vueAfficherEvenementFragment : Affich
 
     //variables
     private var job: Job? = null
-    private var modèle = AfficherEvenementModel()
+    private var modèle = ModelDonnéesFactices()
 
     //fun
     fun initialiser_fragment(){
@@ -23,7 +23,7 @@ class PrésentateurAfficherÉvénement(val vueAfficherEvenementFragment : Affich
             //récuperer données
             CoroutineScope( Dispatchers.Main ).launch {
                 //affichage
-                vueAfficherEvenementFragment.afficher_données( modèle.événement )
+                vueAfficherEvenementFragment.afficher_données( modèle.retournerUnÉvénement() )
             }
         }
     }
