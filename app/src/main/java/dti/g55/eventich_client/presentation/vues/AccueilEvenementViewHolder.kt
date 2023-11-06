@@ -30,9 +30,11 @@ class AccueilEvenementViewHolder(itemView: View): CustomViewHolder<Evenement>(it
         date.text = evenement.date.toString()
         location.text = evenement.location
 
-        item.setOnClickListener { goToEvent(item) }
+        item.setOnClickListener { goToEvent(item, evenement) }
     }
-    private fun goToEvent(item: LinearLayout) {
-        item.findNavController().navigate(R.id.action_accueil_to_fragment_afficher_evenement)
+    private fun goToEvent(item: LinearLayout, evenement: Evenement) {
+        val action = AccueilVueDirections.actionAccueilToFragmentAfficherEvenement()
+        action.evenementSelectionne = evenement.id
+        item.findNavController().navigate(action)
     }
 }

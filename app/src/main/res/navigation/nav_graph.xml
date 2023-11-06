@@ -11,19 +11,27 @@
         tools:layout="@layout/fragment_liste_evenement">
         <action
             android:id="@+id/action_liste_evenements_to_fragment_afficher_evenement"
-            app:destination="@id/fragment_afficher_evenement" />
+            app:destination="@id/fragment_afficher_evenement" >
+            <argument
+                android:name="evenementSelectionne"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <fragment android:id="@+id/accueil"
-        android:name="dti.g55.eventich_client.presentation.vues.accueilFragment"
+        android:name="dti.g55.eventich_client.presentation.vues.AccueilVue"
         android:label="@string/accueil"
         tools:layout="@layout/fragment_accueil">
         <action
             android:id="@+id/action_accueil_to_fragment_afficher_evenement"
-            app:destination="@id/fragment_afficher_evenement" />
+            app:destination="@id/fragment_afficher_evenement" >
+            <argument
+                android:name="evenementSelectionne"
+                android:defaultValue="0" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/meteo2"
-        android:name="dti.g55.eventich_client.presentation.vues.Meteo"
+        android:name="dti.g55.eventich_client.presentation.vues.MeteoVue"
         android:label="fragment_meteo"
         tools:layout="@layout/fragment_meteo" >
         <action
@@ -32,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragment_afficher_evenement"
-        android:name="dti.g55.eventich_client.presentation.vues.fragment_afficher_evenement"
+        android:name="dti.g55.eventich_client.presentation.vues.EvenementVue"
         android:label="fragment_afficher_evenement"
         tools:layout="@layout/fragment_afficher_evenement" >
         <action
@@ -48,7 +56,7 @@
     </fragment>
     <fragment
         android:id="@+id/profil"
-        android:name="dti.g55.eventich_client.presentation.vues.fragment_profil"
+        android:name="dti.g55.eventich_client.presentation.vues.ProfilVue"
         android:label="fragment_meteo"
         tools:layout="@layout/fragment_profil" >
 

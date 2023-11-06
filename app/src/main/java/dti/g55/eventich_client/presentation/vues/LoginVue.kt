@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import dti.g55.eventich_client.presentation.modeles.LoginViewModel
 import dti.g55.eventich_client.R
 
-class login : Fragment() {
+class LoginVue : Fragment() {
 
     companion object {
-        fun newInstance() = login()
+        fun newInstance() = LoginVue()
     }
 
     private lateinit var viewModel: LoginViewModel

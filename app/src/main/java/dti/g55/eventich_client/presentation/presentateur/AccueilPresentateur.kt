@@ -1,12 +1,9 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import dti.g55.eventich_client.presentation.modeles.Modele
-import dti.g55.eventich_client.presentation.vues.accueilFragment
-import dti.g55.eventich_client.presentation.vues.fragment_profil
+import dti.g55.eventich_client.presentation.vues.AccueilVue
 
-class AccueilPresentateur(var vue: accueilFragment) {
+class AccueilPresentateur(var vue: AccueilVue) {
 
     private var model = Modele()
 

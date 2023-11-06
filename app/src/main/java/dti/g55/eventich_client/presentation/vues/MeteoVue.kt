@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import dti.g55.eventich_client.R
 
 
-class Meteo : Fragment() {
+class MeteoVue : Fragment() {
     lateinit var btnRetourImage: ImageView
 
     override fun onCreateView(

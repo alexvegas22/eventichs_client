@@ -13,7 +13,7 @@ import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import dti.g55.eventich_client.presentation.presentateur.ProfilPresentateur
 
-class fragment_profil : Fragment() {
+class ProfilVue : Fragment() {
 
     private lateinit var context: Context
     private lateinit var imageProfil : ImageView
