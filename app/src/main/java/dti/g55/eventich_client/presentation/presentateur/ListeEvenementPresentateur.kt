@@ -1,7 +1,6 @@
-package dti.g55.eventich_client.presentation.presentateurs
+package dti.g55.eventich_client.presentation.presentateur
 
 import android.widget.DatePicker
-import android.widget.Toast
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementModele
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
 import java.util.Calendar

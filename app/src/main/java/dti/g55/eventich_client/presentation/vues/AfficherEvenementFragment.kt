@@ -7,18 +7,22 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.presentateur.PrésentateurAfficherÉvénement
+import dti.g55.eventich_client.presentation.presentateur.EvenementPresentateur
 
-class AfficherEvenementFragment : Fragment() {
-
-    var présentateur = PrésentateurAfficherÉvénement(this)
-
+class fragment_afficher_evenement : Fragment() {
     lateinit var meteoLayout: LinearLayout
     lateinit var backButtonImage: ImageView
-
+    lateinit var nomEvenement : TextView
+    lateinit var organisationEvenement : TextView
+    lateinit var adresseEvenement: TextView
+    lateinit var dateLongue: TextView
+    lateinit var dateCourte: TextView
+    lateinit var imageEvenement : ImageView
+    private var presentateur : EvenementPresentateur = EvenementPresentateur(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -37,11 +41,15 @@ class AfficherEvenementFragment : Fragment() {
 
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
-
+        nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
+        organisationEvenement = view.findViewById(R.id.txtOrganisateur)
+        adresseEvenement = view.findViewById(R.id.txtAdresse)
+        dateCourte = view.findViewById(R.id.txtDateCourte)
+        dateLongue = view.findViewById(R.id.txtDateLongue)
+        imageEvenement = view.findViewById(R.id.imgÉvénement)
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { retour() }
-
-        présentateur.initialiser_fragment()
+        presentateur.traiterDemarrage()
     }
 
     fun voirMeteo(){
@@ -52,7 +60,13 @@ class AfficherEvenementFragment : Fragment() {
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_liste_evenements)
     }
 
-    fun afficher_données(événement: Evenement) {
-        //à faire
+    fun afficher_données(evenement: Evenement){
+        nomEvenement.setText(evenement.nomComplet)
+        organisationEvenement.setText(evenement.organisation)
+        adresseEvenement.setText(evenement.location)
+        dateCourte.setText(evenement.date.toString())
+        dateLongue.setText(evenement.date.toString())
+
     }
+
 }
