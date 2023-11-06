@@ -24,7 +24,6 @@ class PrésentateurAfficherÉvénement(val vueAfficherEvenementFragment : fragme
             val evenement = modèle.getEvenementSelectionne()
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
-                vueAfficherEvenementFragment.afficher_données(evenement)
                 vueAfficherEvenementFragment.afficher_données( modèle.getEvenementSelectionne() )
             }
         }

@@ -41,7 +41,7 @@ class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var 
 
     override fun onBindViewHolder(holder: AccueilViewHolder, position: Int) {
         val image = listeEvenements[position].imageId
-        val nom = listeEvenements[position].nom
+        val nom = listeEvenements[position].nomComplet
         val date = listeEvenements[position].date
         val location = listeEvenements[position].location
 
@@ -51,8 +51,10 @@ class AccueilEvenementRecyclerAdapter(var listeEvenements: List<Evenement>, var 
         holder.location.text = location
 
         holder.item.setOnClickListener {
-            holder.presentateur.passerEvenementChoisiAuModele(listeEvenements[position])
+
             goToEvent(holder.item)
+            holder.presentateur.passerEvenementChoisiAuModele(listeEvenements[position])
+
         }
     }
 
