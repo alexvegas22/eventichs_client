@@ -26,7 +26,7 @@ class AccueilEvenementViewHolder(itemView: View): CustomViewHolder<Evenement>(it
 
     override fun bindItem(evenement: Evenement) {
         image.setImageResource(evenement.imageId)
-        nom.text = evenement.nom
+        nom.text = evenement.nomComplet
         date.text = evenement.date.toString()
         location.text = evenement.location
 

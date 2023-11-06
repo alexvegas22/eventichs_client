@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.adapteur.AccueilEvenementRecyclerAdapter
 import dti.g55.eventich_client.presentation.presentateur.AccueilPresentateur
-
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
 

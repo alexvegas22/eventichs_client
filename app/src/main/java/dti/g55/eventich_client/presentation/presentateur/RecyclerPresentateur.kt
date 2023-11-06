@@ -1,12 +1,12 @@
 package dti.g55.eventich_client.presentation.presentateur
 
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.adapteur.AccueilEvenementRecyclerAdapter
-import dti.g55.eventich_client.presentation.modeles.modele
+import dti.g55.eventich_client.presentation.modeles.Modele
+import dti.g55.eventich_client.presentation.vues.AccueilEvenementViewHolder
 
-class RecyclerPresentateur(accueilViewHolder: AccueilEvenementRecyclerAdapter.AccueilViewHolder)  {
+class RecyclerPresentateur(accueilViewHolder: AccueilEvenementViewHolder)  {
 
-    private var model : modele = modele()
+    private var model = Modele()
 
     /**
      * Passe les données du recyclerView au modèle
