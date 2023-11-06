@@ -8,10 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.presentateur.EvenementPresentateur
+import dti.g55.eventich_client.presentation.presentateur.PrésentateurAfficherÉvénement
 
 class fragment_afficher_evenement : Fragment() {
     lateinit var meteoLayout: LinearLayout
@@ -22,7 +23,7 @@ class fragment_afficher_evenement : Fragment() {
     lateinit var dateLongue: TextView
     lateinit var dateCourte: TextView
     lateinit var imageEvenement : ImageView
-    private var presentateur : EvenementPresentateur = EvenementPresentateur(this)
+    private var presentateur = PrésentateurAfficherÉvénement(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -39,6 +40,9 @@ class fragment_afficher_evenement : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val test = arguments?.getBundle("evenementSelectionne")
+        Toast.makeText(context, test.toString(), Toast.LENGTH_LONG).show()
+
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
@@ -49,7 +53,7 @@ class fragment_afficher_evenement : Fragment() {
         imageEvenement = view.findViewById(R.id.imgÉvénement)
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { retour() }
-        presentateur.traiterDemarrage()
+        presentateur.initialiser_fragment()
     }
 
     fun voirMeteo(){

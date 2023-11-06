@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_accueil -> {
-                println("THIS IS A TEST -----------------------------------------------------")
                 fragmentContainerView.findNavController().navigate(R.id.action_aller_accueil)
                 return true
             }
