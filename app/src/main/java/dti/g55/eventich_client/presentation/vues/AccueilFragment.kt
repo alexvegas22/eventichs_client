@@ -14,11 +14,14 @@ import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.modeles.modele
 import dti.g55.eventich_client.presentation.adapteur.AccueilEvenementRecyclerAdapter
 import dti.g55.eventich_client.presentation.presentateur.AccueilPresentateur
+import dti.g55.eventich_client.domaine.entite.Evenement
+
+import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
 
 class accueilFragment : Fragment() {
 
-    lateinit var listeEvenements: List<Evenement>
+    private lateinit var listeEvenements: List<Evenement>
     private lateinit var recycler: RecyclerView
     private lateinit var context: Context
     private var presentateur =  AccueilPresentateur(this)
@@ -38,10 +41,11 @@ class accueilFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         presentateur.traiterDemarrage()
         recycler = view.findViewById(R.id.SubscribedEventsRecyclerView)
-        setInfoAdapter()
+        setupRecyclerView()
     }
-    private fun setInfoAdapter(){
-        var adapter = AccueilEvenementRecyclerAdapter(listeEvenements, context)
+
+    private fun setupRecyclerView(){
+        var adapter = CustomRecyclerAdapter(listeEvenements, R.layout.home_featured_event, ::AccueilEvenementViewHolder)
         var layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
