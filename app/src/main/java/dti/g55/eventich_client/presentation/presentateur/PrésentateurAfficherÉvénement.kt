@@ -20,9 +20,11 @@ class PrésentateurAfficherÉvénement(val vueAfficherEvenementFragment : fragme
 
     private fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
-            //récuperer données
+            //charger données
+            val evenement = modèle.getEvenementSelectionne()
             CoroutineScope( Dispatchers.Main ).launch {
-                //affichage
+                //afficher données
+                vueAfficherEvenementFragment.afficher_données(evenement)
                 vueAfficherEvenementFragment.afficher_données( modèle.getEvenementSelectionne() )
             }
         }
