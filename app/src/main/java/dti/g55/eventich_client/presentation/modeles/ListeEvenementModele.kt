@@ -15,7 +15,7 @@ class ListeEvenementModele {
     fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy")
 
-        val evenements = MockData.evenementsListe
+        val evenements = MockData.evenements
 
         println(evenements[0].date)
 
@@ -26,7 +26,7 @@ class ListeEvenementModele {
         var lowercaseFiltre = filtre.lowercase().trim()
 
         return ArrayList(listeEvenements.filter {
-            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
+            it.nomComplet.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
         })
     }
 }

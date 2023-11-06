@@ -60,8 +60,8 @@ class fragment_afficher_evenement : Fragment() {
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_liste_evenements)
     }
 
-    fun setEvenementInfo(evenement: Evenement){
-        nomEvenement.setText(evenement.nom)
+    fun afficher_données(evenement: Evenement){
+        nomEvenement.setText(evenement.nomComplet)
         organisationEvenement.setText(evenement.organisation)
         adresseEvenement.setText(evenement.location)
         dateCourte.setText(evenement.date.toString())

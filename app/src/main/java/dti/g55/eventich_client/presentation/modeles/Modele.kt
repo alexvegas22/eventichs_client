@@ -7,17 +7,17 @@ import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import java.text.SimpleDateFormat
 
-class modele : ViewModel() {
+class Modele : ViewModel() {
 
-    private var evenementSelectionne = MockData.evenementChoisi
+    private var evenements = MockData.evenements
+    private var evenementSelectionne = MockData.testÉvénement1
     private var profilConnecte = MockData.profilUtilisateur
 
     @SuppressLint("SimpleDateFormat")
     fun listeEvenementsInscrits(/* code utilisateur*/): List<Evenement>{
 
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+        // À FAIRE
 
-        val evenements = MockData.evenementsInscrits
         return evenements
     }
     fun getProfil(): ProfilUtilisateur {
@@ -35,4 +35,9 @@ class modele : ViewModel() {
         evenementSelectionne = event
 
     }
+
+    fun retournerListeÉvénements(): MutableList<Evenement> {
+        return evenements
+    }
+
 }

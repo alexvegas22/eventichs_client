@@ -2,12 +2,12 @@ package dti.g55.eventich_client.presentation.presentateur
 
 import dti.g55.eventich_client.SourceDeDonnees.MockData
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
-import dti.g55.eventich_client.presentation.modeles.modele
+import dti.g55.eventich_client.presentation.modeles.Modele
 import dti.g55.eventich_client.presentation.vues.fragment_profil
 
 class ProfilPresentateur(var vue: fragment_profil) {
 
-    private var model : modele = modele()
+    private var model = Modele()
 
 
     /**
