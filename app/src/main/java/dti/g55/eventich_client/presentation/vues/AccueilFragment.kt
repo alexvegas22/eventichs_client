@@ -19,7 +19,7 @@ import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
 class accueilFragment : Fragment() {
 
-    private lateinit var listeEvenements: List<Evenement>
+    lateinit var listeEvenements: List<Evenement>
     private lateinit var recycler: RecyclerView
     private lateinit var context: Context
     private var presentateur =  AccueilPresentateur(this)

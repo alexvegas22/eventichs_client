@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
-import dti.g55.eventich_client.presentation.presentateurs.BoutonDateTag
-import dti.g55.eventich_client.presentation.presentateurs.ListeEvenementPresentateur
+import dti.g55.eventich_client.presentation.presentateur.BoutonDateTag
+import dti.g55.eventich_client.presentation.presentateur.ListeEvenementPresentateur
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 import java.util.Calendar
 import java.util.Date
@@ -51,7 +51,8 @@ class ListeEvenementVue : Fragment() {
         btnDateFin = view.findViewById(R.id.btnDateFin)
         inputRecherche = view.findViewById(R.id.inputRecherche)
 
-        btnDateDebut.setOnClickListener { presentateur.traiterOuvertureDatePickerDialog(BoutonDateTag.DEBUT) }
+        btnDateDebut.setOnClickListener { presentateur.traiterOuvertureDatePickerDialog(
+            BoutonDateTag.DEBUT) }
         btnDateFin.setOnClickListener { presentateur.traiterOuvertureDatePickerDialog(BoutonDateTag.FIN) }
 
         inputRecherche.addTextChangedListener(object : TextWatcher {

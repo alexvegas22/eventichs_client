@@ -9,7 +9,7 @@ import java.text.SimpleDateFormat
 
 class modele : ViewModel() {
 
-    private lateinit var evenementSelectionne : Evenement
+    private var evenementSelectionne = MockData.evenementChoisi
     private var profilConnecte = MockData.profilUtilisateur
 
     @SuppressLint("SimpleDateFormat")
