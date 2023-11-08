@@ -23,6 +23,7 @@ class EvenementVue : Fragment() {
     lateinit var adresseEvenement: TextView
     lateinit var dateLongue: TextView
     lateinit var dateCourte: TextView
+    lateinit var nbparticipant: TextView
     lateinit var imageEvenement : ImageView
     private var presentateur = EvenementPresentateur(this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +46,7 @@ class EvenementVue : Fragment() {
         val evenementId = args.evenementSelectionne
         Toast.makeText(context, "Evenement: $evenementId", Toast.LENGTH_LONG).show()
 
+        nbparticipant = view.findViewById(R.id.txtNbParticipants)
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
@@ -67,6 +69,7 @@ class EvenementVue : Fragment() {
     }
 
     fun afficher_données(evenement: Evenement){
+        nbparticipant.setText(evenement.nbParticipant.toString())
         nomEvenement.setText(evenement.nomComplet)
         organisationEvenement.setText(evenement.organisation)
         adresseEvenement.setText(evenement.location)
