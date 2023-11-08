@@ -24,7 +24,10 @@ class EvenementVue : Fragment() {
     lateinit var dateLongue: TextView
     lateinit var dateCourte: TextView
     lateinit var imageEvenement : ImageView
-    private var presentateur = EvenementPresentateur(this)
+    lateinit var categorieEvenement: TextView
+    lateinit var descriptionEvenement : TextView
+    lateinit var presentateur : EvenementPresentateur
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,16 +46,19 @@ class EvenementVue : Fragment() {
 
         val args: EvenementVueArgs by navArgs()
         val evenementId = args.evenementSelectionne
+        presentateur = EvenementPresentateur(this, evenementId)
         Toast.makeText(context, "Evenement: $evenementId", Toast.LENGTH_LONG).show()
 
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
         organisationEvenement = view.findViewById(R.id.txtOrganisateur)
+        descriptionEvenement = view.findViewById(R.id.txtDescription)
         adresseEvenement = view.findViewById(R.id.txtAdresse)
         dateCourte = view.findViewById(R.id.txtDateCourte)
         dateLongue = view.findViewById(R.id.txtDateLongue)
         imageEvenement = view.findViewById(R.id.imgÉvénement)
+        categorieEvenement = view.findViewById(R.id.txtCatégorie)
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { retour() }
         presentateur.initialiser_fragment()
@@ -72,7 +78,9 @@ class EvenementVue : Fragment() {
         adresseEvenement.setText(evenement.location)
         dateCourte.setText(evenement.date.toString())
         dateLongue.setText(evenement.date.toString())
-
+        imageEvenement.setImageResource(evenement.imageId)
+        categorieEvenement.setText(evenement.catégorie)
+        descriptionEvenement.setText(evenement.description)
     }
 
 }

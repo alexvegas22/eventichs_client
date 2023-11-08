@@ -7,11 +7,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
+class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue, val idEvenement : Int) {
 
     //variables
     private var job: Job? = null
     private var modèle = Modele()
+
 
     //fun
     fun initialiser_fragment(){
@@ -21,7 +22,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
     private fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
-            val evenement = modèle.getEvenementSelectionne()
+            val evenement = modèle.getEvenementSelectionne(idEvenement)
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
                 vueAfficherEvenementFragment.afficher_données(evenement)

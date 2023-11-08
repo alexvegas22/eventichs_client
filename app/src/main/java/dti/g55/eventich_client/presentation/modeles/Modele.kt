@@ -11,7 +11,6 @@ class Modele : ViewModel() {
 
 
     private var evenements = MockData.evenements
-    private var evenementSelectionne = MockData.evenementChoisiTest
     private var profilConnecte = MockData.profilUtilisateur
     private var organisations = MockData.listeOrganisations
 
@@ -28,13 +27,11 @@ class Modele : ViewModel() {
 
         return true
     }
-    fun getEvenementSelectionne(): Evenement{
+    fun getEvenementSelectionne(idEvenement : Int): Evenement{
 
-        return evenementSelectionne
-    }
-    fun setEvenementSelectionnne(event : Evenement){
-        evenementSelectionne = event
-
+        return evenements.filter {
+            it.id == idEvenement
+        }[0]
     }
 
     fun retournerListeÉvénements(): MutableList<Evenement> {
