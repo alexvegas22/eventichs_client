@@ -1,4 +1,4 @@
-package dti.g55.eventich_client
+package dti.g55.eventich_client.presentation.vues
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,12 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ScrollView
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
+import dti.g55.eventich_client.R
 
 
-class Meteo : Fragment() {
+class MeteoVue : Fragment() {
     lateinit var btnRetourImage: ImageView
 
     override fun onCreateView(
