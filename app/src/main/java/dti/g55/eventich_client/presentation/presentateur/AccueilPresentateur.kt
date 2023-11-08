@@ -13,6 +13,7 @@ class AccueilPresentateur(var vue: AccueilVue) {
      */
     fun traiterDemarrage() {
         afficherListeEvenements()
+        afficherEvenementsOrganisation()
     }
 
     /**
@@ -22,4 +23,10 @@ class AccueilPresentateur(var vue: AccueilVue) {
         vue.listeEvenements = model.listeEvenementsInscrits()
     }
 
+    fun afficherEvenementsOrganisation() {
+        var listeFiltrer = model.filtrerOrganisation()
+        if (listeFiltrer != null) {
+            vue.listeEvenementsOrganisation = listeFiltrer
+        }
+    }
 }

@@ -9,17 +9,18 @@ import java.text.SimpleDateFormat
 
 class Modele : ViewModel() {
 
+
     private var evenements = MockData.evenements
     private var evenementSelectionne = MockData.evenementChoisiTest
     private var profilConnecte = MockData.profilUtilisateur
+    private var organisations = MockData.listeOrganisations
 
     @SuppressLint("SimpleDateFormat")
     fun listeEvenementsInscrits(/* code utilisateur*/): List<Evenement>{
-
         // À FAIRE
-
-        return evenements
+        return MockData.evenementsInscrits
     }
+
     fun getProfil(): ProfilUtilisateur {
         return profilConnecte
     }
@@ -40,4 +41,23 @@ class Modele : ViewModel() {
         return evenements
     }
 
+    fun filtrerOrganisation() : List<Evenement>? {
+        var resultatOrganisation : List<Evenement>? = null
+
+            for(organisation in organisations){
+                if (resultatOrganisation == null){
+                    resultatOrganisation = evenements.filter {
+                        it.organisation == organisation
+                    }.toList()
+                }
+                else {
+                    resultatOrganisation += evenements.filter {
+                        it.organisation == organisation
+                    }.toList()
+                }
+            }
+
+        return resultatOrganisation
+
+    }
 }
