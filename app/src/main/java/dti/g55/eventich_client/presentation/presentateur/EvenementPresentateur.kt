@@ -15,15 +15,18 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
 
     //fun
     fun initialiser_fragment(){
+        vueAfficherEvenementFragment.changerCouleursTextInitiales()
         charger_données()
     }
 
     private fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
+            Thread.sleep(2_000) //simulation - À enlever
             val evenement = modèle.getEvenementSelectionne()
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
+                vueAfficherEvenementFragment.changerCouleursTextFinales()
                 vueAfficherEvenementFragment.afficher_données(evenement)
             }
         }
