@@ -7,7 +7,8 @@ import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class MockData {
+class MockData (){
+
     companion object {
 
         val testÉvénement1 = Evenement(0,R.drawable.ic_search, "Événement de Test",  9999, Date(), "Repentigny, QC J5Y 2C2", "Alpha Group", "Divers",

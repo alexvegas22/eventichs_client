@@ -55,6 +55,7 @@ class EvenementVue : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         //assignation
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
@@ -80,10 +81,10 @@ class EvenementVue : Fragment() {
 
         //setlisteners
         meteoLayout.setOnClickListener { voirMeteo() }
-        backButtonImage.setOnClickListener { retour() }
+        backButtonImage.setOnClickListener { presentateur.traiterRetour() }
 
         //initialisation
-        presentateur.initialiser_fragment()
+        presentateur.init()
     }
 
     fun voirMeteo(){
