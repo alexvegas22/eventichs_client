@@ -9,8 +9,6 @@ import java.text.SimpleDateFormat
 
 class Modele : ViewModel() {
 
-    private var evenements = MockData.evenements
-    private var evenementSelectionne = MockData.testÉvénement1
     private var profilConnecte = MockData.profilUtilisateur
 
     @SuppressLint("SimpleDateFormat")
@@ -18,7 +16,7 @@ class Modele : ViewModel() {
 
         // À FAIRE
 
-        return evenements
+        return MockData.evenements
     }
     fun getProfil(): ProfilUtilisateur {
         return profilConnecte
@@ -27,17 +25,13 @@ class Modele : ViewModel() {
 
         return true
     }
-    fun getEvenementSelectionne(): Evenement{
+    fun getEvenementSelectionne(index: Int): Evenement{
 
-        return evenementSelectionne
-    }
-    fun setEvenementSelectionnne(event : Evenement){
-        evenementSelectionne = event
-
+        return MockData.evenements[index]
     }
 
     fun retournerListeÉvénements(): MutableList<Evenement> {
-        return evenements
+        return MockData.evenements
     }
 
 }

@@ -14,16 +14,16 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
     private var modèle = Modele()
 
     //fun
-    fun initialiser_fragment(){
+    fun initialiser_fragment(index: Int){
         vueAfficherEvenementFragment.changerCouleursTextInitiales()
-        charger_données()
+        charger_données(index)
     }
 
-    private fun charger_données() {
+    private fun charger_données(index: Int) {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
             Thread.sleep(2_000) //simulation - À enlever
-            val evenement = modèle.getEvenementSelectionne()
+            val evenement = modèle.getEvenementSelectionne(index)
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
                 vueAfficherEvenementFragment.changerCouleursTextFinales()
@@ -32,7 +32,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
         }
     }
 
-    fun verifier_etat_pipeline(){
-
+    fun verifier_etat_pipeline(): Boolean{
+        return job!=null
     }
 }
