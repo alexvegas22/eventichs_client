@@ -25,6 +25,10 @@ variables:
   # when the script was last modified for latest compileSdkVersion, it was which is written down below
   ANDROID_SDK_TOOLS: "9477386"
 
+before_script:
+  # Not necessary, but just for security
+  - chmod +x ./gradlew
+
 # Make Project
 build:
   interruptible: true
@@ -54,8 +58,6 @@ build:
     - sdkmanager "platforms;android-${ANDROID_COMPILE_SDK}"
     - sdkmanager "platform-tools"
     - sdkmanager "build-tools;${ANDROID_BUILD_TOOLS}"
-    # Not necessary, but just for security
-    - chmod +x ./gradlew
     - ./gradlew assembleDebug
   artifacts:
     paths:
