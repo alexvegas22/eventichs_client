@@ -1,34 +1,27 @@
 package dti.g55.eventich_client.presentation.modeles
 
+import dti.g55.eventich_client.SourceDeDonnees.ISourceDonnee
 import dti.g55.eventich_client.SourceDeDonnees.MockData
 import dti.g55.eventich_client.domaine.entite.Evenement
-import java.text.SimpleDateFormat
 import java.util.Date
 
-class ListeEvenementModele {
+class ListeEvenementModele(val source: ISourceDonnee = MockData) {
     lateinit var listeEvenements: ArrayList<Evenement>
     var dateDebut: Date = Date()
     var dateFin: Date = Date()
     var filtre: String = ""
 
     fun retournerListeÉvénements(): ArrayList<Evenement> {
-        return ArrayList(MockData.evenements)
+        return source.obtenirListeEvenements()
     }
 
     fun listeEvenementsInscrits(/* code utilisateur*/): ArrayList<Evenement>{
-
         // À FAIRE
-
-        return ArrayList(MockData.evenements)
+        return source.obtenirListeEvenements()
     }
 
     fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-
-        val evenements = MockData.evenements
-
-        println(evenements[0].date)
-
+        val evenements = source.obtenirListeEvenements()
         return ArrayList(evenements.filter { it.date in dateDebut..dateFin }.sortedByDescending { it.date })
     }
 
