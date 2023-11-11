@@ -1,12 +1,12 @@
 package dti.g55.eventich_client.presentation.presentateur
 
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
-import dti.g55.eventich_client.presentation.modeles.Modele
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.ProfilVue
 
 class ProfilPresentateur(var vue: ProfilVue) {
 
-    private var model = Modele()
+    private var model = ModeleFactory.profil
 
 
     /**

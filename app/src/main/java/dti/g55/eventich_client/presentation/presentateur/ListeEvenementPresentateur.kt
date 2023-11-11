@@ -2,6 +2,7 @@ package dti.g55.eventich_client.presentation.presentateur
 
 import android.widget.DatePicker
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementModele
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
 import java.util.Calendar
 import java.util.Date
@@ -12,7 +13,7 @@ enum class BoutonDateTag {
 }
 
 class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
-    private val modele = ListeEvenementModele()
+    private val modele = ModeleFactory.listeEvenements
 
     override fun init() {
         setDatesInitial()

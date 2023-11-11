@@ -1,6 +1,6 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.presentation.modeles.Modele
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -11,7 +11,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
 
     //variables
     private var job: Job? = null
-    private var modèle = Modele()
+    private var modèle = ModeleFactory.evenements
 
     //fun
     fun initialiser_fragment(){
@@ -23,7 +23,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
             Thread.sleep(2_000) //simulation - À enlever
-            val evenement = modèle.getEvenementSelectionne()
+            val evenement = modèle.evenementCourant
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
                 vueAfficherEvenementFragment.changerCouleursTextFinales()
