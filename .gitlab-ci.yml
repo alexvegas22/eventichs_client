@@ -69,7 +69,7 @@ lintDebug:
     when: always
 
 # Make Project
-assembleDebug:
+build:
   interruptible: true
   stage: build
   script:
@@ -79,8 +79,8 @@ assembleDebug:
       - app/build/outputs/
 
 # Run all tests, if any fails, interrupt the pipeline(fail it)
-debugTests:
-  needs: [lintDebug, assembleDebug]
+test:
+  needs: [build]
   interruptible: true
   stage: test
   script:
