@@ -1,6 +1,7 @@
 package dti.g55.eventich_client.presentation.presentateur
 
 import android.widget.DatePicker
+import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementModele
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
@@ -13,12 +14,13 @@ enum class BoutonDateTag {
 }
 
 class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
-    private val modele = ModeleFactory.listeEvenements
+    private val listeEvenementsModele = ModeleFactory.listeEvenements
+    private val evenementsModele = ModeleFactory.evenements
 
     override fun init() {
         setDatesInitial()
-        modele.listeEvenements = modele.getListeEvenementsEntreDates(modele.dateDebut, modele.dateFin)
-        vue.setupListeEvenements(modele.listeEvenements)
+        listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+        vue.setupListeEvenements(listeEvenementsModele.listeEvenements)
     }
 
     private fun setDatesInitial() {
@@ -27,17 +29,17 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
         calendar.add(Calendar.MONTH, 5)
         var endDate = toDateEnd(calendar.time)
 
-        modele.dateDebut = startDate
-        modele.dateFin = endDate
+        listeEvenementsModele.dateDebut = startDate
+        listeEvenementsModele.dateFin = endDate
 
-        val formattedStartDate = formaterDateVersAnneeMoisJour(modele.dateDebut)
-        val formattedEndDate = formaterDateVersAnneeMoisJour(modele.dateFin)
+        val formattedStartDate = formaterDateVersAnneeMoisJour(listeEvenementsModele.dateDebut)
+        val formattedEndDate = formaterDateVersAnneeMoisJour(listeEvenementsModele.dateFin)
 
         vue.changerTexteBoutonDateDebut(formattedStartDate)
         vue.changerTexteBoutonDateFin(formattedEndDate)
 
-        vue.setupDatePickerDialog(modele.dateDebut, BoutonDateTag.DEBUT)
-        vue.setupDatePickerDialog(modele.dateFin, BoutonDateTag.FIN)
+        vue.setupDatePickerDialog(listeEvenementsModele.dateDebut, BoutonDateTag.DEBUT)
+        vue.setupDatePickerDialog(listeEvenementsModele.dateFin, BoutonDateTag.FIN)
     }
 
     private fun formaterDateVersAnneeMoisJour(date: Date): String {
@@ -52,8 +54,8 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
     }
 
     fun traiterChangementRecherche(recherche: String) {
-        modele.filtre = recherche
-        var listeFiltrer = modele.getListeFiltrer()
+        listeEvenementsModele.filtre = recherche
+        var listeFiltrer = listeEvenementsModele.getListeFiltrer()
         vue.rafraichirListeEvenements(listeFiltrer)
     }
 
@@ -72,28 +74,28 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
 
         when (datePicker.tag) {
             BoutonDateTag.DEBUT -> {
-                if (date.after(modele.dateFin)){
+                if (date.after(listeEvenementsModele.dateFin)){
                     vue.afficherErreurDateDebutInvalide()
                     return
                 }
 
-                modele.dateDebut = toDateStart(date)
+                listeEvenementsModele.dateDebut = toDateStart(date)
                 vue.changerTexteBoutonDateDebut(formattedDate)
             }
             BoutonDateTag.FIN -> {
-                if (date.before(modele.dateDebut)){
+                if (date.before(listeEvenementsModele.dateDebut)){
                     vue.afficherErreurDateFinInvalide()
                     return
                 }
 
-                modele.dateFin = toDateEnd(date)
+                listeEvenementsModele.dateFin = toDateEnd(date)
                 vue.changerTexteBoutonDateFin(formattedDate)
             }
             else -> return
         }
 
-        modele.listeEvenements = modele.getListeEvenementsEntreDates(modele.dateDebut, modele.dateFin)
-        var nouvelleListe = modele.getListeFiltrer()
+        listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+        var nouvelleListe = listeEvenementsModele.getListeFiltrer()
         vue.rafraichirListeEvenements(nouvelleListe)
     }
 
@@ -116,5 +118,10 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
         calendar.set(Calendar.MILLISECOND, 999)
 
         return calendar.time
+    }
+
+    fun traiterClickEvenement(evenement: Evenement){
+        evenementsModele.evenementCourant = evenement
+        vue.allerVersEvenement()
     }
 }

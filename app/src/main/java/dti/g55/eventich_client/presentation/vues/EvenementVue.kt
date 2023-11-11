@@ -55,10 +55,6 @@ class EvenementVue : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: EvenementVueArgs by navArgs()
-        val evenementId = args.evenementSelectionne
-        Toast.makeText(context, "Evenement: $evenementId", Toast.LENGTH_LONG).show()
-
         //assignation
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)

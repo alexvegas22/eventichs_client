@@ -47,7 +47,7 @@ class MeteoVue : Fragment() {
 
 
     fun setupListeHeure(listeHeures: ArrayList<HeureMeteo>){
-        var adapter = CustomRecyclerAdapter(listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder)
+        var adapter = CustomRecyclerAdapter(listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder, presentateur)
         var layoutManager = LinearLayoutManager(context)
         layoutManager.stackFromEnd = true
         tvDate.text = listeHeures[1].date
