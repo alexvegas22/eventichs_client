@@ -70,6 +70,4 @@ test:
   stage: test
   script:
     - ./gradlew test
-  reports:
-    junit: build/test-results/test/**
 
