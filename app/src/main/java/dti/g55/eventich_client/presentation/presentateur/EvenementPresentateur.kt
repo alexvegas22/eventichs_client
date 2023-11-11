@@ -9,15 +9,13 @@ import kotlinx.coroutines.launch
 
 class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : IPresentateur{
 
-    //variables
     private var job: Job? = null
     private var modèle = ModeleFactory.evenements
 
-    //fun
-    private fun charger_données() {
+    fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
-            Thread.sleep(2_000) //simulation - À enlever
+            Thread.sleep(1_000) //simulation - À enlever
             val evenement = modèle.evenementCourant
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données

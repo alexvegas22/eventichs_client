@@ -1,5 +1,10 @@
 package dti.g55.eventich_client
 
+import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.modeles.EvenementModele
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
+import dti.g55.eventich_client.presentation.presentateur.EvenementPresentateur
+import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
 //import org.junit.Test
@@ -12,6 +17,9 @@ import kotlinx.coroutines.test.*
 import org.junit.Test
 import org.mockito.junit.MockitoJUnitRunner
 import org.junit.runner.RunWith
+import org.mockito.Mockito
+import org.mockito.kotlin.times
+import java.util.Date
 
 @RunWith(MockitoJUnitRunner::class)
 class ExampleUnitTest {
@@ -29,23 +37,34 @@ class ExampleUnitTest {
     }
 
     @Test
-    fun `étant donné un Modèle instancié, lorsque le présentateur appelle la fonction getEvenementSelectionne, on obtient un événement nommé bravo`() = runTest {
+    fun `étant donné un Modèle instancié, lorsque le présentateur appelle la fonction init(), Il appelle la fonction changerCouleursTextInitiales() de la vue et et charger_données()`() = runTest {
 
-        /*val modele : Modele = Mockito.mock( Modele::class.java )
-        val bravo = Evenement(999,R.drawable.ic_search, "bravo",  1111, Date(), "sans importance", "sans importance", "",
-            "sans importance")
-        Mockito.`when`( modele.getEvenementSelectionne(999) ).thenReturn( bravo )
+        // mock
+        val vue : EvenementVue = Mockito.mock( EvenementVue::class.java )
+        // sujet de test - mock pour pouvoir spy avec mockito
+        val presentateur = EvenementPresentateur(vue)
+        // spy
+        val spy = Mockito.spy(presentateur)
 
-        val evenement = modele.getEvenementSelectionne(999)
-        kotlin.test.assertEquals(bravo, evenement)*/
+        spy.init()
+        Mockito.verify(vue).changerCouleursTextInitiales()
+        Mockito.verify(spy).charger_données()
     }
 
-    @Test
-    fun `étant donné un Modèle instancié, lorsque le présentateur appelle la fonction getEvenementSelectionne, on obtient l'événement au bon index passé en parametre à la fonction`() = runTest {
+    //@Test
+    //fun `étant donné un Modèle instancié, lorsque le présentateur appelle la fonction getEvenementSelectionne, on obtient l'événement au bon index passé en parametre à la fonction`() = runTest {
 
-        /*val modele = Modele()
+        // mock
+        //val modele : EvenementModele = Mockito.mock( ModeleFactory.evenements::class.java )
+        //val vue : EvenementVue = Mockito.mock( EvenementVue::class.java )
+        // sujet de test - mock pour pouvoir spy avec mockito
+        //val presentateur = EvenementPresentateur(vue)
+        // spy
+        //val spy = Mockito.spy(presentateur)
 
-        val evenement = modele.getEvenementSelectionne(3)
-        kotlin.test.assertEquals(evenement, MockData.evenements[3])*/
-    }
+        //Mockito.`when`( modele.evenementCourant ).thenReturn( Evenement(0,0,"",0, Date(),"","","","") )
+
+        //spy.charger_données()
+        //Mockito.verify ------------------- whatever à verifier
+    //}
 }
