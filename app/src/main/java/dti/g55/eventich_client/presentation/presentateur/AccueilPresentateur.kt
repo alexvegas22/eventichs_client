@@ -1,11 +1,11 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.presentation.modeles.Modele
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.AccueilVue
 
 class AccueilPresentateur(var vue: AccueilVue) {
 
-    private var model = Modele()
+    private var model = ModeleFactory.listeEvenements
 
 
     /**
