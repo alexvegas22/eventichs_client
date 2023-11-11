@@ -1,29 +1,24 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.presentation.modeles.Modele
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
+class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : IPresentateur{
 
     //variables
     private var job: Job? = null
-    private var modèle = Modele()
+    private var modèle = ModeleFactory.evenements
 
     //fun
-    fun initialiser_fragment(index: Int){
-        vueAfficherEvenementFragment.changerCouleursTextInitiales()
-        charger_données(index)
-    }
-
-    private fun charger_données(index: Int) {
+    private fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
             Thread.sleep(2_000) //simulation - À enlever
-            val evenement = modèle.getEvenementSelectionne(index)
+            val evenement = modèle.evenementCourant
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
                 vueAfficherEvenementFragment.changerCouleursTextFinales()
@@ -34,5 +29,14 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
 
     fun verifier_etat_pipeline(): Boolean{
         return job!=null
+    }
+
+    override fun init() {
+        vueAfficherEvenementFragment.changerCouleursTextInitiales()
+        charger_données()
+    }
+
+    fun traiterRetour(){
+        vueAfficherEvenementFragment.retour()
     }
 }

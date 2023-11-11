@@ -2,13 +2,15 @@ package dti.g55.eventich_client.presentation.vues
 
 import android.view.View
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.HeureMeteo
+import dti.g55.eventich_client.presentation.presentateur.IPresentateur
+import dti.g55.eventich_client.presentation.presentateur.MeteoPresentateur
 import dti.g55.eventich_client.utilitaire.CustomViewHolder
 
-class ListeMeteoViewHolder(itemView: View): CustomViewHolder<HeureMeteo>(itemView) {
+class ListeMeteoViewHolder(itemView: View, val presentateur: MeteoPresentateur
+): CustomViewHolder<HeureMeteo>(itemView, presentateur) {
     val heure: TextView
     val image: ImageView
     val description: TextView

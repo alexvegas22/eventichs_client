@@ -25,7 +25,7 @@ class Modele : ViewModel() {
 
         return true
     }
-    fun getEvenementSelectionne(index: Int): Evenement{
+    fun obtenirEvenementCourant(index: Int): Evenement{
 
         return MockData.evenements[index]
     }

@@ -11,6 +11,16 @@ class ListeEvenementModele {
     var dateFin: Date = Date()
     var filtre: String = ""
 
+    fun retournerListeÉvénements(): ArrayList<Evenement> {
+        return ArrayList(MockData.evenements)
+    }
+
+    fun listeEvenementsInscrits(/* code utilisateur*/): ArrayList<Evenement>{
+
+        // À FAIRE
+
+        return ArrayList(MockData.evenements)
+    }
 
     fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
         val dateFormat = SimpleDateFormat("dd-MM-yyyy")

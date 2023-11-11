@@ -55,9 +55,6 @@ class EvenementVue : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: EvenementVueArgs by navArgs()
-        val evenementId = args.evenementSelectionne
-        //Toast.makeText(context, "Evenement: $evenementId", Toast.LENGTH_LONG).show()
 
         //assignation
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
@@ -84,10 +81,10 @@ class EvenementVue : Fragment() {
 
         //setlisteners
         meteoLayout.setOnClickListener { voirMeteo() }
-        backButtonImage.setOnClickListener { retour() }
+        backButtonImage.setOnClickListener { presentateur.traiterRetour() }
 
         //initialisation
-        presentateur.initialiser_fragment(evenementId)
+        presentateur.init()
     }
 
     fun voirMeteo(){
