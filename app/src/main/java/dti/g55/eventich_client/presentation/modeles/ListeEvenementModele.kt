@@ -17,16 +17,16 @@ class ListeEvenementModele {
 
         val evenements = MockData.evenements
 
-        println(evenements[0].date)
+        println(evenements[0].dateDebut)
 
-        return ArrayList(evenements.filter { it.date in dateDebut..dateFin }.sortedByDescending { it.date })
+        return ArrayList(evenements.filter { it.dateDebut in dateDebut..dateFin }.sortedByDescending { it.dateDebut })
     }
 
     fun getListeFiltrer(): ArrayList<Evenement>{
         var lowercaseFiltre = filtre.lowercase().trim()
 
         return ArrayList(listeEvenements.filter {
-            it.nomComplet.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
+            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
         })
     }
 }
