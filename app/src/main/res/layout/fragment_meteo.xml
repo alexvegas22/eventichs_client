@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/btnRetour"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_weight="1"
@@ -72,18 +72,11 @@
             android:text="Partiellement nuageux"
             android:textSize="18sp" />
 
-        <ScrollView
-            android:id="@+id/svTempératures"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvMétéo"
             android:layout_width="match_parent"
-            android:layout_height="411dp"
-            android:layout_weight="1">
-
-            <LinearLayout
-                android:id="@+id/llTempératures"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"/>
-        </ScrollView>
+            android:layout_height="412dp"
+            android:layout_weight="1" />
 
     </LinearLayout>
 </FrameLayout>

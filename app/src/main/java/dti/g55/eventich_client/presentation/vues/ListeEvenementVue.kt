@@ -10,7 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -71,7 +74,7 @@ class ListeEvenementVue : Fragment() {
     }
 
     fun setupListeEvenements(evenements: ArrayList<Evenement>){
-        var adapter = CustomRecyclerAdapter(evenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder)
+        var adapter = CustomRecyclerAdapter(evenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder, presentateur)
         var layoutManager = LinearLayoutManager(context)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
@@ -105,7 +108,7 @@ class ListeEvenementVue : Fragment() {
     }
 
     fun rafraichirListeEvenements(evenements: ArrayList<Evenement>){
-        recycler.adapter = CustomRecyclerAdapter(evenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder)
+        recycler.adapter = CustomRecyclerAdapter(evenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder, presentateur)
     }
 
     fun ouvrirSelecteurDateDebut(){
@@ -130,5 +133,9 @@ class ListeEvenementVue : Fragment() {
 
     fun afficherErreurDateFinInvalide() {
         Toast.makeText(context, "La date de fin ne peut pas être avant la date de début.", Toast.LENGTH_SHORT).show()
+    }
+
+    fun allerVersEvenement() {
+        findNavController().navigate(R.id.action_liste_evenements_to_fragment_afficher_evenement)
     }
 }

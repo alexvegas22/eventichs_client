@@ -2,11 +2,13 @@ package dti.g55.eventich_client.SourceDeDonnees
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.HeureMeteo
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class MockData {
+class MockData (){
+
     companion object {
         val evenements = mutableListOf(
             Evenement(0,R.drawable.ic_search, "Événement de Test",  9999, Date(), "Repentigny, QC J5Y 2C2", "Alpha Group", "Divers",
@@ -95,6 +97,17 @@ class MockData {
 
 
 
+        val listeHeuresMétéo = créerListeHeuresMétéo()
+        fun créerListeHeuresMétéo(): ArrayList<HeureMeteo>{
+            val listeHeure = mutableListOf<HeureMeteo>()
+            for (i in 0..23){
+                val testMétéo = HeureMeteo("2023-11-15",17,i, R.drawable.day_cloudy_icon, "Partiellement nuageux", 17, 73)
+                listeHeure.add(testMétéo)
+            }
+            return ArrayList(listeHeure)
+        }
     }
+
+
 
 }
