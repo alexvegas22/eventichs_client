@@ -7,22 +7,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
-class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
+class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : IPresentateur{
 
-    //variables
     private var job: Job? = null
     private var modèle = ModeleFactory.evenements
 
-    //fun
-    fun initialiser_fragment(){
-        vueAfficherEvenementFragment.changerCouleursTextInitiales()
-        charger_données()
-    }
-
-    private fun charger_données() {
+    fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
-            Thread.sleep(2_000) //simulation - À enlever
+            Thread.sleep(1_000) //simulation - À enlever
             val evenement = modèle.evenementCourant
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
@@ -32,7 +25,16 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) {
         }
     }
 
-    fun verifier_etat_pipeline(){
+    fun verifier_etat_pipeline(): Boolean{
+        return job!=null
+    }
 
+    override fun init() {
+        vueAfficherEvenementFragment.changerCouleursTextInitiales()
+        charger_données()
+    }
+
+    fun traiterRetour(){
+        vueAfficherEvenementFragment.retour()
     }
 }

@@ -1,6 +1,5 @@
 package dti.g55.eventich_client.SourceDeDonnees
 import dti.g55.eventich_client.R
-import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.domaine.entite.HeureMeteo
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
