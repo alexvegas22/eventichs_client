@@ -22,8 +22,8 @@ class EvenementVue : Fragment() {
     lateinit var imageEvenement : ImageView
     lateinit var nomEvenement : TextView
     lateinit var nbparticipant: TextView
-    lateinit var dateLongue: TextView
-    lateinit var dateCourte: TextView
+    lateinit var dateDebut: TextView
+    lateinit var dateFin: TextView
     lateinit var temperature: TextView
     lateinit var humidite: TextView
     lateinit var meteo: TextView
@@ -61,8 +61,8 @@ class EvenementVue : Fragment() {
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
         nbparticipant = view.findViewById(R.id.txtNbParticipants)
         imageEvenement = view.findViewById(R.id.imgÉvénement)
-        dateCourte = view.findViewById(R.id.txtDateCourte)
-        dateLongue = view.findViewById(R.id.txtDateLongue)
+        dateDebut = view.findViewById(R.id.txtDateCourte)
+        dateFin = view.findViewById(R.id.txtDateLongue)
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         afficheur_temperature = view.findViewById(R.id.txtaffichageT)
         afficheur_humidite = view.findViewById(R.id.txtaffichageH)
@@ -94,8 +94,8 @@ class EvenementVue : Fragment() {
     fun changerCouleursTextInitiales(){
         nomEvenement.setTextColor(Color.parseColor("#E91E63"))
         nbparticipant.setTextColor(Color.parseColor("#E91E63"))
-        dateCourte.setTextColor(Color.parseColor("#E91E63"))
-        dateLongue.setTextColor(Color.parseColor("#E91E63"))
+        dateDebut.setTextColor(Color.parseColor("#E91E63"))
+        dateFin.setTextColor(Color.parseColor("#E91E63"))
         afficheur_temperature.setTextColor(Color.parseColor("#FF333333"))
         afficheur_humidite.setTextColor(Color.parseColor("#FF333333"))
         afficheur_meteo.setTextColor(Color.parseColor("#FF333333"))
@@ -115,8 +115,8 @@ class EvenementVue : Fragment() {
     fun changerCouleursTextFinales(){
         nomEvenement.setTextColor(Color.parseColor("#FF333333"))
         nbparticipant.setTextColor(Color.parseColor("#FF333333"))
-        dateCourte.setTextColor(Color.parseColor("#FF333333"))
-        dateLongue.setTextColor(Color.parseColor("#FF333333"))
+        dateDebut.setTextColor(Color.parseColor("#FF333333"))
+        dateFin.setTextColor(Color.parseColor("#FF333333"))
         afficheur_temperature.setTextColor(Color.parseColor("#FF807F7F"))
         afficheur_humidite.setTextColor(Color.parseColor("#FF807F7F"))
         afficheur_meteo.setTextColor(Color.parseColor("#FF807F7F"))
@@ -138,10 +138,10 @@ class EvenementVue : Fragment() {
     }
 
     fun afficher_données(evenement: Evenement){
-        nomEvenement.setText(evenement.nomComplet)
+        nomEvenement.setText(evenement.nom)
         nbparticipant.setText(evenement.nbParticipant.toString())
-        dateCourte.setText(evenement.date.toString())
-        dateLongue.setText(evenement.date.toString())
+        dateDebut.setText(evenement.dateDebut.toString())
+        dateFin.setText(evenement.dateFin.toString())
         temperature.setText("25") // À changer
         humidite.setText("13") // À changer
         meteo.setText("Ciel dégagé") // À changer

@@ -26,8 +26,8 @@ class ListeEvenementItemViewHolder(itemView: View, val presentateur: ListeEvenem
 
     override fun bindItem(evenement: Evenement) {
         image.setImageResource(evenement.imageId)
-        nom.text = evenement.nomComplet
-        date.text = evenement.date.toString()
+        nom.text = evenement.nom
+        date.text = evenement.dateDebut.toString()
         location.text = evenement.location
 
         item.setOnClickListener { presentateur.traiterClickEvenement(evenement) }
