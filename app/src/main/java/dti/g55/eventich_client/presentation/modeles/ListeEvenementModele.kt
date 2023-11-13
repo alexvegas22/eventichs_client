@@ -28,7 +28,7 @@ class ListeEvenementModele(val source: ISourceDonnee = MockData) {
     fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>{
         var lowercaseFiltre = filtre.lowercase().trim()
 
-        return ArrayList(listeEvenements.filter {
+        return ArrayList(liste.filter {
             it.nom.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
         })
     }

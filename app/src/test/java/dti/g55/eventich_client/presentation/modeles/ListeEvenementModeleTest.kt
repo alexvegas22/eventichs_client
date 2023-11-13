@@ -16,7 +16,7 @@ class ListeEvenementModeleTest {
             1,
             R.drawable.ic_search,
             "Evenement",
-            2, Date(),
+            2, Date(), Date(),
             "Location",
             "Organ",
             "Cat",
@@ -31,11 +31,11 @@ class ListeEvenementModeleTest {
 
     @Test
     fun `Étant donné un ListeEvenementModele nouvellement instantié, lorsqu'on appelle la fonction getListFiltrer avec une liste d'événements et le filtre 'even', alors on obtient une liste avec seulement les événements contenant 'even' dans le nom ou la location`() {
-        val evenement1 = Evenement(1, R.drawable.ic_search, "Evenement", 2, Date(),
+        val evenement1 = Evenement(1, R.drawable.ic_search, "Evenement", 2, Date(), Date(),
             "Location", "Organ", "Cat", "Desc")
-        val evenement2 = Evenement(1, R.drawable.ic_search, "Test", 2, Date(),
+        val evenement2 = Evenement(1, R.drawable.ic_search, "Test", 2, Date(), Date(),
             "Location evEn", "Organ", "Cat", "Desc d'evenement")
-        val evenement3 = Evenement(1, R.drawable.ic_search, "Aucun match", 2, Date(),
+        val evenement3 = Evenement(1, R.drawable.ic_search, "Aucun match", 2, Date(), Date(),
             "Location", "Organ", "Cat", "Aucune description")
 
         val listeEvenements = arrayListOf(evenement1, evenement2, evenement3)
