@@ -55,7 +55,7 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
 
     fun traiterChangementRecherche(recherche: String) {
         listeEvenementsModele.filtre = recherche
-        var listeFiltrer = listeEvenementsModele.getListeFiltrer()
+        var listeFiltrer = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, listeEvenementsModele.filtre)
         vue.rafraichirListeEvenements(listeFiltrer)
     }
 
@@ -95,7 +95,7 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
         }
 
         listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
-        var nouvelleListe = listeEvenementsModele.getListeFiltrer()
+        var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, listeEvenementsModele.filtre)
         vue.rafraichirListeEvenements(nouvelleListe)
     }
 

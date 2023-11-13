@@ -25,10 +25,10 @@ class ListeEvenementModele(val source: ISourceDonnee = MockData) {
         return ArrayList(evenements.filter { it.date in dateDebut..dateFin }.sortedByDescending { it.date })
     }
 
-    fun getListeFiltrer(): ArrayList<Evenement>{
+    fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>{
         var lowercaseFiltre = filtre.lowercase().trim()
 
-        return ArrayList(listeEvenements.filter {
+        return ArrayList(liste.filter {
             it.nomComplet.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
         })
     }
