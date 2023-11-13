@@ -22,14 +22,14 @@ class ListeEvenementModele(val source: ISourceDonnee = MockData) {
 
     fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
         val evenements = source.obtenirListeEvenements()
-        return ArrayList(evenements.filter { it.date in dateDebut..dateFin }.sortedByDescending { it.date })
+        return ArrayList(evenements.filter { it.dateDebut in dateDebut..dateFin }.sortedByDescending { it.dateDebut })
     }
 
     fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>{
         var lowercaseFiltre = filtre.lowercase().trim()
 
-        return ArrayList(liste.filter {
-            it.nomComplet.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
+        return ArrayList(listeEvenements.filter {
+            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
         })
     }
 }
