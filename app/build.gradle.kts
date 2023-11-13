@@ -54,4 +54,5 @@ dependencies {
     testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
     // Use the Kotlin JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
 }

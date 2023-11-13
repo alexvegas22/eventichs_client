@@ -1,6 +1,7 @@
 package dti.g55.eventich_client.SourceDeDonnees
 import android.annotation.SuppressLint
 import dti.g55.eventich_client.R
+import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.domaine.entite.HeureMeteo
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
@@ -86,14 +87,14 @@ class MockData {
             arrayOf("alex@email.com", "root"),
             arrayOf("user@email.com", "root")
         )
-        val listeHeuresMétéo = créerListeHeuresMétéo()
-        fun créerListeHeuresMétéo(): ArrayList<HeureMeteo>{
-            val listeHeure = mutableListOf<HeureMeteo>()
-            for (i in 0..23){
-                val testMétéo = HeureMeteo("2023-11-15",17,i, R.drawable.day_cloudy_icon, "Partiellement nuageux", 17, 73)
-                listeHeure.add(testMétéo)
+        val météo: ConditionMeterologique = créerMétéoJournée()
+        fun créerMétéoJournée(): ConditionMeterologique{
+            val météo = ConditionMeterologique( "Partiellement nuagueux", 17, 13, arrayListOf() )
+            for (heure in 0..23){
+                val testMétéo = HeureMeteo(heure, R.drawable.day_cloudy_icon, "Partiellement nuageux", 17, 13)
+                météo.listeHeures.add(testMétéo)
             }
-            return ArrayList(listeHeure)
+            return météo
         }
 
     }

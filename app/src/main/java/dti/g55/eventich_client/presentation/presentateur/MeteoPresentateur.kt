@@ -9,8 +9,8 @@ class MeteoPresentateur(val vue : MeteoVue): IPresentateur {
     private val modele = ModeleFactory.meteo
 
     override fun init() {
-        val listeHeuresMétéo = modele.getListeMétéoParHeure()
-        vue.setupListeHeure(listeHeuresMétéo)
+        val météo = modele.obtenirMétéo()
+        vue.setupListeHeure(météo)
     }
 
     fun traiterClickBoutonRetour() {
