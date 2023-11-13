@@ -1,5 +1,4 @@
 package dti.g55.eventich_client.SourceDeDonnees
-import android.annotation.SuppressLint
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.domaine.entite.HeureMeteo
@@ -7,12 +6,10 @@ import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class MockData {
-    companion object {
-        @SuppressLint("SimpleDateFormat")
-        val dateFormat = SimpleDateFormat("dd-MM-yyyy")
+object MockData: ISourceDonnee {
+    val dateFormat = SimpleDateFormat("dd-MM-yyyy")
 
-        val evenements = mutableListOf(
+    val evenements = mutableListOf(
             Evenement(0,R.drawable.ic_search, "Événement de Test",  9999, Date(), Date(),"Repentigny, QC J5Y 2C2", "Alpha Group", "Divers",
                 "Objet factice créé à des fins de tests"),
             Evenement(1, R.drawable.ic_search, "Conférence sur les mathématiques ésotériques",  124, Date(), Date(),"6400 16e Avenue, Montréal, QC H1X 2S9", "Cégep de Rosemont", "Éducation",
@@ -96,5 +93,94 @@ class MockData {
             return ArrayList(listeHeure)
         }
 
+    override fun obtenirListeEvenements(): ArrayList<Evenement> {
+        return ArrayList(
+            mutableListOf(
+                Evenement(
+                    0,
+                    R.drawable.whiteworth_chalet_front,
+                    "Événement de Test",
+                    9999,
+                    dateFormat.parse("14-11-2023"),
+                    dateFormat.parse("14-11-2023"),
+                    "Repentigny, QC J5Y 2C2",
+                    "Alpha Group",
+                    "Divers",
+                    "Objet factice créé à des fins de tests"
+                ),
+                Evenement(
+                    1,
+                    R.drawable.thermometer,
+                    "Conférence sur les mathématiques ésotériques",
+                    124,
+                    dateFormat.parse("16-11-2023"),
+                    dateFormat.parse("16-11-2023"),
+                    "6400 16e Avenue, Montréal, QC H1X 2S9",
+                    "Cégep de Rosemont",
+                    "Éducation",
+                    "Venez en apprendre plus sur les mathématiques ésotériques de second niveau"
+                ),
+                Evenement(
+                    2,
+                    R.drawable.day_cloudy_icon,
+                    "Assemblée générale des lutins",
+                    50,
+                    dateFormat.parse("18-11-2023"),
+                    dateFormat.parse("18-11-2023"),
+                    "x-5678 y-120 z-33 Atelier secret",
+                    "Ho Ho Ho",
+                    "Loisirs",
+                    "Assemblée très importante, humains interdits"
+                ),
+                Evenement(
+                    3,
+                    R.drawable.alistaire_cockburn,
+                    "Festival du hamburger",
+                    546,
+                    dateFormat.parse("22-11-2023"),
+                    dateFormat.parse("18-11-2023"),
+                    "3451 Rue Fleury E, Montréal-Nord2",
+                    "B Burger",
+                    "Commerce",
+                    "L'opportunité de gouter à nos nouveaux burgers pour seulement 10$ l'entrée. À vos marques, pret, régalez-vous!"
+                ),
+                Evenement(
+                    4,
+                    R.drawable.day_sunny_icon,
+                    "R A Izmash Forum",
+                    1128,
+                    dateFormat.parse("25-11-2023"),
+                    dateFormat.parse("18-11-2023"),
+                    "Proyezd Deryabina, 3/435, Izhevsk",
+                    "Izmash",
+                    "Commerce",
+                    "Крупнейший российский производитель боевого автоматического и снайперского оружия, управляемых артиллерийских снарядов, а также широкого спектра высокоточного оружия."
+                ),
+                Evenement(
+                    5,
+                    R.drawable.confirmed,
+                    "V O I D",
+                    0,
+                    dateFormat.parse("26-11-2023"),
+                    dateFormat.parse("18-11-2023"),
+                    "...",
+                    "null",
+                    "Divers",
+                    "----_________-----__-_-----------___________----------____---____-----------"
+                ),
+                Evenement(
+                    6,
+                    R.drawable.people,
+                    "Événement vide",
+                    2,
+                    dateFormat.parse("20-12-2023"),
+                    dateFormat.parse("18-11-2023"),
+                    "362 Rue du Domaine, Sainte-Sophie",
+                    "Clairview",
+                    "Loisirs",
+                    "Un autre objet factice créé à des fins de tests"
+                )
+            )
+        )
     }
 }
