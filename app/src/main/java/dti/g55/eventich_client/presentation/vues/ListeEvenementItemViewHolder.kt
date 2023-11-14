@@ -4,12 +4,12 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.navigation.findNavController
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.presentateur.ListeEvenementPresentateur
 import dti.g55.eventich_client.utilitaire.CustomViewHolder
 
-class ListeEvenementItemViewHolder(itemView: View): CustomViewHolder<Evenement>(itemView){
+class ListeEvenementItemViewHolder(itemView: View, val presentateur: ListeEvenementPresentateur): CustomViewHolder<Evenement>(itemView, presentateur){
     val item: LinearLayout
     val image: ImageView
     val nom: TextView
@@ -30,11 +30,6 @@ class ListeEvenementItemViewHolder(itemView: View): CustomViewHolder<Evenement>(
         date.text = evenement.dateDebut.toString()
         location.text = evenement.location
 
-        item.setOnClickListener { goToEvent(item, evenement) }
-    }
-    private fun goToEvent(item: LinearLayout, evenement: Evenement) {
-        val action = ListeEvenementVueDirections.actionListeEvenementsToFragmentAfficherEvenement()
-        action.evenementSelectionne = evenement.id
-        item.findNavController().navigate(action)
+        item.setOnClickListener { presentateur.traiterClickEvenement(evenement) }
     }
 }

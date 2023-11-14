@@ -1,32 +1,31 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.presentation.modeles.Modele
+import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.AccueilVue
 
-class AccueilPresentateur(var vue: AccueilVue) {
+class AccueilPresentateur(var vue: AccueilVue): IPresentateur {
 
-    private var model = Modele()
+    private var listeEvenementModele = ModeleFactory.listeEvenements
+    private var evenementModele = ModeleFactory.evenements
 
 
     /**
      * Traite le démarrage de la vue Fragment Profil
      */
-    fun traiterDemarrage() {
+    override fun init() {
         afficherListeEvenements()
-        afficherEvenementsOrganisation()
     }
 
     /**
      * Passe la liste des evenements à la vue
      */
     fun afficherListeEvenements() {
-        vue.listeEvenements = model.listeEvenementsInscrits()
+        vue.setupRecyclerView(listeEvenementModele.listeEvenementsInscrits(), listeEvenementModele.filtrerOrganisation())
     }
 
-    fun afficherEvenementsOrganisation() {
-        var listeFiltrer = model.filtrerOrganisation()
-        if (listeFiltrer != null) {
-            vue.listeEvenementsOrganisation = listeFiltrer
-        }
+    fun traiterClickEvenement(evenement: Evenement){
+        evenementModele.evenementCourant = evenement
+        vue.allerVersEvenement()
     }
 }
