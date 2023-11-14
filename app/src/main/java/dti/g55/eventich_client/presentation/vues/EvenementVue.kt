@@ -67,11 +67,11 @@ class EvenementVue : Fragment() {
     }
 
     fun afficher_données(evenement: Evenement){
-        nomEvenement.setText(evenement.nomComplet)
+        nomEvenement.setText(evenement.nom)
         organisationEvenement.setText(evenement.organisation)
         adresseEvenement.setText(evenement.location)
-        dateCourte.setText(evenement.date.toString())
-        dateLongue.setText(evenement.date.toString())
+        dateCourte.setText(evenement.dateDebut.toString())
+        dateLongue.setText(evenement.dateFin.toString())
 
     }
 
