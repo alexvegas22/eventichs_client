@@ -20,6 +20,22 @@ class ListeEvenementModele(val source: ISourceDonnee = MockData) {
         return source.obtenirListeEvenements()
     }
 
+    fun filtrerOrganisation() : ArrayList<Evenement> {
+        val organisations = source.obtenirOrganisations()
+        var evenements = source.obtenirListeEvenements()
+
+        var resultatOrganisation = arrayListOf<Evenement>()
+
+        for(organisation in organisations){
+            resultatOrganisation += ArrayList(evenements.filter {
+                it.organisation == organisation
+            })
+        }
+
+        return resultatOrganisation
+
+    }
+
     fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
         val evenements = source.obtenirListeEvenements()
         return ArrayList(evenements.filter { it.dateDebut in dateDebut..dateFin }.sortedByDescending { it.dateDebut })

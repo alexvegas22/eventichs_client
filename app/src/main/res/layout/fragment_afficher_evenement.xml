@@ -58,7 +58,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/lytConteneurInfosSupérieures"
             android:layout_width="match_parent"
@@ -436,7 +435,6 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
-
     </LinearLayout>
 
 

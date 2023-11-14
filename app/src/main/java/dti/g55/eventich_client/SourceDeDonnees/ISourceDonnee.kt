@@ -5,4 +5,5 @@ import java.util.Date
 
 interface ISourceDonnee {
     fun obtenirListeEvenements(): ArrayList<Evenement>
+    fun obtenirOrganisations(): ArrayList<String>
 }
