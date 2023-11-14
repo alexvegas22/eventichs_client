@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dti.g55.eventich_client.R
+import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.presentateur.EvenementPresentateur
 
@@ -55,14 +56,13 @@ class EvenementVue : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         //assignation
         backButtonImage = view.findViewById(R.id.imgBoutonArrière)
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
         nbparticipant = view.findViewById(R.id.txtNbParticipants)
         imageEvenement = view.findViewById(R.id.imgÉvénement)
-        dateDebut = view.findViewById(R.id.txtDateCourte)
-        dateFin = view.findViewById(R.id.txtDateLongue)
+        dateFin = view.findViewById(R.id.txtDateCourte)
+        dateDebut = view.findViewById(R.id.txtDateLongue)
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
         afficheur_temperature = view.findViewById(R.id.txtaffichageT)
         afficheur_humidite = view.findViewById(R.id.txtaffichageH)
@@ -137,18 +137,17 @@ class EvenementVue : Fragment() {
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_liste_evenements)
     }
 
-    fun afficher_données(evenement: Evenement){
+    fun afficher_données(evenement: Evenement, conditionMeterologique: ConditionMeterologique){
         nomEvenement.setText(evenement.nom)
         nbparticipant.setText(evenement.nbParticipant.toString())
         dateDebut.setText(evenement.dateDebut.toString())
         dateFin.setText(evenement.dateFin.toString())
-        temperature.setText("25") // À changer
-        humidite.setText("13") // À changer
-        meteo.setText("Ciel dégagé") // À changer
+        temperature.text = conditionMeterologique.températureMoyenne.toString()
+        humidite.text = conditionMeterologique.pourcentageHumidité.toString()
+        meteo.text = conditionMeterologique.meteoDescription
         categorie.setText(evenement.catégorie)
         adresseEvenement.setText(evenement.location)
         organisationEvenement.setText(evenement.organisation)
         description.setText(evenement.description)
     }
-
 }

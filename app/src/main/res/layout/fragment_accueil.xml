@@ -8,7 +8,6 @@
     tools:context=".presentation.vues.AccueilVue"
     tools:ignore="MissingDefaultResource">
 
-
     <TextView
         android:id="@+id/welcomeTextView"
         android:layout_width="wrap_content"
@@ -21,7 +20,6 @@
         app:layout_constraintBottom_toTopOf="@+id/NextEventsText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
-
     <TextView
         android:id="@+id/NextEventsText"
         android:layout_width="wrap_content"
@@ -29,7 +27,6 @@
         android:fontFamily="@font/poppins_bold"
         android:text="Vos prochains évènements"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        app:layout_constraintTop_toBottomOf="@id/welcomeTextView"
         app:layout_constraintBottom_toTopOf="@+id/SubscribedEventsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

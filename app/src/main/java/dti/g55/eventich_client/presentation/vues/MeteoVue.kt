@@ -12,7 +12,9 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
+import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.HeureMeteo
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.presentateur.MeteoPresentateur
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
@@ -23,6 +25,7 @@ class MeteoVue : Fragment() {
     lateinit var tvDate: TextView
     lateinit var tvTemp: TextView
     private val presentateur = MeteoPresentateur(this)
+    private val modeleEvenement = ModeleFactory.evenements
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,12 +49,12 @@ class MeteoVue : Fragment() {
     }
 
 
-    fun setupListeHeure(listeHeures: ArrayList<HeureMeteo>){
-        var adapter = CustomRecyclerAdapter(listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder, presentateur)
+    fun setupListeHeure(condition: ConditionMeterologique){
+        var adapter = CustomRecyclerAdapter(condition.listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder, presentateur)
         var layoutManager = LinearLayoutManager(context)
         layoutManager.stackFromEnd = true
-        tvDate.text = listeHeures[1].date
-        tvTemp.text = listeHeures[1].températureMoyenne.toString()
+        tvDate.text = modeleEvenement.evenementCourant.dateDebut.toString()
+        tvTemp.text = condition.températureMoyenne.toString()
         rvMétéo.layoutManager = layoutManager
         rvMétéo.itemAnimator = DefaultItemAnimator()
         rvMétéo.adapter = adapter

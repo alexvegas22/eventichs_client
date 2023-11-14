@@ -19,8 +19,9 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
             val evenement = modèle.evenementCourant
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
+                val météo = modèle.obtenirMétéo()
                 vueAfficherEvenementFragment.changerCouleursTextFinales()
-                vueAfficherEvenementFragment.afficher_données(evenement)
+                vueAfficherEvenementFragment.afficher_données(evenement, météo)
             }
         }
     }

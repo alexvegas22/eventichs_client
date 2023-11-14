@@ -21,7 +21,7 @@ class AccueilPresentateur(var vue: AccueilVue): IPresentateur {
      * Passe la liste des evenements à la vue
      */
     fun afficherListeEvenements() {
-        vue.setupRecyclerView(listeEvenementModele.listeEvenementsInscrits())
+        vue.setupRecyclerView(listeEvenementModele.listeEvenementsInscrits(), listeEvenementModele.filtrerOrganisation())
     }
 
     fun traiterClickEvenement(evenement: Evenement){
