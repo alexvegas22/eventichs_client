@@ -5,6 +5,7 @@
     android:id="@+id/frmlytConteneurPrincipal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:visibility="visible"
     tools:context=".presentation.vues.EvenementVue">
 
     <LinearLayout
@@ -35,10 +36,28 @@
                 android:baselineAligned="false"
                 android:gravity="right|end"
                 android:orientation="horizontal"
-                android:textAlignment="textEnd" />
+                android:textAlignment="textEnd">
+
+                <TextView
+                    android:id="@+id/txtConfirmerPrésence"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:text="Confirmer présence"
+                    android:textAlignment="textEnd"
+                    android:textSize="10sp"
+                    android:visibility="invisible" />
+
+                <ImageView
+                    android:id="@+id/imgBoutonConfirmerPrésence"
+                    android:layout_width="45dp"
+                    android:layout_height="match_parent"
+                    android:baselineAlignBottom="false"
+                    android:visibility="invisible"
+                    app:srcCompat="@drawable/confirmed" />
+            </LinearLayout>
 
         </LinearLayout>
-
         <LinearLayout
             android:id="@+id/lytConteneurInfosSupérieures"
             android:layout_width="match_parent"
@@ -55,6 +74,25 @@
                 android:textColor="#E91E63"
                 android:textSize="22sp" />
 
+            <ImageView
+                android:id="@+id/imgIconParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/people" />
+
+            <TextView
+                android:id="@+id/txtNbParticipants"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp"
+                android:text="000"
+                android:textColor="#E91E63"
+                android:textSize="10sp" />
         </LinearLayout>
 
         <RelativeLayout
@@ -66,7 +104,7 @@
             <ImageView
                 android:id="@+id/imgÉvénement"
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
+                android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:gravity="center"
@@ -304,6 +342,7 @@
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:text="Catégorie :"
+                    android:textColor="#FF333333"
                     android:textSize="13sp" />
 
                 <TextView
@@ -396,7 +435,6 @@
                 android:textSize="12sp" />
 
         </LinearLayout>
-
     </LinearLayout>
 
 

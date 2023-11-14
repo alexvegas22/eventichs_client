@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_liste_evenements_to_fragment_afficher_evenement"
             app:destination="@id/fragment_afficher_evenement" >
-            <argument
-                android:name="evenementSelectionne"
-                android:defaultValue="0" />
         </action>
     </fragment>
     <fragment android:id="@+id/accueil"
@@ -24,9 +21,6 @@
         <action
             android:id="@+id/action_accueil_to_fragment_afficher_evenement"
             app:destination="@id/fragment_afficher_evenement" >
-            <argument
-                android:name="evenementSelectionne"
-                android:defaultValue="0" />
         </action>
     </fragment>
     <fragment
@@ -49,10 +43,6 @@
         <action
             android:id="@+id/action_fragment_afficher_evenement_to_liste_evenements"
             app:destination="@id/liste_evenements" />
-        <argument
-            android:name="evenementSelectionne"
-            app:argType="integer"
-            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/profil"
