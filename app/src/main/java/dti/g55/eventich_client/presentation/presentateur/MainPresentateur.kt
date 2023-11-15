@@ -1,9 +1,7 @@
 package dti.g55.eventich_client.presentation.presentateur
 
 import dti.g55.eventich_client.MainActivity
-import dti.g55.eventich_client.R
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
-import dti.g55.eventich_client.presentation.modeles.PreferenceModele
 
 interface MainPresentateur {
     fun attachView(view: MainActivity)
