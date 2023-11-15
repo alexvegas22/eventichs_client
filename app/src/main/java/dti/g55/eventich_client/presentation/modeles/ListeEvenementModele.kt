@@ -15,7 +15,7 @@ class ListeEvenementModele(val source: ISourceDonnee = MockData) {
         return source.obtenirListeEvenements()
     }
 
-    fun listeEvenementsInscrits(/* code utilisateur*/): ArrayList<Evenement>{
+    fun listeEvenementsInscrits(): ArrayList<Evenement>{
         // À FAIRE
         return source.obtenirListeEvenements()
     }

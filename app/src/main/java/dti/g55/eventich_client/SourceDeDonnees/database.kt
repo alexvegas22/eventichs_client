@@ -71,7 +71,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     fun creerPreference(db: SQLiteDatabase){
-        val pref = Preference("Français","Light")
+        val pref = Preference("Français",R.style.AppThemeDark)
         val valeur = ContentValues()
         valeur.put(COLUMN_langue, pref.langue)
         valeur.put(COLUMN_modeUI, pref.modeUI)
@@ -80,7 +80,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
     fun creerUtilisateurs(db: SQLiteDatabase) {
         val utilisateurs = mutableListOf(
-            ProfilUtilisateur(R.drawable.alistaire_cockburn,"Cockburn", "Alistaire",  5142345622,"agile@alliance.com","124 rue Street, Montreal, Quebec")
+            ProfilUtilisateur(R.drawable.alistaire_cockburn,"Cockburn", "Alistaire",  "5142345622","agile@alliance.com","124 rue Street, Montreal, Quebec")
         )
 
         for (utilisateur in utilisateurs){
@@ -188,12 +188,12 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val cursor = db.rawQuery("SELECT * FROM $TABLE_Preference LIMIT 1", null)
 
         if (!cursor.moveToFirst())
-            preference = Preference("Français", "Light")
+            preference = Preference("Français", R.style.AppThemeDark)
         else {
             val langueIndex = cursor.getColumnIndex(COLUMN_langue)
             val modeIndex = cursor.getColumnIndex(COLUMN_modeUI)
             val langue = cursor.getString(langueIndex)
-            val mode = cursor.getString(modeIndex)
+            val mode = cursor.getInt(modeIndex)
             preference = Preference(langue, mode)
         }
 
