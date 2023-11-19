@@ -58,6 +58,7 @@
             </LinearLayout>
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lytConteneurInfosSupérieures"
             android:layout_width="match_parent"
@@ -92,24 +93,34 @@
                 android:paddingRight="2dp"
                 android:text="000"
                 android:textColor="#E91E63"
-                android:textSize="10sp" />
+                android:textSize="20sp" />
         </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/lytConteneurImageÉvénement"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0">
+            android:layout_height="270dp">
 
             <ImageView
                 android:id="@+id/imgÉvénement"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:cropToPadding="false"
                 android:gravity="center"
                 android:scaleType="centerCrop"
-                android:src="@drawable/whiteworth_chalet_front" />
+                android:src="@drawable/whiteworth_chalet_front"
+                android:visibility="invisible" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/lottieChargement"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="false"
+                android:adjustViewBounds="true"
+                android:gravity="center"
+                app:lottie_autoPlay="true"
+                app:lottie_rawRes="@raw/loading" />
 
             <ImageView
                 android:id="@+id/imgBottomGradient"
@@ -132,7 +143,6 @@
             android:id="@+id/lytConteneurInfosDateMeteo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0"
             android:orientation="vertical">
 
             <LinearLayout
@@ -164,7 +174,7 @@
                         android:paddingRight="5dp"
                         android:text="------ -- ------ ----"
                         android:textColor="#E91E63"
-                        android:textSize="13sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/txtDateCourte"
@@ -174,7 +184,7 @@
                         android:paddingRight="5dp"
                         android:text="--/--/----"
                         android:textColor="#E91E63"
-                        android:textSize="10sp" />
+                        android:textSize="13sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -209,7 +219,7 @@
                             android:text="--"
                             android:textAlignment="gravity"
                             android:textColor="#E91E63"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txtUnitéMesureT"
@@ -251,7 +261,7 @@
                             android:text="--"
                             android:textAlignment="gravity"
                             android:textColor="#E91E63"
-                            android:textSize="12sp" />
+                            android:textSize="14sp" />
 
                         <TextView
                             android:id="@+id/txtUnitéMesureH"
@@ -290,16 +300,10 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="0"
                             android:gravity="right"
-                            android:text="--------"
+                            android:text="-------- --------"
                             android:textAlignment="gravity"
                             android:textColor="#E91E63"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:id="@+id/txtPlaceHolder"
-                            android:layout_width="20dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0" />
+                            android:textSize="14sp" />
 
                         <ImageView
                             android:id="@+id/imgIconeM"
@@ -317,7 +321,7 @@
             android:id="@+id/lytConteneurInfosInférieures"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.20"
+            android:layout_weight="0.6"
             android:orientation="vertical">
 
             <TextView
@@ -343,7 +347,7 @@
                     android:paddingBottom="2dp"
                     android:text="Catégorie :"
                     android:textColor="#FF333333"
-                    android:textSize="13sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/txtCatégorie"
@@ -354,7 +358,7 @@
                     android:paddingBottom="2dp"
                     android:text="-------------"
                     android:textColor="#E91E63"
-                    android:textSize="13sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -371,7 +375,7 @@
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:text="Adresse :"
-                    android:textSize="13sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/txtAdresse"
@@ -383,7 +387,7 @@
                     android:paddingBottom="2dp"
                     android:text="-- --- ------- , ----- -- X0X 0X0"
                     android:textColor="#E91E63"
-                    android:textSize="13sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
@@ -400,7 +404,7 @@
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
                     android:text="Organisateur :"
-                    android:textSize="13sp" />
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/txtOrganisateur"
@@ -412,7 +416,7 @@
                     android:paddingBottom="2dp"
                     android:text="-------------"
                     android:textColor="#E91E63"
-                    android:textSize="13sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
             <TextView
@@ -423,7 +427,7 @@
                 android:paddingTop="2dp"
                 android:paddingBottom="2dp"
                 android:text="Description ..."
-                android:textSize="13sp" />
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/txtDescription"
@@ -432,7 +436,7 @@
                 android:paddingLeft="30dp"
                 android:text="En cours de chargement, un instant svp ..."
                 android:textColor="#E91E63"
-                android:textSize="12sp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
     </LinearLayout>

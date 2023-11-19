@@ -32,6 +32,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
 
     override fun init() {
         vueAfficherEvenementFragment.changerCouleursTextInitiales()
+        vueAfficherEvenementFragment.afficherAnimationChargement()
         charger_données()
     }
 

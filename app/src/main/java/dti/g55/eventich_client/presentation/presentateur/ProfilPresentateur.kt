@@ -8,12 +8,12 @@ class ProfilPresentateur(var vue: ProfilVue) {
 
     private var model = ModeleFactory.profil
 
-
     /**
      * Traite le démarrage de la vue Fragment Profil
      */
     fun traiterDemarrage() {
         afficherUtilisateur()
+
     }
 
     /**
@@ -23,4 +23,6 @@ class ProfilPresentateur(var vue: ProfilVue) {
         var profilConnecté : ProfilUtilisateur = model.getProfil()
         vue.updateProfileComponents(profilConnecté)
     }
+
+
 }
