@@ -12,6 +12,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.airbnb.lottie.LottieAnimationView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
@@ -21,6 +22,7 @@ class EvenementVue : Fragment() {
     lateinit var meteoLayout: LinearLayout
     lateinit var backButtonImage: ImageView
     lateinit var imageEvenement : ImageView
+    lateinit var animationChargement : LottieAnimationView
     lateinit var nomEvenement : TextView
     lateinit var nbparticipant: TextView
     lateinit var dateDebut: TextView
@@ -61,6 +63,7 @@ class EvenementVue : Fragment() {
         nomEvenement = view.findViewById(R.id.txtNomCompletÉvénement)
         nbparticipant = view.findViewById(R.id.txtNbParticipants)
         imageEvenement = view.findViewById(R.id.imgÉvénement)
+        animationChargement = view.findViewById(R.id.lottieChargement)
         dateFin = view.findViewById(R.id.txtDateCourte)
         dateDebut = view.findViewById(R.id.txtDateLongue)
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
@@ -89,6 +92,16 @@ class EvenementVue : Fragment() {
 
     fun voirMeteo(){
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_meteo2)
+    }
+
+    fun afficherAnimationChargement(){
+        animationChargement.visibility = View.VISIBLE
+        imageEvenement.visibility = View.INVISIBLE
+    }
+
+    private fun masquerAnimationChargement() {
+        animationChargement.visibility = View.INVISIBLE
+        imageEvenement.visibility = View.VISIBLE
     }
 
     fun changerCouleursTextInitiales(){
@@ -138,6 +151,7 @@ class EvenementVue : Fragment() {
     }
 
     fun afficher_données(evenement: Evenement, conditionMeterologique: ConditionMeterologique){
+        masquerAnimationChargement()
         nomEvenement.setText(evenement.nom)
         nbparticipant.setText(evenement.nbParticipant.toString())
         dateDebut.setText(evenement.dateDebut.toString())
