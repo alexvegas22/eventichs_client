@@ -375,16 +375,16 @@ object MockData: ISourceDonnee {
 
     val météo: ConditionMeterologique = créerMétéoJournée()
     fun créerMétéoJournée(): ConditionMeterologique {
-        val météo = ConditionMeterologique("Partiellement nuagueux", 17, 13, arrayListOf())
+        val météo = ConditionMeterologique("Partiellement nuagueux", 17.0, 13, arrayListOf())
         for (heure in 0..23) {
             val testMétéo =
-                HeureMeteo(heure, R.drawable.day_cloudy_icon, "Partiellement nuageux", 17, 13)
+                HeureMeteo(heure, R.drawable.day_cloudy_icon, "Partiellement nuageux", 17.0, 13)
             météo.listeHeures.add(testMétéo)
         }
         return météo
     }
 
-    override fun obtenirListeEvenements(): ArrayList<Evenement> {
+    override suspend fun obtenirListeEvenements(): ArrayList<Evenement> {
         return ArrayList(
             mutableListOf(
                 Evenement(
@@ -481,7 +481,11 @@ object MockData: ISourceDonnee {
         )
     }
 
-    override fun obtenirOrganisations(): ArrayList<String> {
+    override suspend fun obtenirOrganisations(): ArrayList<String> {
         return listeOrganisations
+    }
+
+    override suspend fun obtenirConditionMeteorologique(): ConditionMeterologique {
+        TODO("Not yet implemented")
     }
 }

@@ -6,4 +6,5 @@ object ModeleFactory {
     val listeEvenements = ListeEvenementModele()
     val meteo = MeteoModele()
     val profil = ProfilModele()
+    val preferences = PreferenceModele()
 }

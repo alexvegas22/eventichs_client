@@ -1,26 +1,26 @@
 package dti.g55.eventich_client.presentation.modeles
 
 import dti.g55.eventich_client.SourceDeDonnees.ISourceDonnee
-import dti.g55.eventich_client.SourceDeDonnees.MockData
+import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesHTTP
 import dti.g55.eventich_client.domaine.entite.Evenement
 import java.util.Date
 
-class ListeEvenementModele(val source: ISourceDonnee = MockData) {
-    lateinit var listeEvenements: ArrayList<Evenement>
+class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http://v34l.com:8080")) {
+    var listeEvenements: ArrayList<Evenement> = arrayListOf()
     var dateDebut: Date = Date()
     var dateFin: Date = Date()
     var filtre: String = ""
 
-    fun retournerListeÉvénements(): ArrayList<Evenement> {
+    suspend fun retournerListeÉvénements(): ArrayList<Evenement> {
         return source.obtenirListeEvenements()
     }
 
-    fun listeEvenementsInscrits(/* code utilisateur*/): ArrayList<Evenement>{
+    suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
         // À FAIRE
         return source.obtenirListeEvenements()
     }
 
-    fun filtrerOrganisation() : ArrayList<Evenement> {
+    suspend fun filtrerOrganisation() : ArrayList<Evenement> {
         val organisations = source.obtenirOrganisations()
         var evenements = source.obtenirListeEvenements()
 
@@ -36,7 +36,7 @@ class ListeEvenementModele(val source: ISourceDonnee = MockData) {
 
     }
 
-    fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
+    suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
         val evenements = source.obtenirListeEvenements()
         return ArrayList(evenements.filter { it.dateDebut in dateDebut..dateFin }.sortedByDescending { it.dateDebut })
     }
