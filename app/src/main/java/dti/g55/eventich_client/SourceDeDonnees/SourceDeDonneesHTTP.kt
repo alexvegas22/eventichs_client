@@ -8,8 +8,6 @@ import java.io.IOException
 class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
     @Throws(SourceDeDonneesException::class)
     override suspend fun obtenirListeEvenements(): ArrayList<Evenement> {
-        val liste = arrayListOf<Evenement>();
-
         try {
             val client = OkHttpClient()
             val requête = Request.Builder().url("$url_api/evenements").build()
