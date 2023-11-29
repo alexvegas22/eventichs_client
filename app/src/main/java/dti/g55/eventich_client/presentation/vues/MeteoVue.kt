@@ -1,19 +1,18 @@
 package dti.g55.eventich_client.presentation.vues
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
-import dti.g55.eventich_client.domaine.entite.HeureMeteo
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.presentateur.MeteoPresentateur
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
@@ -58,6 +57,12 @@ class MeteoVue : Fragment() {
         rvMétéo.layoutManager = layoutManager
         rvMétéo.itemAnimator = DefaultItemAnimator()
         rvMétéo.adapter = adapter
+    }
+
+    fun rafraichirListeHeure(condition: ConditionMeterologique){
+        rvMétéo.adapter = CustomRecyclerAdapter(condition.listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder, presentateur)
+        tvDate.text = modeleEvenement.evenementCourant.dateDebut.toString()
+        tvTemp.text = condition.températureMoyenne.toString()
     }
 
     fun retour() {

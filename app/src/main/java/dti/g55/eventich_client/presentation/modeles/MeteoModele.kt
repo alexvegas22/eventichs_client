@@ -1,13 +1,13 @@
 package dti.g55.eventich_client.presentation.modeles
 
-import dti.g55.eventich_client.SourceDeDonnees.MockData
+import dti.g55.eventich_client.SourceDeDonnees.ISourceDonnee
+import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesHTTP
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
-import dti.g55.eventich_client.domaine.entite.HeureMeteo
-import java.util.Date
 
-class MeteoModele {
+class MeteoModele(val source: ISourceDonnee = SourceDeDonneesHTTP("https://api.open-meteo.com/v1")) {
 
-    fun obtenirMétéo(): ConditionMeterologique {
-        return MockData.météo
+    suspend fun obtenirMétéo(): ConditionMeterologique {
+        return source.obtenirConditionMeteorologique()
     }
+
 }
