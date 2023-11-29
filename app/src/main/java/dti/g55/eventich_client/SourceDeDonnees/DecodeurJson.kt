@@ -60,7 +60,7 @@ class DecodeurJson {
                     "type" -> {
                         type = reader.nextString()
                     }
-                    "categorie_Id" -> {
+                    "categorie" -> {
                         categorie = reader.nextString()
                     }
                     "description" -> {
@@ -69,7 +69,7 @@ class DecodeurJson {
                     "photo" -> {
                         photo = reader.nextString()
                     }
-                    "organisation_Id" -> {
+                    "organisation" -> {
                         organisation = reader.nextString()
                     }
                 }
