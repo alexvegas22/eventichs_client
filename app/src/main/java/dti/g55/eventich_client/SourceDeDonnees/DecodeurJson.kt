@@ -72,6 +72,7 @@ class DecodeurJson {
                     "organisation" -> {
                         organisation = reader.nextString()
                     }
+                    else -> reader.skipValue()
                 }
             }
             reader.endObject()
