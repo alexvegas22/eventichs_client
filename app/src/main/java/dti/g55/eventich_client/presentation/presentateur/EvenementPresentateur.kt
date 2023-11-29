@@ -1,11 +1,15 @@
 package dti.g55.eventich_client.presentation.presentateur
 
+import android.content.ContentResolver
+import android.content.ContentValues
+import android.provider.CalendarContract.Events.*
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+
 
 class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : IPresentateur{
 
@@ -39,5 +43,11 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
 
     fun traiterRetour(){
         vueAfficherEvenementFragment.retour()
+    }
+
+    fun ajouterAuCalendrier(){
+
+        // Do something that works
+
     }
 }

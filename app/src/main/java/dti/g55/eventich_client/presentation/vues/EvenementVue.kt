@@ -25,6 +25,7 @@ class EvenementVue : Fragment() {
     lateinit var animationChargement : LottieAnimationView
     lateinit var nomEvenement : TextView
     lateinit var nbparticipant: TextView
+    lateinit var calendrier: ImageView
     lateinit var dateDebut: TextView
     lateinit var dateFin: TextView
     lateinit var temperature: TextView
@@ -64,6 +65,7 @@ class EvenementVue : Fragment() {
         nbparticipant = view.findViewById(R.id.txtNbParticipants)
         imageEvenement = view.findViewById(R.id.imgÉvénement)
         animationChargement = view.findViewById(R.id.lottieChargement)
+        calendrier = view.findViewById(R.id.imgIconeCalendrier)
         dateFin = view.findViewById(R.id.txtDateCourte)
         dateDebut = view.findViewById(R.id.txtDateLongue)
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
@@ -85,6 +87,7 @@ class EvenementVue : Fragment() {
         //setlisteners
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { presentateur.traiterRetour() }
+        calendrier.setOnClickListener { presentateur.ajouterAuCalendrier() }
 
         //initialisation
         presentateur.init()
@@ -154,6 +157,7 @@ class EvenementVue : Fragment() {
         masquerAnimationChargement()
         nomEvenement.setText(evenement.nom)
         nbparticipant.setText(evenement.nbParticipant.toString())
+        //imageEvenement.setImageDrawable(evenement.XXXXXXXXXXXXXXXXXXXX)
         dateDebut.setText(evenement.dateDebut.toString())
         dateFin.setText(evenement.dateFin.toString())
         temperature.text = conditionMeterologique.températureMoyenne.toString()

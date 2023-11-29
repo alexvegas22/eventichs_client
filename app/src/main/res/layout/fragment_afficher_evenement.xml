@@ -433,7 +433,8 @@
                 android:id="@+id/txtDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="30dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
                 android:text="En cours de chargement, un instant svp ..."
                 android:textColor="#E91E63"
                 android:textSize="20sp" />
