@@ -11,15 +11,16 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
 
     private var job: Job? = null
     private var modèle = ModeleFactory.evenements
+    private var modèleMétéo = ModeleFactory.meteo
 
     fun charger_données() {
         job = CoroutineScope( Dispatchers.IO ).launch {
             //charger données
             Thread.sleep(1_000) //simulation - À enlever
             val evenement = modèle.evenementCourant
+            val météo = modèleMétéo.obtenirMétéo()
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
-                val météo = modèle.obtenirMétéo()
                 vueAfficherEvenementFragment.changerCouleursTextFinales()
                 vueAfficherEvenementFragment.afficher_données(evenement, météo)
             }
