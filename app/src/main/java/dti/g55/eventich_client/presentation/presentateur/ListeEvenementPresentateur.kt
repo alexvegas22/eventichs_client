@@ -6,6 +6,8 @@ import dti.g55.eventich_client.presentation.modeles.EvenementModele
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementModele
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
 import java.util.Calendar
 import java.util.Date
 
@@ -21,8 +23,23 @@ class ListeEvenementPresentateur(
 ): IPresentateur {
     override fun init() {
         setDatesInitial()
-        listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+        setupListeEvenements()
+        getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
+    }
+
+    private fun setupListeEvenements() {
         vue.setupListeEvenements(listeEvenementsModele.listeEvenements)
+    }
+
+    private fun getListeEvenementsEntreDatesFiltrer(filtre: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
+                vue.rafraichirListeEvenements(nouvelleListe)
+            }
+        }
     }
 
     private fun setDatesInitial() {
@@ -96,9 +113,7 @@ class ListeEvenementPresentateur(
             else -> return
         }
 
-        listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
-        var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, listeEvenementsModele.filtre)
-        vue.rafraichirListeEvenements(nouvelleListe)
+        getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
     }
 
     fun toDateStart(date: Date): Date {
