@@ -33,10 +33,10 @@ class DecodeurJson {
             var dateDebut: String = ""
             var dateFin: String = ""
             var type: String = ""
-            var categorie_Id: Int = 0
+            var categorie: String = ""
             var description: String = ""
             var photo: String = ""
-            var organisation_Id: Int = 0
+            var organisation: String = ""
 
             while (reader.hasNext()){
                 val clé = reader.nextName()
@@ -61,7 +61,7 @@ class DecodeurJson {
                         type = reader.nextString()
                     }
                     "categorie_Id" -> {
-                        categorie_Id = reader.nextInt()
+                        categorie = reader.nextString()
                     }
                     "description" -> {
                         description = reader.nextString()
@@ -70,13 +70,13 @@ class DecodeurJson {
                         photo = reader.nextString()
                     }
                     "organisation_Id" -> {
-                        organisation_Id = reader.nextInt()
+                        organisation = reader.nextString()
                     }
                 }
             }
             reader.endObject()
 
-            return Evenement(id, R.drawable.ic_search, nom, 0, dateFormat.parse(dateDebut), dateFormat.parse(dateFin), adresse, organisation_Id.toString(), categorie_Id.toString(), description)
+            return Evenement(id, R.drawable.ic_search, nom, 0, dateFormat.parse(dateDebut), dateFormat.parse(dateFin), adresse, organisation, categorie, description)
         }
     }
 }
