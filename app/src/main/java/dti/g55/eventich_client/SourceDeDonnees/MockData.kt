@@ -384,7 +384,7 @@ object MockData: ISourceDonnee {
         return météo
     }
 
-    override fun obtenirListeEvenements(): ArrayList<Evenement> {
+    override suspend fun obtenirListeEvenements(): ArrayList<Evenement> {
         return ArrayList(
             mutableListOf(
                 Evenement(
@@ -481,7 +481,7 @@ object MockData: ISourceDonnee {
         )
     }
 
-    override fun obtenirOrganisations(): ArrayList<String> {
+    override suspend fun obtenirOrganisations(): ArrayList<String> {
         return listeOrganisations
     }
 }

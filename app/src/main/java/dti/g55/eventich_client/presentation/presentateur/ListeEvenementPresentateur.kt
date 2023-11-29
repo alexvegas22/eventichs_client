@@ -2,9 +2,12 @@ package dti.g55.eventich_client.presentation.presentateur
 
 import android.widget.DatePicker
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.modeles.EvenementModele
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementModele
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
+import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
 import java.util.Calendar
 import java.util.Date
 
@@ -13,14 +16,30 @@ enum class BoutonDateTag {
     FIN
 }
 
-class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
-    private val listeEvenementsModele = ModeleFactory.listeEvenements
-    private val evenementsModele = ModeleFactory.evenements
-
+class ListeEvenementPresentateur(
+    val vue: ListeEvenementVue,
+    val listeEvenementsModele: ListeEvenementModele = ModeleFactory.listeEvenements,
+    val evenementsModele: EvenementModele = ModeleFactory.evenements
+): IPresentateur {
     override fun init() {
         setDatesInitial()
-        listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+        setupListeEvenements()
+        getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
+    }
+
+    private fun setupListeEvenements() {
         vue.setupListeEvenements(listeEvenementsModele.listeEvenements)
+    }
+
+    private fun getListeEvenementsEntreDatesFiltrer(filtre: String) {
+        CoroutineScope(Dispatchers.IO).launch {
+            listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+
+            CoroutineScope(Dispatchers.Main).launch {
+                var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
+                vue.rafraichirListeEvenements(nouvelleListe)
+            }
+        }
     }
 
     private fun setDatesInitial() {
@@ -94,9 +113,7 @@ class ListeEvenementPresentateur(val vue: ListeEvenementVue): IPresentateur {
             else -> return
         }
 
-        listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
-        var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, listeEvenementsModele.filtre)
-        vue.rafraichirListeEvenements(nouvelleListe)
+        getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
     }
 
     fun toDateStart(date: Date): Date {
