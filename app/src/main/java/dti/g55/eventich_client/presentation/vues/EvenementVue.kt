@@ -2,6 +2,7 @@ package dti.g55.eventich_client.presentation.vues
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.airbnb.lottie.LottieAnimationView
+import com.squareup.picasso.Picasso
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
@@ -149,18 +151,33 @@ class EvenementVue : Fragment() {
     fun retour() {
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_liste_evenements)
     }
+    fun chercherNbParticipants(evenement: Evenement) : Int{
+
+        return 0
+    }
 
     fun afficher_données(evenement: Evenement, conditionMeterologique: ConditionMeterologique){
         masquerAnimationChargement()
+
+        val imageParam = evenement.image
+        Log.e("image link",imageParam)
+        imageEvenement.setImageResource(R.drawable.whiteworth_chalet_front)
+       try {
+            // Use Picasso to load the image from the URL
+            Picasso.get().load(evenement.image).into(imageEvenement)
+        } catch (e : Exception) {
+
+        }
+
         nomEvenement.setText(evenement.nom)
-        nbparticipant.setText(evenement.nbParticipant.toString())
+        nbparticipant.setText("0")//chercherNbParticipants(evenement))
         dateDebut.setText(evenement.dateDebut.toString())
         dateFin.setText(evenement.dateFin.toString())
         temperature.text = conditionMeterologique.températureMoyenne.toString()
         humidite.text = conditionMeterologique.pourcentageHumidité.toString()
         meteo.text = conditionMeterologique.meteoDescription
-        categorie.setText(evenement.catégorie)
-        adresseEvenement.setText(evenement.location)
+        categorie.setText(evenement.categorie)
+        adresseEvenement.setText(evenement.adresse)
         organisationEvenement.setText(evenement.organisation)
         description.setText(evenement.description)
     }

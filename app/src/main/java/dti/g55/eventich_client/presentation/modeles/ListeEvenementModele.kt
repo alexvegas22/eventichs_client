@@ -45,7 +45,7 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
         var lowercaseFiltre = filtre.lowercase().trim()
 
         return ArrayList(liste.filter {
-            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
+            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.adresse.lowercase().trim().contains(lowercaseFiltre)
         })
     }
 }

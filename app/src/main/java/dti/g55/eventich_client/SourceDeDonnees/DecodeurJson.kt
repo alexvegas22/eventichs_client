@@ -66,7 +66,7 @@ class DecodeurJson {
                     "description" -> {
                         description = reader.nextString()
                     }
-                    "photo" -> {
+                    "image" -> {
                         photo = reader.nextString()
                     }
                     "organisation" -> {
@@ -77,7 +77,7 @@ class DecodeurJson {
             }
             reader.endObject()
 
-            return Evenement(id, R.drawable.ic_search, nom, 0, dateFormat.parse(dateDebut), dateFormat.parse(dateFin), adresse, organisation, categorie, description)
+            return Evenement(id, nom,  adresse, dateFormat.parse(dateDebut), dateFormat.parse(dateFin), type ,description, categorie, photo, organisation)
         }
     }
 }

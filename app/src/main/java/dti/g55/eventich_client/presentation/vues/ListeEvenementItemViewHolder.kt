@@ -1,9 +1,11 @@
 package dti.g55.eventich_client.presentation.vues
 
+import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import com.squareup.picasso.Picasso
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.presentateur.ListeEvenementPresentateur
@@ -25,10 +27,17 @@ class ListeEvenementItemViewHolder(itemView: View, val presentateur: ListeEvenem
     }
 
     override fun bindItem(evenement: Evenement) {
-        image.setImageResource(evenement.imageId)
+
+        image.setImageResource(R.drawable.ic_search)
+        try {
+            // Use Picasso to load the image from the URL
+            Picasso.get().load(evenement.image).into(image)
+        } catch (e : Exception) {
+            Log.e("Image Error","Woopsie")
+        }
         nom.text = evenement.nom
         date.text = evenement.dateDebut.toString()
-        location.text = evenement.location
+        location.text = evenement.adresse
 
         item.setOnClickListener { presentateur.traiterClickEvenement(evenement) }
     }
