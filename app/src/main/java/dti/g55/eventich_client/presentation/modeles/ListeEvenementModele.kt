@@ -10,6 +10,7 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
     var dateDebut: Date = Date()
     var dateFin: Date = Date()
     var filtre: String = ""
+    var profilModele = ProfilModele()
 
     suspend fun retournerListeÉvénements(): ArrayList<Evenement> {
         return source.obtenirListeEvenements()
@@ -17,7 +18,7 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
 
     suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
         // À FAIRE
-        return source.obtenirListeEvenements()
+        return source.obtenirListeEvenementsInscrits(profilModele.getProfil())
     }
 
     suspend fun filtrerOrganisation() : ArrayList<Evenement> {
@@ -45,7 +46,7 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
         var lowercaseFiltre = filtre.lowercase().trim()
 
         return ArrayList(liste.filter {
-            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.location.lowercase().trim().contains(lowercaseFiltre)
+            it.nom.lowercase().trim().contains(lowercaseFiltre) || it.adresse.lowercase().trim().contains(lowercaseFiltre)
         })
     }
 }

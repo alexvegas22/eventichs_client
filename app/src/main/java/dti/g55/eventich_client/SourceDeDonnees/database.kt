@@ -37,60 +37,32 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val COLUMN_dateFin = "date_fin"
         private const val COLUMN_location = "location"
         private const val COLUMN_cheminImage = "cheminImage"
-
-        private const val TABLE_Preference = "Preference"
-        private const val COLUMN_idPreference = "idPreference"
-        private const val COLUMN_langue= "langue"
-        private const val COLUMN_modeUI = "modeUI"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
-        val CREATE_TABLE_preference = "CREATE TABLE $TABLE_Preference ($COLUMN_idPreference INTEGER PRIMARY KEY, $COLUMN_langue TEXT, $COLUMN_modeUI TEXT);"
-        db.execSQL(CREATE_TABLE_preference)
-
-        val CREATE_TABLE_Utilisateur = "CREATE TABLE $TABLE_Utilisateur ($COLUMN_idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_nom TEXT, $COLUMN_prénom TEXT, $COLUMN_numéroDeTéléphone INTEGER,$COLUMN_email TEXT);"
+        val CREATE_TABLE_Utilisateur = "CREATE TABLE $TABLE_Utilisateur ($COLUMN_idUtilisateur INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_nom TEXT, $COLUMN_prénom TEXT, $COLUMN_numéroDeTéléphone INTEGER,$COLUMN_email TEXT, $COLUMN_adresse_utilisateur TEXT);"
         db.execSQL(CREATE_TABLE_Utilisateur)
-
         val CREATE_TABLE_Evenement = "CREATE TABLE $TABLE_Evenement ($COLUMN_idEvenement INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_titre TEXT,$COLUMN_description TEXT,$COLUMN_dateDebut Date, $COLUMN_dateFin Date,$COLUMN_location Text, $COLUMN_cheminImage TEXT);"
         db.execSQL(CREATE_TABLE_Evenement)
 
-      //  val CREATE_TABLE_Images = "CREATE TABLE $TABLE_Image ($COLUMN_idImage INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMN_type text, $COLUMN_img BLOB);"
-        //db.execSQL(CREATE_TABLE_Images)
-
-        creerUtilisateurs(db)
+        creerUtilisateur(db)
         creerEvenement(db)
-        creerPreference(db)
-        //creerImages(db)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Utilisateur)
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_Evenement)
-        //db.execSQL("DROP TABLE IF EXISTS " + TABLE_Images)
         onCreate(db)
     }
-
-    fun creerPreference(db: SQLiteDatabase){
-        val pref = Preference("Français",R.style.AppThemeDark)
+    fun creerUtilisateur(db: SQLiteDatabase) {
+        val utilisateur =ProfilUtilisateur(1, R.drawable.alistaire_cockburn,"Cockburn", "Alistaire",  "5142345622","agile@alliance.com","124 rue Street, Montreal, Quebec")
         val valeur = ContentValues()
-        valeur.put(COLUMN_langue, pref.langue)
-        valeur.put(COLUMN_modeUI, pref.modeUI)
-        db.insert(TABLE_Preference, null, valeur)
-    }
-
-    fun creerUtilisateurs(db: SQLiteDatabase) {
-        val utilisateurs = mutableListOf(
-            ProfilUtilisateur(R.drawable.alistaire_cockburn,"Cockburn", "Alistaire",  "5142345622","agile@alliance.com","124 rue Street, Montreal, Quebec")
-        )
-
-        for (utilisateur in utilisateurs){
-            val valeur = ContentValues()
             valeur.put(COLUMN_nom, utilisateur.nom)
             valeur.put(COLUMN_prénom, utilisateur.prenom)
             valeur.put(COLUMN_numéroDeTéléphone, utilisateur.telephone)
             valeur.put(COLUMN_email, utilisateur.email)
+            valeur.put(COLUMN_adresse_utilisateur, utilisateur.adresse)
             db.insert(TABLE_Utilisateur, null, valeur)
-        }
     }
 
     fun ajouterUtilisateur(h: ProfilUtilisateur){
@@ -120,49 +92,40 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     fun creerEvenement(db: SQLiteDatabase) {
         @SuppressLint("SimpleDateFormat")
         val dateFormat = SimpleDateFormat("dd-MM-yyyy")
-        val evenements = mutableListOf(
-            Evenement(0,R.drawable.ic_search, "Événement de Test",  9999, dateFormat.parse("26-10-2023"),
-                dateFormat.parse("27-10-2023"), "Repentigny, QC J5Y 2C2", "Alpha Group", "Divers",
-                "Objet factice créé à des fins de tests"),
-            Evenement(1, R.drawable.ic_search, "Conférence sur les mathématiques ésotériques",  124, dateFormat.parse("20-11-2023"),dateFormat.parse("22-11-2023"), "6400 16e Avenue, Montréal, QC H1X 2S9", "Cégep de Rosemont", "Éducation",
-                "Venez en apprendre plus sur les mathématiques ésotériques de second niveau"),
-            Evenement(2, R.drawable.ic_search, "Assemblée générale des lutins",  50, dateFormat.parse("14-10-2023"),dateFormat.parse("16-10-2023"), "x-5678 y-120 z-33 Atelier secret", "Ho Ho Ho", "Loisirs",
-                "Assemblée très importante, humains interdits")
-        )
+        val e = Evenement(0, "Événement de Test",  "Repentigny, QC J5Y 2C2", dateFormat.parse("26-10-2023"),
+                dateFormat.parse("27-10-2023"), "Public", "Divers",
+                "Objet factice créé à des fins de tests", "https://www.vmcdn.ca/f/files/princegeorgematters/images/getty/house-party-getty-images.jpg","Rosemont")
 
-        for (e in evenements){
             val valeur = ContentValues()
             valeur.put(COLUMN_titre, e.nom)
             valeur.put(COLUMN_description, e.description)
             valeur.put(COLUMN_dateDebut, e.dateDebut.toString())
             valeur.put(COLUMN_dateFin, e.dateFin.toString())
-            valeur.put(COLUMN_location, e.location)
-            valeur.put(COLUMN_cheminImage, e.imageId)
+            valeur.put(COLUMN_location, e.adresse)
+            valeur.put(COLUMN_cheminImage, e.image)
             db.insert(TABLE_Evenement, null, valeur)
-        }
-    }
 
+    }
     fun ajouterEvenement(h: Evenement){
         val valeur = ContentValues()
         valeur.put(COLUMN_titre, h.nom)
         valeur.put(COLUMN_description, h.description)
         valeur.put(COLUMN_dateDebut, h.dateDebut.toString())
         valeur.put(COLUMN_dateFin, h.dateFin.toString())
-        valeur.put(COLUMN_location, h.location)
-        valeur.put(COLUMN_cheminImage, h.imageId)
+        valeur.put(COLUMN_location, h.adresse)
+        valeur.put(COLUMN_cheminImage, h.image)
         val db = writableDatabase
         db.insert(TABLE_Evenement, null, valeur)
         db.close()
     }
-    fun supprimerActivité(idEvenement: Int) {
+    fun supprimerEvenement(idEvenement: Int) {
         val db = writableDatabase
         db.execSQL(
             "DELETE FROM " + TABLE_Evenement + " WHERE " +
                     COLUMN_idEvenement + "= \"" + idEvenement + "\";"
         )
     }
-
-    fun modifierActivité(idEvenement: Int,
+    fun modifierEvenement(idEvenement: Int,
                          titre:String,
                          description:String,
                          debut: LocalDate,
@@ -180,28 +143,5 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "$COLUMN_cheminImage = '$cheminImage' WHERE $COLUMN_idEvenement = $idEvenement")
         db.close()
     }
-
-
-    fun rechercherPref(): Preference {
-        lateinit var preference: Preference
-        val db = readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_Preference LIMIT 1", null)
-
-        if (!cursor.moveToFirst())
-            preference = Preference("Français", R.style.AppThemeDark)
-        else {
-            val langueIndex = cursor.getColumnIndex(COLUMN_langue)
-            val modeIndex = cursor.getColumnIndex(COLUMN_modeUI)
-            val langue = cursor.getString(langueIndex)
-            val mode = cursor.getInt(modeIndex)
-            preference = Preference(langue, mode)
-        }
-
-        cursor.close()
-        db.close()
-
-        return preference
-    }
-
 }
 
