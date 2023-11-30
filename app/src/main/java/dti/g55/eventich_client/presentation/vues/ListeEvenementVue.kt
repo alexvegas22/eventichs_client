@@ -12,11 +12,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.presentateur.BoutonDateTag
@@ -33,6 +35,7 @@ class ListeEvenementVue : Fragment() {
     private lateinit var btnDateDebut: Button
     private lateinit var btnDateFin: Button
     private lateinit var inputRecherche: EditText
+    private lateinit var animationChargement : LottieAnimationView
 
     private lateinit var startDateSelectorDialog: DatePickerDialog
     private lateinit var endDateSelectorDialog: DatePickerDialog
@@ -46,6 +49,22 @@ class ListeEvenementVue : Fragment() {
         return inflater.inflate(R.layout.fragment_liste_evenement, container, false)
     }
 
+    fun disposerVueChargement(){
+        btnDateDebut.isEnabled = false
+        btnDateFin.isEnabled = false
+        recycler.isVisible = false
+        animationChargement.isVisible = true
+        inputRecherche.isEnabled = false
+    }
+
+    fun disposerVueChargementTerminé(){
+        btnDateDebut.isEnabled = true
+        btnDateFin.isEnabled = true
+        recycler.isVisible = true
+        animationChargement.isVisible = false
+        inputRecherche.isEnabled = true
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -53,6 +72,7 @@ class ListeEvenementVue : Fragment() {
         btnDateDebut = view.findViewById(R.id.btnDateDebut)
         btnDateFin = view.findViewById(R.id.btnDateFin)
         inputRecherche = view.findViewById(R.id.inputRecherche)
+        animationChargement = view.findViewById(R.id.lottieChargementListe)
 
         btnDateDebut.setOnClickListener { presentateur.traiterOuvertureDatePickerDialog(
             BoutonDateTag.DEBUT) }

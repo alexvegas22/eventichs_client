@@ -22,6 +22,7 @@ class ListeEvenementPresentateur(
     val evenementsModele: EvenementModele = ModeleFactory.evenements
 ): IPresentateur {
     override fun init() {
+        vue.disposerVueChargement()
         setDatesInitial()
         setupListeEvenements()
         getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
@@ -33,11 +34,13 @@ class ListeEvenementPresentateur(
 
     private fun getListeEvenementsEntreDatesFiltrer(filtre: String) {
         CoroutineScope(Dispatchers.IO).launch {
+            Thread.sleep(1_000) //simulation - À enlever
             listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
 
             CoroutineScope(Dispatchers.Main).launch {
                 var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
                 vue.rafraichirListeEvenements(nouvelleListe)
+                vue.disposerVueChargementTerminé()
             }
         }
     }

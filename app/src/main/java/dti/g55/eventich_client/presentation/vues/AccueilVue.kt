@@ -19,6 +19,8 @@ import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 class AccueilVue : Fragment() {
     private lateinit var recyclerEvenementsProchains: RecyclerView
     private lateinit var recyclerEvenementsOrganisations: RecyclerView
+    private lateinit var titreTxt: TextView
+    private lateinit var organisationTxt: TextView
     private lateinit var nomUtilisateur : TextView
     private lateinit var context: Context
     private var presentateur =  AccueilPresentateur(this)
@@ -37,6 +39,8 @@ class AccueilVue : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        titreTxt = view.findViewById(R.id.NextEventsText)
+        organisationTxt = view.findViewById(R.id.OrganisationEventsText)
         recyclerEvenementsProchains = view.findViewById(R.id.SubscribedEventsRecyclerView)
         recyclerEvenementsOrganisations = view.findViewById(R.id.OrganisationEventsRecyclerView)
 
@@ -75,5 +79,15 @@ class AccueilVue : Fragment() {
 
     fun allerVersEvenement() {
         findNavController().navigate(R.id.action_accueil_to_fragment_afficher_evenement)
+    }
+
+    fun afficherChargement() {
+        titreTxt.setText("Chargement en cours")
+        organisationTxt.setText("Un instant SVP...")
+    }
+
+    fun masquerChargement() {
+        titreTxt.setText("Vos prochains évènements")
+        organisationTxt.setText("Évènements dans vos organisations")
     }
 }
