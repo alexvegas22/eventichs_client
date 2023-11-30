@@ -50,6 +50,7 @@ object MockData: ISourceDonnee {
     )
 
     val profilUtilisateur: ProfilUtilisateur = ProfilUtilisateur(
+        1,
         R.drawable.alistaire_cockburn,
         "Cockburn",
         "Alistaire",
@@ -107,6 +108,14 @@ object MockData: ISourceDonnee {
 
     override suspend fun obtenirListeEvenements(): ArrayList<Evenement> {
         return ArrayList(evenements)
+    }
+
+    override suspend fun obtenirListeEvenementsInscrits(profil: ProfilUtilisateur): ArrayList<Evenement> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenirNbParticipants(evenement: Evenement): Int {
+        TODO("Not yet implemented")
     }
 
     override suspend fun obtenirOrganisations(): ArrayList<String> {

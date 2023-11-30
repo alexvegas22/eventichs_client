@@ -55,7 +55,7 @@ class DatabaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         onCreate(db)
     }
     fun creerUtilisateur(db: SQLiteDatabase) {
-        val utilisateur =ProfilUtilisateur(R.drawable.alistaire_cockburn,"Cockburn", "Alistaire",  "5142345622","agile@alliance.com","124 rue Street, Montreal, Quebec")
+        val utilisateur =ProfilUtilisateur(1, R.drawable.alistaire_cockburn,"Cockburn", "Alistaire",  "5142345622","agile@alliance.com","124 rue Street, Montreal, Quebec")
         val valeur = ContentValues()
             valeur.put(COLUMN_nom, utilisateur.nom)
             valeur.put(COLUMN_prénom, utilisateur.prenom)

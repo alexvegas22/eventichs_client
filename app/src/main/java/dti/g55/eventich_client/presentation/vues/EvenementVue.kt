@@ -151,12 +151,8 @@ class EvenementVue : Fragment() {
     fun retour() {
         findNavController().navigate(R.id.action_fragment_afficher_evenement_to_liste_evenements)
     }
-    fun chercherNbParticipants(evenement: Evenement) : Int{
 
-        return 0
-    }
-
-    fun afficher_données(evenement: Evenement, conditionMeterologique: ConditionMeterologique){
+    fun afficher_données(evenement: Evenement, conditionMeterologique: ConditionMeterologique, nbParticipants : String){
         masquerAnimationChargement()
 
         val imageParam = evenement.image
@@ -170,7 +166,7 @@ class EvenementVue : Fragment() {
         }
 
         nomEvenement.setText(evenement.nom)
-        nbparticipant.setText("0")//chercherNbParticipants(evenement))
+        nbparticipant.setText(nbParticipants)//chercherNbParticipants(evenement))
         dateDebut.setText(evenement.dateDebut.toString())
         dateFin.setText(evenement.dateFin.toString())
         temperature.text = conditionMeterologique.températureMoyenne.toString()

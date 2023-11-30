@@ -2,6 +2,7 @@ package dti.g55.eventich_client.SourceDeDonnees
 
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.io.IOException
@@ -11,7 +12,7 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
     override suspend fun obtenirListeEvenements(): ArrayList<Evenement> {
         try {
             val client = OkHttpClient()
-            val requête = Request.Builder().url("$url_api/evenements").build()
+            val requête = Request.Builder().url("$url_api/evenements/public").build()
 
             val réponse = client.newCall(requête).execute()
 
@@ -25,6 +26,58 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
             }
 
             return DecodeurJson.décoderJsonVersListeEvenements(body)
+        }
+        catch (e: IOException){
+            throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
+        }
+    }
+
+    @Throws(SourceDeDonneesException::class)
+    override suspend fun obtenirListeEvenementsInscrits(utilisateur: ProfilUtilisateur): ArrayList<Evenement> {
+        try {
+            val client = OkHttpClient()
+
+            val id = utilisateur.id
+            val requête = Request.Builder().url("$url_api/utilisateurs/$id/evenements").build()
+
+            val réponse = client.newCall(requête).execute()
+
+            val body = réponse.body()?.string()
+
+            if (réponse.code() != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            }
+            if (body == null){
+                throw SourceDeDonneesException("Aucune donnée reçues")
+            }
+
+            return DecodeurJson.décoderJsonVersListeEvenements(body)
+        }
+        catch (e: IOException){
+            throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
+        }
+    }
+
+    @Throws(SourceDeDonneesException::class)
+    override suspend fun obtenirNbParticipants(evenement: Evenement): Int {
+        try {
+            val client = OkHttpClient()
+
+            val id = evenement.id
+            val requête = Request.Builder().url("$url_api/evenements/$id/participants").build()
+
+            val réponse = client.newCall(requête).execute()
+
+            val body = réponse.body()?.string()
+
+            if (réponse.code() != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            }
+            if (body == null){
+                throw SourceDeDonneesException("Aucune donnée reçues")
+            }
+
+            return DecodeurJson.décoderJsonVersNbParticipants(body)
         }
         catch (e: IOException){
             throw SourceDeDonneesException(e.message ?: "Erreur inconnue")

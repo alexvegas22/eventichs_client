@@ -33,7 +33,6 @@ class Modele : ViewModel() {
             it.id == idEvenement
         }[0]
     }
-
     fun retournerListeÉvénements(): MutableList<Evenement> {
         return evenements
     }
