@@ -183,6 +183,5 @@ class EvenementVue : Fragment() {
 
     fun utiliserCalendrier(){
         presentateur.ajouterAuCalendrier()
-        //startActivity(presentateur.ajouterAuCalendrier())
     }
 }
