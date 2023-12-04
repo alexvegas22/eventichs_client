@@ -1,5 +1,6 @@
 package dti.g55.eventich_client.presentation.vues
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -89,7 +90,7 @@ class EvenementVue : Fragment() {
         //setlisteners
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { presentateur.traiterRetour() }
-        calendrier.setOnClickListener { utiliserCalendrier() }
+        calendrier.setOnClickListener { cliquerCalendrier() }
 
         //initialisation
         presentateur.init()
@@ -181,7 +182,10 @@ class EvenementVue : Fragment() {
         description.setText(evenement.description)
     }
 
-    fun utiliserCalendrier(){
+    fun cliquerCalendrier(){
         presentateur.ajouterAuCalendrier()
+    }
+    fun utiliserCalendrier(intent: Intent){
+        startActivity(intent)
     }
 }

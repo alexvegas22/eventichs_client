@@ -53,8 +53,9 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
         vueAfficherEvenementFragment.retour()
     }
 
-    @SuppressLint("UseRequireInsteadOfGet")
-    fun ajouterAuCalendrier()/*:Intent*/ {
+    fun ajouterAuCalendrier() {
+
+        // À modifier
 
         val event = modèle.evenementCourant
 
@@ -67,58 +68,16 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
             timeInMillis
         }
 
-        job = CoroutineScope( Dispatchers.IO ).launch {
-            //charger données
             val intent = Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.Events.CALENDAR_ID, 3)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
                 .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
-                .putExtra(CalendarContract.Events.TITLE, "Yoga")
-                .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
-                .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
-                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-                .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
-            CoroutineScope( Dispatchers.Main ).launch {
-                //afficher données
-                vueAfficherEvenementFragment.startActivity(intent)
-            }
-        }
+                .putExtra(CalendarContract.Events.TITLE, event.nom)
+                .putExtra(CalendarContract.Events.DESCRIPTION, event.description)
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, event.adresse)
+                //.putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
 
-        /*
-        val intent = Intent(Intent.ACTION_INSERT)
-            .setData(CalendarContract.Events.CONTENT_URI)
-            .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
-            .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
-            .putExtra(CalendarContract.Events.TITLE, "Yoga")
-            .putExtra(CalendarContract.Events.DESCRIPTION, "Group class")
-            .putExtra(CalendarContract.Events.EVENT_LOCATION, "The gym")
-            .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
-            .putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
-        vueAfficherEvenementFragment.startActivity(intent)
-         */
-
-        /*
-        val calendarId: Long = 3
-        val startMillis: Long = Calendar.getInstance().run {
-            set(2023, 12, 2, 7, 30)
-            timeInMillis
-        }
-        val endMillis: Long = Calendar.getInstance().run {
-            set(2023, 12, 2, 12, 45)
-            timeInMillis
-        }
-
-        val values = ContentValues().apply {
-            put(CalendarContract.Events.DTSTART, startMillis)
-            put(CalendarContract.Events.DTEND, endMillis)
-            put(CalendarContract.Events.TITLE, "Jazzercise")
-            put(CalendarContract.Events.DESCRIPTION, "Group workout")
-            put(CalendarContract.Events.CALENDAR_ID, calendarId)
-            put(CalendarContract.Events.EVENT_TIMEZONE, "America/Los_Angeles")
-        }
-        // Find out what to do
-        val uri: Uri? = vueAfficherEvenementFragment.context?.contentResolver?.insert(CalendarContract.Events.CONTENT_URI, values)
-        */
+            vueAfficherEvenementFragment.utiliserCalendrier(intent)
     }
 }
