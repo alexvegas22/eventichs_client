@@ -7,28 +7,28 @@
 
     <TextView
         android:id="@+id/tvHeure"
-        android:layout_width="25dp"
+        android:layout_width="7dp"
         android:layout_height="25dp"
         android:textSize="16sp"
         android:layout_weight="1" />
 
     <ImageView
         android:id="@+id/imgTempérature"
-        android:layout_width="23dp"
+        android:layout_width="8dp"
         android:layout_height="23dp"
         android:layout_weight="1"
         android:src="@android:drawable/ic_menu_gallery"/>
 
     <TextView
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="147dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvTempérature"
-        android:layout_width="wrap_content"
+        android:layout_width="44dp"
         android:layout_height="wrap_content"
         android:textSize="16sp"
         android:layout_weight="1" />

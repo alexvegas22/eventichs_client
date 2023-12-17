@@ -24,7 +24,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
             Thread.sleep(1_000) //simulation - À enlever
             val evenement = modèle.evenementCourant
             val météo = modèleMétéo.obtenirMétéo()
-            var nbParticipants = modèle.obtenirBbParticipants(evenement)
+            var nbParticipants = modèle.obtenirNbParticipants(evenement)
             CoroutineScope( Dispatchers.Main ).launch {
                 //afficher données
                 vueAfficherEvenementFragment.changerCouleursTextFinales()

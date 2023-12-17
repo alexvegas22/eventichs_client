@@ -1,15 +1,20 @@
 package dti.g55.eventich_client.presentation.presentateur
 
 import android.widget.DatePicker
+import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesException
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.modeles.EvenementModele
+import dti.g55.eventich_client.presentation.modeles.IModeleEvenement
+import dti.g55.eventich_client.presentation.modeles.IModeleListeEvenements
 import dti.g55.eventich_client.presentation.modeles.ListeEvenementModele
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
+import dti.g55.eventich_client.presentation.vues.IVueListeEvenement
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers
 import java.util.Calendar
 import java.util.Date
+import kotlin.coroutines.CoroutineContext
 
 enum class BoutonDateTag {
     DEBUT,
@@ -17,10 +22,11 @@ enum class BoutonDateTag {
 }
 
 class ListeEvenementPresentateur(
-    val vue: ListeEvenementVue,
-    val listeEvenementsModele: ListeEvenementModele = ModeleFactory.listeEvenements,
-    val evenementsModele: EvenementModele = ModeleFactory.evenements
-): IPresentateur {
+    val vue: IVueListeEvenement,
+    val listeEvenementsModele: IModeleListeEvenements = ModeleFactory.listeEvenements,
+    val evenementsModele: IModeleEvenement = ModeleFactory.evenements,
+    val coroutineContext: CoroutineContext = Dispatchers.IO
+): IPresentateurListeEvenement {
     override fun init() {
         vue.disposerVueChargement()
         setDatesInitial()
@@ -28,24 +34,27 @@ class ListeEvenementPresentateur(
         getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
     }
 
-    private fun setupListeEvenements() {
+    override fun setupListeEvenements() {
         vue.setupListeEvenements(listeEvenementsModele.listeEvenements)
     }
 
-    private fun getListeEvenementsEntreDatesFiltrer(filtre: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            Thread.sleep(1_000) //simulation - À enlever
-            listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
-
-            CoroutineScope(Dispatchers.Main).launch {
-                var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
-                vue.rafraichirListeEvenements(nouvelleListe)
-                vue.disposerVueChargementTerminé()
+    override fun getListeEvenementsEntreDatesFiltrer(filtre: String) {
+        CoroutineScope(coroutineContext).launch {
+            try {
+                listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
+                CoroutineScope(Dispatchers.Main).launch {
+                    var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
+                    vue.rafraichirListeEvenements(nouvelleListe)
+                    vue.disposerVueChargementTerminé()
+                }
+            }
+            catch(e: SourceDeDonneesException) {
+                println(e);
             }
         }
     }
 
-    private fun setDatesInitial() {
+    override fun setDatesInitial() {
         var startDate = toDateStart(Date())
         var calendar = Calendar.getInstance()
         calendar.add(Calendar.MONTH, 5)
@@ -64,7 +73,7 @@ class ListeEvenementPresentateur(
         vue.setupDatePickerDialog(listeEvenementsModele.dateFin, BoutonDateTag.FIN)
     }
 
-    private fun formaterDateVersAnneeMoisJour(date: Date): String {
+    override fun formaterDateVersAnneeMoisJour(date: Date): String {
         val calendar = Calendar.getInstance()
         calendar.time = date
 
@@ -75,20 +84,20 @@ class ListeEvenementPresentateur(
         return String.format("%04d-%02d-%02d", year, month, day)
     }
 
-    fun traiterChangementRecherche(recherche: String) {
+    override fun traiterChangementRecherche(recherche: String) {
         listeEvenementsModele.filtre = recherche
         var listeFiltrer = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, listeEvenementsModele.filtre)
         vue.rafraichirListeEvenements(listeFiltrer)
     }
 
-    fun traiterOuvertureDatePickerDialog(tag: BoutonDateTag){
+    override fun traiterOuvertureDatePickerDialog(tag: BoutonDateTag){
         when (tag) {
             BoutonDateTag.DEBUT -> vue.ouvrirSelecteurDateDebut()
             BoutonDateTag.FIN -> vue.ouvrirSelecteurDateFin()
         }
     }
 
-    fun traiterChangementDate(datePicker: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
+    override fun traiterChangementDate(datePicker: DatePicker, year: Int, monthOfYear: Int, dayOfMonth: Int) {
         val calendrier = Calendar.getInstance()
         calendrier.set(year, monthOfYear, dayOfMonth)
         val date = calendrier.time
@@ -119,7 +128,7 @@ class ListeEvenementPresentateur(
         getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
     }
 
-    fun toDateStart(date: Date): Date {
+    override fun toDateStart(date: Date): Date {
         val calendar = Calendar.getInstance()
         calendar.time = date
         calendar.set(Calendar.HOUR_OF_DAY, 0)
@@ -129,7 +138,7 @@ class ListeEvenementPresentateur(
 
         return calendar.time
     }
-    fun toDateEnd(date: Date): Date {
+    override fun toDateEnd(date: Date): Date {
         val calendar = Calendar.getInstance()
         calendar.time = date
         calendar.set(Calendar.HOUR_OF_DAY, 23)
@@ -140,7 +149,7 @@ class ListeEvenementPresentateur(
         return calendar.time
     }
 
-    fun traiterClickEvenement(evenement: Evenement){
+    override fun traiterClickEvenement(evenement: Evenement){
         evenementsModele.evenementCourant = evenement
         vue.allerVersEvenement()
     }
