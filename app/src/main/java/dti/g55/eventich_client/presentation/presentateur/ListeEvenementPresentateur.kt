@@ -41,10 +41,12 @@ class ListeEvenementPresentateur(
         CoroutineScope(coroutineContext).launch {
             try {
                 listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
-
                 CoroutineScope(Dispatchers.Main).launch {
+                    println("This is called")
                     var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
+                    println("Nouvelle liste " + nouvelleListe)
                     vue.rafraichirListeEvenements(nouvelleListe)
+                    println("This is also called")
                 }
             }
             catch(e: SourceDeDonneesException) {

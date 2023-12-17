@@ -42,8 +42,8 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
         return ArrayList(evenements.filter { it.dateDebut in dateDebut..dateFin }.sortedByDescending { it.dateDebut })
     }
 
-    override fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>{
-        var lowercaseFiltre = filtre.lowercase().trim()
+    override fun getListeFiltrer(liste: ArrayList<Evenement>, filtreRecherche: String): ArrayList<Evenement>{
+        var lowercaseFiltre = filtreRecherche.lowercase().trim()
 
         return ArrayList(liste.filter {
             it.nom.lowercase().trim().contains(lowercaseFiltre) || it.adresse.lowercase().trim().contains(lowercaseFiltre)
