@@ -18,7 +18,7 @@ import dti.g55.eventich_client.presentation.presentateur.MeteoPresentateur
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
 
-class MeteoVue : Fragment() {
+class MeteoVue : Fragment(), IVueMeteo {
     lateinit var btnRetourImage: ImageView
     lateinit var rvMétéo: RecyclerView
     lateinit var tvDate: TextView
@@ -32,7 +32,7 @@ class MeteoVue : Fragment() {
         return inflater.inflate(R.layout.fragment_meteo, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+    override fun onViewCreated( view: View, savedInstanceState: Bundle? ) {
         super.onViewCreated(view, savedInstanceState)
 
         rvMétéo = view.findViewById(R.id.rvMétéo)
@@ -48,7 +48,7 @@ class MeteoVue : Fragment() {
     }
 
 
-    fun setupListeHeure(condition: ConditionMeterologique){
+    override fun setupListeHeure( condition: ConditionMeterologique ){
         var adapter = CustomRecyclerAdapter(condition.listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder, presentateur)
         var layoutManager = LinearLayoutManager(context)
         layoutManager.stackFromEnd = true
@@ -59,13 +59,13 @@ class MeteoVue : Fragment() {
         rvMétéo.adapter = adapter
     }
 
-    fun rafraichirListeHeure(condition: ConditionMeterologique){
+    override fun rafraichirListeHeure( condition: ConditionMeterologique ){
         rvMétéo.adapter = CustomRecyclerAdapter(condition.listeHeures, R.layout.fragment_condition_meteo, ::ListeMeteoViewHolder, presentateur)
         tvDate.text = modeleEvenement.evenementCourant.dateDebut.toString()
         tvTemp.text = condition.températureMoyenne.toString()
     }
 
-    fun retour() {
+    override fun retour() {
         findNavController().navigate(R.id.action_meteo2_to_fragment_afficher_evenement)
     }
 
