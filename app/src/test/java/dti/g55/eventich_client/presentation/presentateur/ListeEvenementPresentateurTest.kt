@@ -17,6 +17,7 @@ import org.junit.Test
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.verify
 import org.mockito.Mockito.`when`
+import org.mockito.kotlin.eq
 import java.util.Calendar
 import java.util.Date
 
@@ -111,9 +112,9 @@ class ListeEvenementPresentateurTest {
 
         présentateur.getListeEvenementsEntreDatesFiltrer("arty")
 
-        verify(mockVue).rafraichirListeEvenements(arrayListOf<Evenement>())
+        verify(mockVue).rafraichirListeEvenements(eq((arrayListOf(evenement2))))
     }
-     */
+    */
 
     @Test
     fun `Étant donné un ListeEvenementPresentateur, lorsqu'on appelle la fonction formaterDateVersAnneeMoisJour avec un objet date du 20 janvier 2022, alors on obtient 2022-01-20`() = runTest {
