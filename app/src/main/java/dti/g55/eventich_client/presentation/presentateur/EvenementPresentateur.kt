@@ -1,11 +1,16 @@
 package dti.g55.eventich_client.presentation.presentateur
 
+import android.content.Intent
+import android.provider.CalendarContract
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
+import java.util.Calendar
+
 
 class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : IPresentateur{
 
@@ -39,6 +44,37 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
     }
 
     fun traiterRetour(){
+        job?.cancel()
         vueAfficherEvenementFragment.retour()
+    }
+
+    fun ajouterAuCalendrier() {
+
+        // À modifier
+
+        val event = modèle.evenementCourant
+
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+
+        val startMillis: Long = Calendar.getInstance().run {
+            set(2023, 12, 2, 7, 30)
+            timeInMillis
+        }
+        val endMillis: Long = Calendar.getInstance().run {
+            set(2023, 12, 2, 12, 45)
+            timeInMillis
+        }
+
+            val intent = Intent(Intent.ACTION_INSERT)
+                .setData(CalendarContract.Events.CONTENT_URI)
+                .putExtra(CalendarContract.Events.CALENDAR_ID, 3)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.dateDebut.time)
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.dateFin.time)
+                .putExtra(CalendarContract.Events.TITLE, event.nom)
+                .putExtra(CalendarContract.Events.DESCRIPTION, event.description)
+                .putExtra(CalendarContract.Events.EVENT_LOCATION, event.adresse)
+                //.putExtra(Intent.EXTRA_EMAIL, "rowan@example.com,trevor@example.com")
+
+            vueAfficherEvenementFragment.utiliserCalendrier(intent)
     }
 }

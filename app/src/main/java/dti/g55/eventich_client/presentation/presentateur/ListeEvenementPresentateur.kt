@@ -28,6 +28,7 @@ class ListeEvenementPresentateur(
     val coroutineContext: CoroutineContext = Dispatchers.IO
 ): IPresentateurListeEvenement {
     override fun init() {
+        vue.disposerVueChargement()
         setDatesInitial()
         setupListeEvenements()
         getListeEvenementsEntreDatesFiltrer(listeEvenementsModele.filtre)
@@ -42,11 +43,9 @@ class ListeEvenementPresentateur(
             try {
                 listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
                 CoroutineScope(Dispatchers.Main).launch {
-                    println("This is called")
                     var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
-                    println("Nouvelle liste " + nouvelleListe)
                     vue.rafraichirListeEvenements(nouvelleListe)
-                    println("This is also called")
+                    vue.disposerVueChargementTerminé()
                 }
             }
             catch(e: SourceDeDonneesException) {

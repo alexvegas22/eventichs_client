@@ -1,5 +1,6 @@
 package dti.g55.eventich_client.presentation.vues
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -27,6 +28,7 @@ class EvenementVue : Fragment() {
     lateinit var animationChargement : LottieAnimationView
     lateinit var nomEvenement : TextView
     lateinit var nbparticipant: TextView
+    lateinit var calendrier: ImageView
     lateinit var dateDebut: TextView
     lateinit var dateFin: TextView
     lateinit var temperature: TextView
@@ -66,6 +68,7 @@ class EvenementVue : Fragment() {
         nbparticipant = view.findViewById(R.id.txtNbParticipants)
         imageEvenement = view.findViewById(R.id.imgÉvénement)
         animationChargement = view.findViewById(R.id.lottieChargement)
+        calendrier = view.findViewById(R.id.imgIconeCalendrier)
         dateFin = view.findViewById(R.id.txtDateCourte)
         dateDebut = view.findViewById(R.id.txtDateLongue)
         meteoLayout = view.findViewById(R.id.lytConteneurInfosMeteo)
@@ -87,6 +90,7 @@ class EvenementVue : Fragment() {
         //setlisteners
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { presentateur.traiterRetour() }
+        calendrier.setOnClickListener { cliquerCalendrier() }
 
         //initialisation
         presentateur.init()
@@ -166,7 +170,7 @@ class EvenementVue : Fragment() {
         }
 
         nomEvenement.setText(evenement.nom)
-        nbparticipant.setText(nbParticipants)//chercherNbParticipants(evenement))
+        nbparticipant.setText(nbParticipants)
         dateDebut.setText(evenement.dateDebut.toString())
         dateFin.setText(evenement.dateFin.toString())
         temperature.text = conditionMeterologique.températureMoyenne.toString()
@@ -176,5 +180,12 @@ class EvenementVue : Fragment() {
         adresseEvenement.setText(evenement.adresse)
         organisationEvenement.setText(evenement.organisation)
         description.setText(evenement.description)
+    }
+
+    fun cliquerCalendrier(){
+        presentateur.ajouterAuCalendrier()
+    }
+    fun utiliserCalendrier(intent: Intent){
+        startActivity(intent)
     }
 }

@@ -24,11 +24,13 @@ class AccueilPresentateur(var vue: AccueilVue): IPresentateur {
      * Passe la liste des evenements à la vue
      */
     fun afficherListeEvenements() {
+        vue.afficherChargement()
         CoroutineScope(Dispatchers.IO).launch {
             val evenementsInscrits = listeEvenementModele.listeEvenementsInscrits()
             val evenementsOrganisations = listeEvenementModele.filtrerOrganisation()
 
             CoroutineScope(Dispatchers.Main).launch {
+                vue.masquerChargement()
                 vue.setupRecyclerView(evenementsInscrits, evenementsOrganisations)
             }
         }
