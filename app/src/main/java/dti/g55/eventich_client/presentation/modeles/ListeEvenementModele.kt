@@ -5,23 +5,23 @@ import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesHTTP
 import dti.g55.eventich_client.domaine.entite.Evenement
 import java.util.Date
 
-class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http://v34l.com:8080")) {
-    var listeEvenements: ArrayList<Evenement> = arrayListOf()
-    var dateDebut: Date = Date()
-    var dateFin: Date = Date()
-    var filtre: String = ""
+class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http://v34l.com:8080")) : IModeleListeEvenements {
+    override var listeEvenements = arrayListOf<Evenement>()
+    override var dateDebut = Date()
+    override var dateFin = Date()
+    override var filtre = ""
     var profilModele = ProfilModele()
 
-    suspend fun retournerListeÉvénements(): ArrayList<Evenement> {
+    override suspend fun retournerListeÉvénements(): ArrayList<Evenement> {
         return source.obtenirListeEvenements()
     }
 
-    suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
+    override suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
         // À FAIRE
         return source.obtenirListeEvenementsInscrits(profilModele.getProfil())
     }
 
-    suspend fun filtrerOrganisation() : ArrayList<Evenement> {
+    override suspend fun filtrerOrganisation() : ArrayList<Evenement> {
         val organisations = source.obtenirOrganisations()
         var evenements = source.obtenirListeEvenements()
 
@@ -37,12 +37,12 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
 
     }
 
-    suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
+    override suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
         val evenements = source.obtenirListeEvenements()
         return ArrayList(evenements.filter { it.dateDebut in dateDebut..dateFin }.sortedByDescending { it.dateDebut })
     }
 
-    fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>{
+    override fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>{
         var lowercaseFiltre = filtre.lowercase().trim()
 
         return ArrayList(liste.filter {
