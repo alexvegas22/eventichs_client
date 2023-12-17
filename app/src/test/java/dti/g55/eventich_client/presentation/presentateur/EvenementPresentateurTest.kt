@@ -1,6 +1,5 @@
-package dti.g55.eventich_client
+package dti.g55.eventich_client.presentation.presentateur
 
-import dti.g55.eventich_client.presentation.presentateur.EvenementPresentateur
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
