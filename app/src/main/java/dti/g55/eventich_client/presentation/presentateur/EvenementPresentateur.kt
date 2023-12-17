@@ -1,19 +1,14 @@
 package dti.g55.eventich_client.presentation.presentateur
 
-import android.annotation.SuppressLint
-import android.content.ActivityNotFoundException
-import android.content.ContentResolver
-import android.content.ContentValues
 import android.content.Intent
-import android.net.Uri
 import android.provider.CalendarContract
-import android.widget.Toast
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 
@@ -59,6 +54,8 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
 
         val event = modèle.evenementCourant
 
+        val formatter = SimpleDateFormat("dd/MM/yyyy")
+
         val startMillis: Long = Calendar.getInstance().run {
             set(2023, 12, 2, 7, 30)
             timeInMillis
@@ -71,8 +68,8 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : I
             val intent = Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.Events.CALENDAR_ID, 3)
-                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
-                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endMillis)
+                .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, event.dateDebut.time)
+                .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, event.dateFin.time)
                 .putExtra(CalendarContract.Events.TITLE, event.nom)
                 .putExtra(CalendarContract.Events.DESCRIPTION, event.description)
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, event.adresse)
