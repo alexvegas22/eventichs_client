@@ -19,13 +19,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.presentateur.BoutonDateTag
 import dti.g55.eventich_client.presentation.presentateur.ListeEvenementPresentateur
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 import java.util.Calendar
 import java.util.Date
 
-class ListeEvenementVue : Fragment() {
+class ListeEvenementVue : Fragment(), IVueListeEvenement {
 
     private val presentateur = ListeEvenementPresentateur(this)
     private lateinit var recycler: RecyclerView
@@ -73,7 +74,7 @@ class ListeEvenementVue : Fragment() {
         presentateur.init()
     }
 
-    fun setupListeEvenements(evenements: ArrayList<Evenement>){
+    override fun setupListeEvenements(evenements: ArrayList<Evenement>){
         var adapter = CustomRecyclerAdapter(evenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder, presentateur)
         var layoutManager = LinearLayoutManager(context)
         layoutManager.reverseLayout = true
@@ -83,7 +84,7 @@ class ListeEvenementVue : Fragment() {
         recycler.adapter = adapter
     }
 
-    fun setupDatePickerDialog(date: Date, tag: BoutonDateTag) {
+    override fun setupDatePickerDialog(date: Date, tag: BoutonDateTag) {
         val dateSetListener = DatePickerDialog.OnDateSetListener {
                 datePicker, year, monthOfYear, dayOfMonth -> presentateur.traiterChangementDate(datePicker, year, monthOfYear, dayOfMonth)
         }
@@ -107,35 +108,35 @@ class ListeEvenementVue : Fragment() {
         }
     }
 
-    fun rafraichirListeEvenements(evenements: ArrayList<Evenement>){
+    override fun rafraichirListeEvenements(evenements: ArrayList<Evenement>){
         recycler.adapter = CustomRecyclerAdapter(evenements, R.layout.fragment_evenement_liste_item, ::ListeEvenementItemViewHolder, presentateur)
     }
 
-    fun ouvrirSelecteurDateDebut(){
+    override fun ouvrirSelecteurDateDebut(){
         startDateSelectorDialog.show()
     }
 
-    fun ouvrirSelecteurDateFin(){
+    override fun ouvrirSelecteurDateFin(){
         endDateSelectorDialog.show()
     }
 
-    fun changerTexteBoutonDateDebut(texte: String) {
+    override fun changerTexteBoutonDateDebut(texte: String) {
         btnDateDebut.text = texte
     }
 
-    fun changerTexteBoutonDateFin(texte: String){
+    override fun changerTexteBoutonDateFin(texte: String){
         btnDateFin.text = texte
     }
 
-    fun afficherErreurDateDebutInvalide() {
+    override fun afficherErreurDateDebutInvalide() {
         Toast.makeText(context, "La date de début ne peut pas dépasser la date de fin.", Toast.LENGTH_SHORT).show()
     }
 
-    fun afficherErreurDateFinInvalide() {
+    override fun afficherErreurDateFinInvalide() {
         Toast.makeText(context, "La date de fin ne peut pas être avant la date de début.", Toast.LENGTH_SHORT).show()
     }
 
-    fun allerVersEvenement() {
+    override fun allerVersEvenement() {
         findNavController().navigate(R.id.action_liste_evenements_to_fragment_afficher_evenement)
     }
 }
