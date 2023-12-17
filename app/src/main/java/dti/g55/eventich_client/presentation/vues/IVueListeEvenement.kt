@@ -15,4 +15,6 @@ interface IVueListeEvenement {
     fun afficherErreurDateDebutInvalide()
     fun afficherErreurDateFinInvalide()
     fun allerVersEvenement()
+    fun disposerVueChargement()
+    fun disposerVueChargementTerminé()
 }

@@ -50,7 +50,7 @@ class ListeEvenementVue : Fragment(), IVueListeEvenement {
         return inflater.inflate(R.layout.fragment_liste_evenement, container, false)
     }
 
-    fun disposerVueChargement(){
+    override fun disposerVueChargement(){
         btnDateDebut.isEnabled = false
         btnDateFin.isEnabled = false
         recycler.isVisible = false
@@ -58,7 +58,7 @@ class ListeEvenementVue : Fragment(), IVueListeEvenement {
         inputRecherche.isEnabled = false
     }
 
-    fun disposerVueChargementTerminé(){
+    override fun disposerVueChargementTerminé(){
         btnDateDebut.isEnabled = true
         btnDateFin.isEnabled = true
         recycler.isVisible = true
