@@ -43,17 +43,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="Confirmer présence"
+                    android:text="Rejoindre"
                     android:textAlignment="textEnd"
-                    android:textSize="10sp"
-                    android:visibility="invisible" />
+                    android:textSize="10sp" />
 
                 <ImageView
                     android:id="@+id/imgBoutonConfirmerPrésence"
                     android:layout_width="45dp"
                     android:layout_height="match_parent"
                     android:baselineAlignBottom="false"
-                    android:visibility="invisible"
                     app:srcCompat="@drawable/confirmed" />
             </LinearLayout>
 

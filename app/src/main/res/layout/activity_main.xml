@@ -23,8 +23,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_weight="9"
-        app:menu="@menu/bottom_navigation_menu"
-        tools:ignore="VisualLintBottomNav">
+        app:menu="@menu/bottom_navigation_menu">
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

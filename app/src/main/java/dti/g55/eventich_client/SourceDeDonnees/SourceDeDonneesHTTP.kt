@@ -24,14 +24,12 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
             }
-
             return DecodeurJson.décoderJsonVersListeEvenements(body)
         }
         catch (e: IOException){
             throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
         }
     }
-
     @Throws(SourceDeDonneesException::class)
     override suspend fun obtenirListeEvenementsInscrits(utilisateur: ProfilUtilisateur): ArrayList<Evenement> {
         try {
@@ -85,8 +83,30 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
     }
 
     @Throws(SourceDeDonneesException::class)
-    override suspend fun obtenirOrganisations(): ArrayList<String> {
-        return arrayListOf<String>()
+    override suspend fun obtenirOrganisations(utilisateur: ProfilUtilisateur): ArrayList<String> {
+        try {
+            val client = OkHttpClient()
+
+            val id = utilisateur.id
+            //val requête = Request.Builder().url("$url_api/utilisateurs/$id/organisations").build()
+            val requête = Request.Builder().url("$url_api/organisations").build()
+
+            val réponse = client.newCall(requête).execute()
+
+            val body = réponse.body()?.string()
+
+            if (réponse.code() != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            }
+            if (body == null){
+                throw SourceDeDonneesException("Aucune donnée reçues")
+            }
+
+            return DecodeurJson.décoderJSONVersListeOrganisations(body)
+        }
+        catch (e: IOException){
+            throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
+        }
     }
 
     @Throws(SourceDeDonneesException::class)
@@ -120,6 +140,58 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
         catch (e: IOException){
             throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
         }
+    }
+
+    override suspend fun obtenirOrganisationsPubliques(): ArrayList<String> {
+        try {
+            val client = OkHttpClient()
+
+            val requête = Request.Builder().url("$url_api/organisations/publiques").build()
+
+            val réponse = client.newCall(requête).execute()
+
+            val body = réponse.body()?.string()
+
+            if (réponse.code() != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            }
+            if (body == null){
+                throw SourceDeDonneesException("Aucune donnée reçues")
+            }
+
+            return DecodeurJson.décoderJSONVersListeOrganisations(body)
+        }
+        catch (e: IOException){
+            throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
+        }
+    }
+
+    override suspend fun obtenirEvenementsParOrganisation(organisation: String): ArrayList<Evenement> {
+        try{
+            val client = OkHttpClient()
+
+            val requête = Request.Builder().url("$url_api/organisations/$organisation/evenements").build()
+
+            val réponse = client.newCall(requête).execute()
+
+            val body = réponse.body()?.string()
+
+            if (réponse.code() != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            }
+            if (body == null){
+                throw SourceDeDonneesException("Aucune donnée reçues")
+            }
+
+            return DecodeurJson.décoderJsonVersListeEvenements(body)
+        }
+        catch (e: IOException){
+            throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
+        }
+    }
+
+    suspend fun rejoindreEvenement(){
+
     }
 
 }

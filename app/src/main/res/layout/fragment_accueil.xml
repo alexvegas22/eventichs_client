@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_black"
         android:layout_marginTop="30dp"
-        android:text="Bienvenue Cockburn"
+        android:text="Bienvenue"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/NextEventsText"
@@ -46,17 +46,38 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
-
     <TextView
         android:id="@+id/OrganisationEventsText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Évènements dans vos organisations"
         android:fontFamily="@font/poppins_bold"
+        android:text="@string/vos_org"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SubscribedEventsRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/SubscribedEventsRecyclerView"
+        app:layout_constraintBottom_toTopOf="@id/textinput_placeholder"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:id="@+id/textinput_placeholder"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/OrganisationEventsText"
+        app:layout_constraintBottom_toTopOf="@id/OrganisationEventsRecyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <AutoCompleteTextView
+            android:id="@+id/autoCompleteOrganisationName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="none"
+            android:text="Organisation"
+            android:textAlignment="center" />
+    </com.google.android.material.textfield.TextInputLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/OrganisationEventsRecyclerView"
@@ -64,11 +85,12 @@
         android:layout_height="wrap_content"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:orientation="horizontal"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/textinput_placeholder"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganisationEventsText">
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 

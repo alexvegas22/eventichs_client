@@ -1,4 +1,5 @@
 package dti.g55.eventich_client.SourceDeDonnees
+import android.annotation.SuppressLint
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
@@ -8,6 +9,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 object MockData: ISourceDonnee {
+    @SuppressLint("SimpleDateFormat")
     val dateFormat = SimpleDateFormat("dd-MM-yyyy")
 
     val evenements = mutableListOf(
@@ -52,8 +54,8 @@ object MockData: ISourceDonnee {
     val profilUtilisateur: ProfilUtilisateur = ProfilUtilisateur(
         1,
         R.drawable.alistaire_cockburn,
-        "Cockburn",
-        "Alistaire",
+        "Test Nom",
+        "Test Prenom",
         "5142224444",
         "agileKing@alliance.com",
         "6400 16e Avenue, Montreal, Quebec"
@@ -111,18 +113,26 @@ object MockData: ISourceDonnee {
     }
 
     override suspend fun obtenirListeEvenementsInscrits(profil: ProfilUtilisateur): ArrayList<Evenement> {
-        TODO("Not yet implemented")
+        return ArrayList(evenements)
     }
 
     override suspend fun obtenirNbParticipants(evenement: Evenement): Int {
-        TODO("Not yet implemented")
+        return 0
     }
 
-    override suspend fun obtenirOrganisations(): ArrayList<String> {
+    override suspend fun obtenirOrganisations(profil: ProfilUtilisateur): ArrayList<String> {
         return listeOrganisations
     }
 
     override suspend fun obtenirConditionMeteorologique(): ConditionMeterologique {
+        return météo
+    }
+
+    override suspend fun obtenirOrganisationsPubliques(): ArrayList<String> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun obtenirEvenementsParOrganisation(organisation: String): ArrayList<Evenement> {
         TODO("Not yet implemented")
     }
 }

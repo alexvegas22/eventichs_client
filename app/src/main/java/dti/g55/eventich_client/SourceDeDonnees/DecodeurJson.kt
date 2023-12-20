@@ -1,5 +1,6 @@
 package dti.g55.eventich_client.SourceDeDonnees
 
+import android.annotation.SuppressLint
 import android.util.JsonReader
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
@@ -41,6 +42,7 @@ class DecodeurJson {
             return nbParticipants
         }
 
+        @SuppressLint("SimpleDateFormat")
         fun décoderJsonVersEvenement(reader: JsonReader): Evenement {
             val dateFormat = SimpleDateFormat("yyyy-MM-dd")
 
@@ -97,6 +99,31 @@ class DecodeurJson {
             reader.endObject()
 
             return Evenement(id, nom,  adresse, dateFormat.parse(dateDebut), dateFormat.parse(dateFin), type ,description, categorie, photo, organisation)
+        }
+
+        fun décoderJSONVersListeOrganisations(json: String): ArrayList<String> {
+            val liste = arrayListOf<String>()
+
+            val reader = JsonReader(StringReader(json))
+            reader.beginArray()
+            while (reader.hasNext()) {
+                reader.beginObject()
+                while (reader.hasNext()) {
+                    val clé = reader.nextName()
+
+                    when (clé) {
+                        "nomOrganisation" -> {
+                            liste += reader.nextString()
+                        }
+
+                        else -> reader.skipValue()
+                    }
+                }
+                reader.endObject()
+            }
+            reader.endArray()
+
+            return liste
         }
     }
 }

@@ -17,12 +17,11 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
     }
 
     override suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
-        // À FAIRE
         return source.obtenirListeEvenementsInscrits(profilModele.getProfil())
     }
 
     override suspend fun filtrerOrganisation() : ArrayList<Evenement> {
-        val organisations = source.obtenirOrganisations()
+        val organisations = source.obtenirOrganisations(profilModele.getProfil())
         var evenements = source.obtenirListeEvenements()
 
         var resultatOrganisation = arrayListOf<Evenement>()
@@ -32,9 +31,7 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
                 it.organisation == organisation
             })
         }
-
         return resultatOrganisation
-
     }
 
     override suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
@@ -48,5 +45,9 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
         return ArrayList(liste.filter {
             it.nom.lowercase().trim().contains(lowercaseFiltre) || it.adresse.lowercase().trim().contains(lowercaseFiltre)
         })
+    }
+
+    override suspend fun getEvenementParOrganisation(organisation: String): ArrayList<Evenement> {
+        return source.obtenirEvenementsParOrganisation(organisation)
     }
 }

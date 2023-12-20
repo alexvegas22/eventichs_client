@@ -13,4 +13,5 @@ interface IModeleListeEvenements {
     suspend fun filtrerOrganisation(): ArrayList<Evenement>;
     suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement>;
     fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>;
+    suspend fun getEvenementParOrganisation(organisation: String): ArrayList<Evenement>
 }

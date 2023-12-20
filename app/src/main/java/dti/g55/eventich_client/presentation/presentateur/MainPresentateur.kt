@@ -15,7 +15,7 @@ class MainPresenterImpl : MainPresentateur {
 
     override fun attachView(view: MainActivity) {
         this.view = view
-        view.updateTheme(modele.getTheme())
+        //view.updateTheme(modele.getTheme())
     }
 
     override fun detachView() {
