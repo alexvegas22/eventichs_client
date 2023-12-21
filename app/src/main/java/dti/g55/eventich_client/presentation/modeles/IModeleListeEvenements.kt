@@ -5,6 +5,7 @@ import java.util.Date
 
 interface IModeleListeEvenements {
     var listeEvenements: ArrayList<Evenement>
+    var listeEvenementsInscrits: ArrayList<Evenement>
     var dateDebut: Date
     var dateFin: Date
     var filtre: String

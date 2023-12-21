@@ -41,6 +41,10 @@ class SourceDeDonneesSQL(val context: Context):ISourceDonnee {
         return dbHelper.obtenirEvenementsParOrganisation(organisation)
     }
 
+    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean {
+        return true
+    }
+
     suspend fun synchroniserEvenementsVersDB(listeEvenement: ArrayList<Evenement>) {
         dbHelper.clearEvenements()
         for (evenement in listeEvenement) {

@@ -7,6 +7,7 @@ import java.util.Date
 
 class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http://v34l.com:8080")) : IModeleListeEvenements {
     override var listeEvenements = arrayListOf<Evenement>()
+    override var listeEvenementsInscrits = arrayListOf<Evenement>()
     override var dateDebut = Date()
     override var dateFin = Date()
     override var filtre = ""
@@ -17,7 +18,8 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
     }
 
     override suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
-        return source.obtenirListeEvenementsInscrits(profilModele.getProfil())
+        listeEvenementsInscrits = source.obtenirListeEvenementsInscrits(profilModele.getProfil())
+        return listeEvenementsInscrits
     }
 
     override suspend fun filtrerOrganisation() : ArrayList<Evenement> {

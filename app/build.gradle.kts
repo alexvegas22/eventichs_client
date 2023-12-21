@@ -53,7 +53,7 @@ dependencies {
     implementation("androidx.preference:preference:1.2.0")
     // Lottie : https://github.com/airbnb/lottie-android
     implementation ("com.airbnb.android:lottie:6.2.0")
-    implementation ("com.squareup.okhttp3:okhttp:3.10.0")
+    implementation ("com.squareup.okhttp3:okhttp:4.12.0")
     // https://mvnrepository.com/artifact/org.mockito.kotlin/mockito-kotlin
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.1.0")
     // Use the Kotlin test library.

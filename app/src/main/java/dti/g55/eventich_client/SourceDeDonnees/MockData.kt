@@ -135,4 +135,8 @@ object MockData: ISourceDonnee {
     override suspend fun obtenirEvenementsParOrganisation(organisation: String): ArrayList<Evenement> {
         TODO("Not yet implemented")
     }
+
+    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean {
+        TODO("Not yet implemented")
+    }
 }

@@ -12,4 +12,5 @@ interface ISourceDonnee {
     suspend fun obtenirConditionMeteorologique(): ConditionMeterologique
     suspend fun obtenirOrganisationsPubliques(): ArrayList<String>
     suspend fun obtenirEvenementsParOrganisation(organisation : String): ArrayList<Evenement>
+    suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean
 }
