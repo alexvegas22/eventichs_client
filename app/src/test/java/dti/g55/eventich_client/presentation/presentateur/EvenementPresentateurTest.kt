@@ -1,5 +1,7 @@
 package dti.g55.eventich_client.presentation.presentateur
 
+import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.presentation.modeles.EvenementModele
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.newSingleThreadContext
@@ -11,7 +13,9 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mockito
+import org.mockito.Mockito.times
 import org.mockito.junit.MockitoJUnitRunner
+import java.util.Date
 
 @RunWith(MockitoJUnitRunner::class)
 class EvenementPresentateurTest {
@@ -32,14 +36,18 @@ class EvenementPresentateurTest {
 
         // mock
         val vue : EvenementVue = Mockito.mock( EvenementVue::class.java )
+        val modèle = Mockito.mock( EvenementModele::class.java )
         // sujet de test - mock pour pouvoir spy avec mockito
-        val presentateur = EvenementPresentateur(vue)
+        val presentateur = EvenementPresentateur(vue, modèle)
         // spy
         val spy = Mockito.spy(presentateur)
+
+        Mockito.`when`(modèle.evenementCourant).thenReturn(Evenement(1, "Test", "Test", Date(), Date(), "public", "test", "Test", "Test", "Test"))
 
         spy.init()
         Mockito.verify(vue).changerCouleursTextInitiales()
         Mockito.verify(vue).afficherAnimationChargement()
-        Mockito.verify(spy).charger_données()
+        Mockito.verify(spy, times(1)).charger_données()
+        Mockito.verify(spy, times(1)).afficherStatusParticipation()
     }
 }

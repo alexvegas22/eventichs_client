@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -45,6 +46,7 @@ class EvenementVue : Fragment() {
     lateinit var afficheur_adresseEvenement: TextView
     lateinit var afficheur_organisationEvenement : TextView
     lateinit var afficheur_description: TextView
+    lateinit var btnRejoindre: Button
     private var presentateur = EvenementPresentateur(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,11 +88,13 @@ class EvenementVue : Fragment() {
         organisationEvenement = view.findViewById(R.id.txtOrganisateur)
         afficheur_description = view.findViewById(R.id.txtAffichageDescription)
         description = view.findViewById(R.id.txtDescription)
+        btnRejoindre = view.findViewById(R.id.btnRejoindre)
 
         //setlisteners
         meteoLayout.setOnClickListener { voirMeteo() }
         backButtonImage.setOnClickListener { presentateur.traiterRetour() }
         calendrier.setOnClickListener { cliquerCalendrier() }
+        btnRejoindre.setOnClickListener { presentateur.traiterRejoindre() }
 
         //initialisation
         presentateur.init()
@@ -187,5 +191,14 @@ class EvenementVue : Fragment() {
     }
     fun utiliserCalendrier(intent: Intent){
         startActivity(intent)
+    }
+
+    fun afficherParticipation(){
+        btnRejoindre.text = "J'y vais!"
+        btnRejoindre.setBackgroundColor(resources.getColor(androidx.constraintlayout.widget.R.color.material_grey_300))
+    }
+
+    fun afficherErreur(){
+        Toast.makeText(context, "Un problème est survenu, veuillez réessayer.", Toast.LENGTH_SHORT).show()
     }
 }

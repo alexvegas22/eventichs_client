@@ -1,11 +1,16 @@
 package dti.g55.eventich_client.SourceDeDonnees
 
+import android.util.JsonWriter
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import okhttp3.RequestBody
+import java.io.ByteArrayOutputStream
 import java.io.IOException
+import java.io.OutputStreamWriter
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 
 class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
     @Throws(SourceDeDonneesException::class)
@@ -16,10 +21,10 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -40,10 +45,10 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -66,10 +71,10 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -93,10 +98,10 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -119,14 +124,14 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
             val réponseHeures = client.newCall(requêteHeures).execute()
 
-            val bodyHeures = réponseHeures.body()?.string()
+            val bodyHeures = réponseHeures.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -150,10 +155,10 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -174,10 +179,10 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
 
             val réponse = client.newCall(requête).execute()
 
-            val body = réponse.body()?.string()
+            val body = réponse.body?.string()
 
-            if (réponse.code() != 200) {
-                throw SourceDeDonneesException("Erreur: ${réponse.code()}")
+            if (réponse.code != 200) {
+                throw SourceDeDonneesException("Erreur: ${réponse.code}")
             }
             if (body == null){
                 throw SourceDeDonneesException("Aucune donnée reçues")
@@ -188,6 +193,47 @@ class SourceDeDonneesHTTP(val url_api: String): ISourceDonnee {
         catch (e: IOException){
             throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
         }
+    }
+
+    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean {
+        try{
+            val client = OkHttpClient()
+
+            val output = ByteArrayOutputStream()
+            val writer = JsonWriter( OutputStreamWriter( output ) )
+
+            writer.beginObject()
+            writer.name("idUtilisateur").value(idUtilisateur)
+            writer.name("idEvenement").value(idEvenement)
+            writer.endObject()
+            writer.close()
+
+            val body = RequestBody.create(
+                "application/json".toMediaTypeOrNull(), output.toString()
+            )
+
+            val requête = Request.Builder()
+                .url( "$url_api/rejoindre" )
+                .post( body )
+                .build()
+
+            val réponse = client.newCall( requête ).execute();
+
+            if( réponse.code != 200 ){
+                return false
+            }
+            if( réponse.body == null ){
+                throw SourceDeDonneesException( "Pas de données reçues" )
+                return false
+            }
+
+            return true
+        }
+        catch(e: IOException){
+            throw SourceDeDonneesException(e.message ?: "Erreur inconnue")
+            return false
+        }
+
     }
 
     suspend fun rejoindreEvenement(){
