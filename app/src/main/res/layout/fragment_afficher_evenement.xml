@@ -38,21 +38,13 @@
                 android:orientation="horizontal"
                 android:textAlignment="textEnd">
 
-                <TextView
-                    android:id="@+id/txtConfirmerPrésence"
+                <Button
+                    android:id="@+id/btnRejoindre"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:text="Rejoindre"
-                    android:textAlignment="textEnd"
-                    android:textSize="10sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Participer" />
 
-                <ImageView
-                    android:id="@+id/imgBoutonConfirmerPrésence"
-                    android:layout_width="45dp"
-                    android:layout_height="match_parent"
-                    android:baselineAlignBottom="false"
-                    app:srcCompat="@drawable/confirmed" />
             </LinearLayout>
 
         </LinearLayout>
