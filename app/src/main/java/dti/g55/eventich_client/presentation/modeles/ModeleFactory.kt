@@ -3,6 +3,7 @@ package dti.g55.eventich_client.presentation.modeles
 import android.content.Context
 
 object ModeleFactory {
+
     val evenements = EvenementModele()
     val listeEvenements = ListeEvenementModele()
     val listeOrganisations = ListeOrganisationsModele()

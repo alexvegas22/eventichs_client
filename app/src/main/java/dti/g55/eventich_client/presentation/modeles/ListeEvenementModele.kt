@@ -11,7 +11,7 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
     override var dateDebut = Date()
     override var dateFin = Date()
     override var filtre = ""
-    var profilModele = ProfilModele()
+    var profilModele = ModeleFactory.profil
 
     override suspend fun retournerListeÉvénements(): ArrayList<Evenement> {
         return source.obtenirListeEvenements()
