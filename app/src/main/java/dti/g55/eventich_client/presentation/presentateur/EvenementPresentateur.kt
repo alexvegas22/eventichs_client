@@ -2,6 +2,7 @@ package dti.g55.eventich_client.presentation.presentateur
 
 import android.content.Intent
 import android.provider.CalendarContract
+import dti.g55.eventich_client.presentation.modeles.IModeleEvenement
 import dti.g55.eventich_client.presentation.modeles.ModeleFactory
 import dti.g55.eventich_client.presentation.vues.EvenementVue
 import kotlinx.coroutines.CoroutineScope
@@ -12,10 +13,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 
 
-class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue) : IPresentateur{
+class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue, val modèle: IModeleEvenement = ModeleFactory.evenements) : IPresentateur{
 
     private var job: Job? = null
-    private var modèle = ModeleFactory.evenements
     private var modèleListeEvenements = ModeleFactory.listeEvenements
     private var modèleMétéo = ModeleFactory.meteo
     private var modèleUtilisateur = ModeleFactory.profil
