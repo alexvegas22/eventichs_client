@@ -1,21 +1,18 @@
 package dti.g55.eventich_client
 
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.findNavController
-import androidx.preference.PreferenceManager
 import dti.g55.eventich_client.presentation.presentateur.MainPresentateur
 import dti.g55.eventich_client.presentation.presentateur.MainPresenterImpl
 
 
 class MainActivity : AppCompatActivity() {
     lateinit var fragmentContainerView: FragmentContainerView
-    var prentateur : MainPresentateur = MainPresenterImpl()
+    var prentateur : MainPresentateur = MainPresenterImpl(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

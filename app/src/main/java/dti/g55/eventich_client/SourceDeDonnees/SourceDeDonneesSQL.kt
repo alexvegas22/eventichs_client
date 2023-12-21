@@ -9,7 +9,7 @@ import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import java.time.LocalDate
 
-class SourceDeDonneesSQL(context: Context):ISourceDonnee {
+class SourceDeDonneesSQL(val context: Context):ISourceDonnee {
     private val dbHelper = DatabaseHelper(context)
     override suspend fun obtenirListeEvenements(): ArrayList<Evenement> {
         return dbHelper.obtenirEvenements()
@@ -24,9 +24,7 @@ class SourceDeDonneesSQL(context: Context):ISourceDonnee {
     }
 
     override suspend fun obtenirOrganisations(profil: ProfilUtilisateur): ArrayList<String> {
-        val message = mutableListOf(
-            "Vous êtes hors ligne, connectez-vous afin de consulter vos organisations"
-        )
+        val message = mutableListOf<String>()
         return ArrayList(message)
     }
 
@@ -35,9 +33,7 @@ class SourceDeDonneesSQL(context: Context):ISourceDonnee {
     }
 
     override suspend fun obtenirOrganisationsPubliques(): ArrayList<String> {
-        val message = mutableListOf(
-            "Vous êtes hors ligne, connectez-vous afin de consulter vos organisations"
-        )
+        val message = mutableListOf<String>()
         return ArrayList(message)
     }
 
