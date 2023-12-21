@@ -27,7 +27,7 @@ class ProfilVue : Fragment() {
     private lateinit var adresseProfil : TextView
     private lateinit var profilUtilisateur: ProfilUtilisateur
     private var presentateur: ProfilPresentateur= ProfilPresentateur(this)
-    private var mairPresentateur : MainPresentateur = MainPresenterImpl()
+    private var mairPresentateur : MainPresentateur = MainPresenterImpl(context)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
