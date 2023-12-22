@@ -1,7 +1,9 @@
 package dti.g55.eventich_client.presentation.presentateur
 
+import android.content.Context
 import android.widget.DatePicker
 import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesException
+import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesSQL
 import dti.g55.eventich_client.domaine.entite.Evenement
 import dti.g55.eventich_client.presentation.modeles.EvenementModele
 import dti.g55.eventich_client.presentation.modeles.IModeleEvenement
@@ -12,6 +14,7 @@ import dti.g55.eventich_client.presentation.vues.IVueListeEvenement
 import dti.g55.eventich_client.presentation.vues.ListeEvenementVue
 import kotlinx.coroutines.*
 import kotlinx.coroutines.Dispatchers
+import java.util.ArrayList
 import java.util.Calendar
 import java.util.Date
 import kotlin.coroutines.CoroutineContext
@@ -23,10 +26,13 @@ enum class BoutonDateTag {
 
 class ListeEvenementPresentateur(
     val vue: IVueListeEvenement,
+    context : Context,
     val listeEvenementsModele: IModeleListeEvenements = ModeleFactory.listeEvenements,
+
     val evenementsModele: IModeleEvenement = ModeleFactory.evenements,
     val coroutineContext: CoroutineContext = Dispatchers.IO
 ): IPresentateurListeEvenement {
+    val donneesLocales = SourceDeDonneesSQL(context)
     override fun init() {
         vue.disposerVueChargement()
         setDatesInitial()
@@ -39,19 +45,26 @@ class ListeEvenementPresentateur(
     }
 
     override fun getListeEvenementsEntreDatesFiltrer(filtre: String) {
+        var nouvelleListe = ArrayList<Evenement>()
+        var listeEvenementModele = ModeleFactory.listeEvenements
         CoroutineScope(coroutineContext).launch {
             try {
                 listeEvenementsModele.listeEvenements = listeEvenementsModele.getListeEvenementsEntreDates(listeEvenementsModele.dateDebut, listeEvenementsModele.dateFin)
                 CoroutineScope(Dispatchers.Main).launch {
-                    var nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
+                    nouvelleListe = listeEvenementsModele.getListeFiltrer(listeEvenementsModele.listeEvenements, filtre)
                     vue.rafraichirListeEvenements(nouvelleListe)
-                    vue.disposerVueChargementTerminé()
+                    if (nouvelleListe.isNotEmpty()) donneesLocales.synchroniserEvenementsVersDB(nouvelleListe)
                 }
             }
             catch(e: SourceDeDonneesException) {
                 println(e);
+                nouvelleListe = donneesLocales.obtenirListeEvenements()
+                vue.rafraichirListeEvenements(nouvelleListe)
             }
         }
+
+
+        vue.disposerVueChargementTerminé()
     }
 
     override fun setDatesInitial() {

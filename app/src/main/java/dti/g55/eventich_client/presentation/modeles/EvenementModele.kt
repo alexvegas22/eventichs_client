@@ -13,7 +13,7 @@ class EvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http://v3
         return (listeEvenementsInscrits.any { it.id == idEvenement })
     }
 
-    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean {
+    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: String): Boolean {
         return source.rejoindreEvenement(idEvenement, idUtilisateur)
     }
 

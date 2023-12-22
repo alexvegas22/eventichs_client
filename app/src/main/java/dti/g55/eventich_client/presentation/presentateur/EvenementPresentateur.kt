@@ -81,7 +81,7 @@ class EvenementPresentateur(val vueAfficherEvenementFragment : EvenementVue, val
     }
 
     fun traiterRejoindre() {
-        val idUtilisateur = modèleUtilisateur.getProfil().id
+        val idUtilisateur = modèleUtilisateur.getProfil().code
         val idEvenement = modèle.evenementCourant.id
         job = CoroutineScope( Dispatchers.IO ).launch {
             if (!modèle.verifierParticipationEvenement(idEvenement, modèleListeEvenements.listeEvenementsInscrits)){

@@ -14,8 +14,8 @@ interface MainPresentateur {
 class MainPresenterImpl(context: Context) : MainPresentateur {
 
     private var view: MainActivity? = null
-    var donneesLocales = SourceDeDonneesSQL(context)
-    var modele = ModeleFactory.preferences
+    //var modele = ModeleFactory.preferences
+
 
     override fun attachView(view: MainActivity) {
         this.view = view
@@ -27,6 +27,6 @@ class MainPresenterImpl(context: Context) : MainPresentateur {
     }
 
     override fun toggleTheme() {
-        modele.toggleTheme()
+        //modele.toggleTheme()
     }
 }

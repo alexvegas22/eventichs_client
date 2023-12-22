@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.ConditionMeterologique
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.Organisation
 import dti.g55.eventich_client.domaine.entite.ProfilUtilisateur
 import java.time.LocalDate
 
@@ -15,7 +16,7 @@ class SourceDeDonneesSQL(val context: Context):ISourceDonnee {
         return dbHelper.obtenirEvenements()
     }
 
-    override suspend fun obtenirListeEvenementsInscrits(profil: ProfilUtilisateur): ArrayList<Evenement> {
+    override suspend fun obtenirListeEvenementsInscrits(): ArrayList<Evenement> {
         return dbHelper.obtenirEvenements()
     }
 
@@ -23,8 +24,8 @@ class SourceDeDonneesSQL(val context: Context):ISourceDonnee {
         return 0
     }
 
-    override suspend fun obtenirOrganisations(profil: ProfilUtilisateur): ArrayList<String> {
-        val message = mutableListOf<String>()
+    override suspend fun obtenirOrganisations(): ArrayList<Organisation> {
+        val message = mutableListOf<Organisation>()
         return ArrayList(message)
     }
 
@@ -32,17 +33,23 @@ class SourceDeDonneesSQL(val context: Context):ISourceDonnee {
         TODO("Not yet implemented")
     }
 
-    override suspend fun obtenirOrganisationsPubliques(): ArrayList<String> {
-        val message = mutableListOf<String>()
+    override suspend fun obtenirOrganisationsPubliques(): ArrayList<Organisation> {
+        val message = mutableListOf<Organisation>()
         return ArrayList(message)
     }
 
-    override suspend fun obtenirEvenementsParOrganisation(organisation : String): ArrayList<Evenement> {
-        return dbHelper.obtenirEvenementsParOrganisation(organisation)
+    override suspend fun obtenirEvenementsParOrganisation(organisation : Organisation): ArrayList<Evenement> {
+        return dbHelper.obtenirEvenementsParOrganisation(organisation.nom)
     }
 
-    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean {
+    override suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: String): Boolean {
         return true
+    }
+    fun seConnecter(profilUtilisateur: ProfilUtilisateur){
+        dbHelper.ajouterUtilisateur(profilUtilisateur)
+    }
+    fun obtenirUtilisateur() : ProfilUtilisateur{
+        return dbHelper.obtenirUtilisateur()
     }
 
     suspend fun synchroniserEvenementsVersDB(listeEvenement: ArrayList<Evenement>) {

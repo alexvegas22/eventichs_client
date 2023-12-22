@@ -51,22 +51,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
+        android:layout_marginBottom="10dp"
         android:fontFamily="@font/poppins_bold"
         android:text="@string/vos_org"
+        app:layout_constraintBottom_toTopOf="@id/textinput_placeholder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SubscribedEventsRecyclerView"
-        app:layout_constraintBottom_toTopOf="@id/textinput_placeholder"/>
+        app:layout_constraintTop_toBottomOf="@+id/SubscribedEventsRecyclerView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:id="@+id/textinput_placeholder"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="32dp"
+        app:layout_constraintBottom_toTopOf="@id/OrganisationEventsRecyclerView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/OrganisationEventsText"
-        app:layout_constraintBottom_toTopOf="@id/OrganisationEventsRecyclerView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toBottomOf="@+id/OrganisationEventsText">
 
         <AutoCompleteTextView
             android:id="@+id/autoCompleteOrganisationName"
@@ -83,14 +86,11 @@
         android:id="@+id/OrganisationEventsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clipChildren="false"
-        android:clipToPadding="false"
+        android:clipChildren="true"
+        android:clipToPadding="true"
         android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@id/textinput_placeholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintBottom_toBottomOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>
 

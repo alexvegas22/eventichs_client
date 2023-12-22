@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.JsonReader
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.Organisation
 import java.io.StringReader
 import java.text.SimpleDateFormat
 
@@ -101,27 +102,58 @@ class DecodeurJson {
             return Evenement(id, nom,  adresse, dateFormat.parse(dateDebut), dateFormat.parse(dateFin), type ,description, categorie, photo, organisation)
         }
 
-        fun décoderJSONVersListeOrganisations(json: String): ArrayList<String> {
-            val liste = arrayListOf<String>()
+        fun décoderJSONVersListeOrganisations(json: String): ArrayList<Organisation> {
+            val liste = arrayListOf<Organisation>()
 
             val reader = JsonReader(StringReader(json))
             reader.beginArray()
             while (reader.hasNext()) {
                 reader.beginObject()
+                var id = 0
+                var nomOrganisation = ""
                 while (reader.hasNext()) {
                     val clé = reader.nextName()
 
                     when (clé) {
-                        "nomOrganisation" -> {
-                            liste += reader.nextString()
+                        "id_organisation" -> {
+                            id = reader.nextInt()
                         }
-
+                        "code_utilisateur" -> {
+                            nomOrganisation = reader.nextString()
+                        }
                         else -> reader.skipValue()
                     }
                 }
                 reader.endObject()
+                liste += Organisation(id, nomOrganisation)
             }
-            reader.endArray()
+
+            return liste
+        }
+
+        fun décoderJSONVersOrganisations(json: String): Organisation {
+            val reader = JsonReader(StringReader(json))
+
+            reader.beginObject()
+            var id : Int = 0
+            var nomOrganisation : String = ""
+            while (reader.hasNext()) {
+                val clé = reader.nextName()
+
+                when (clé) {
+                    "id_organisation" -> {
+                        id = reader.nextInt()
+                    }
+                    "nomOrganisation" -> {
+                        nomOrganisation = reader.nextString()
+                    }
+                    else -> reader.skipValue()
+                }
+            }
+            reader.endObject()
+           var liste = Organisation(id, nomOrganisation)
+
+
 
             return liste
         }

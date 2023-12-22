@@ -1,8 +1,10 @@
 package dti.g55.eventich_client.presentation.modeles
 
-interface IModeleListeOrganisations {
-    var listeOrganisations : ArrayList<String>
+import dti.g55.eventich_client.domaine.entite.Organisation
 
-    suspend fun retournerOrganisationsPubliques(): ArrayList<String>
-    suspend fun retournerOrganisationsInscrites(): ArrayList<String>
+interface IModeleListeOrganisations {
+    var listeOrganisations : ArrayList<Organisation>
+    var listeOrganisationsInscrites : ArrayList<Organisation>
+    suspend fun retournerOrganisationsPubliques(): ArrayList<Organisation>
+    suspend fun retournerOrganisationsInscrites(): ArrayList<Organisation>
 }

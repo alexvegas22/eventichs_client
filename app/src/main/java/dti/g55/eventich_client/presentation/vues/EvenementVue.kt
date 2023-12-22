@@ -180,10 +180,10 @@ class EvenementVue : Fragment() {
         temperature.text = conditionMeterologique.températureMoyenne.toString()
         humidite.text = conditionMeterologique.pourcentageHumidité.toString()
         meteo.text = conditionMeterologique.meteoDescription
-        categorie.setText(evenement.categorie)
+        categorie.setText(evenement.description)
         adresseEvenement.setText(evenement.adresse)
         organisationEvenement.setText(evenement.organisation)
-        description.setText(evenement.description)
+        description.setText(evenement.categorie)
     }
 
     fun cliquerCalendrier(){

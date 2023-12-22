@@ -1,39 +1,38 @@
 package dti.g55.eventich_client.presentation.modeles
 
+import android.content.Context
 import dti.g55.eventich_client.SourceDeDonnees.ISourceDonnee
+import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesException
 import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesHTTP
+import dti.g55.eventich_client.SourceDeDonnees.SourceDeDonneesSQL
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.Organisation
 import java.util.Date
 
-class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http://v34l.com:8080")) : IModeleListeEvenements {
+class ListeEvenementModele() : IModeleListeEvenements {
+    val source: ISourceDonnee = SourceDeDonneesHTTP("http://v34l.com:8080")
+
     override var listeEvenements = arrayListOf<Evenement>()
     override var listeEvenementsInscrits = arrayListOf<Evenement>()
     override var dateDebut = Date()
     override var dateFin = Date()
     override var filtre = ""
-    var profilModele = ModeleFactory.profil
+    var profilModele = ProfilModele()
 
     override suspend fun retournerListeÉvénements(): ArrayList<Evenement> {
-        return source.obtenirListeEvenements()
+        try {
+            listeEvenements = source.obtenirListeEvenements()
+        } catch (e : SourceDeDonneesException){
+        }
+        return listeEvenements
     }
 
     override suspend fun listeEvenementsInscrits(): ArrayList<Evenement>{
-        listeEvenementsInscrits = source.obtenirListeEvenementsInscrits(profilModele.getProfil())
-        return listeEvenementsInscrits
-    }
-
-    override suspend fun filtrerOrganisation() : ArrayList<Evenement> {
-        val organisations = source.obtenirOrganisations(profilModele.getProfil())
-        var evenements = source.obtenirListeEvenements()
-
-        var resultatOrganisation = arrayListOf<Evenement>()
-
-        for(organisation in organisations){
-            resultatOrganisation += ArrayList(evenements.filter {
-                it.organisation == organisation
-            })
+        try {
+            listeEvenementsInscrits = source.obtenirListeEvenementsInscrits()
+        } catch (e : SourceDeDonneesException){
         }
-        return resultatOrganisation
+        return listeEvenementsInscrits
     }
 
     override suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement> {
@@ -49,7 +48,11 @@ class ListeEvenementModele(val source: ISourceDonnee = SourceDeDonneesHTTP("http
         })
     }
 
-    override suspend fun getEvenementParOrganisation(organisation: String): ArrayList<Evenement> {
+    override suspend fun getEvenementParOrganisation(organisation: Organisation): ArrayList<Evenement> {
         return source.obtenirEvenementsParOrganisation(organisation)
+    }
+    suspend fun sync(context: Context){
+        val sourceLocale = SourceDeDonneesSQL(context)
+        sourceLocale.synchroniserEvenementsVersDB(listeEvenements)
     }
 }

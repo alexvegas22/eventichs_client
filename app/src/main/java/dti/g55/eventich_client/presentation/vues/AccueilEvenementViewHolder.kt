@@ -37,7 +37,6 @@ class AccueilEvenementViewHolder(itemView: View, val presentateur: AccueilPresen
         nom.text = evenement.nom
         date.text = evenement.dateDebut.toString()
         location.text = evenement.adresse
-
         item.setOnClickListener { presentateur.traiterClickEvenement(evenement) }
     }
 }

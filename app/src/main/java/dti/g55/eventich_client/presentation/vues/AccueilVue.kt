@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import dti.g55.eventich_client.R
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.Organisation
 import dti.g55.eventich_client.presentation.presentateur.AccueilPresentateur
 import dti.g55.eventich_client.utilitaire.CustomRecyclerAdapter
 
@@ -24,10 +25,8 @@ class AccueilVue : Fragment() {
     private lateinit var organisationDropdown : AutoCompleteTextView
     private lateinit var titreTxt: TextView
     private lateinit var organisationTxt: TextView
-    private lateinit var nomUtilisateur : TextView
     private lateinit var context: Context
-    private lateinit var listeOrganisations : MutableList<String>
-    private var presentateur =  AccueilPresentateur(this)
+    private lateinit var presentateur: AccueilPresentateur
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +34,7 @@ class AccueilVue : Fragment() {
     ): View? {
 
         context = container!!.context
+        presentateur =  AccueilPresentateur(this, context)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_accueil, container, false)
@@ -51,7 +51,7 @@ class AccueilVue : Fragment() {
         presentateur.init()
     }
 
-    fun setupRecyclerView(listeEvenements: ArrayList<Evenement>, listeNomsOrganisation : ArrayList<String>,listeEvenementsOrganisations: ArrayList<Evenement>) {
+    fun setupRecyclerView(listeEvenements: ArrayList<Evenement>, listeNomsOrganisation : ArrayList<Organisation>, listeEvenementsOrganisations: ArrayList<Evenement>) {
         var adapter = CustomRecyclerAdapter(
             listeEvenements,
             R.layout.home_featured_event,
@@ -65,8 +65,13 @@ class AccueilVue : Fragment() {
         recyclerEvenementsProchains.itemAnimator = DefaultItemAnimator()
         recyclerEvenementsProchains.adapter = adapter
 
-        var adapterOrganisationNom = ArrayAdapter(context, R.layout.organisation_nom_item, listeNomsOrganisation)
+        var adapterOrganisationNom = ArrayAdapter(context, R.layout.organisation_nom_item, listeNomsOrganisation.map{it.nom})
         organisationDropdown.setAdapter(adapterOrganisationNom)
+
+        organisationDropdown.setOnItemClickListener { _, _, position, _ ->
+            val selectedText: String = adapterOrganisationNom.getItem(position).toString()
+            presentateur.traiterClickOrganisation(selectedText)
+        }
 
         var adapterOrganisation = CustomRecyclerAdapter(
             listeEvenementsOrganisations,

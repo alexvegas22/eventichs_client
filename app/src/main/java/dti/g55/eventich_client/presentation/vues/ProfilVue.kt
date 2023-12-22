@@ -2,6 +2,7 @@ package dti.g55.eventich_client.presentation.vues
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.ToggleButton
+import com.squareup.picasso.Picasso
 import dti.g55.eventich_client.MainActivity
 
 import dti.g55.eventich_client.R
@@ -27,7 +29,7 @@ class ProfilVue : Fragment() {
     private lateinit var adresseProfil : TextView
     private lateinit var profilUtilisateur: ProfilUtilisateur
     private var presentateur: ProfilPresentateur= ProfilPresentateur(this)
-    private var mairPresentateur : MainPresentateur = MainPresenterImpl(context)
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +38,6 @@ class ProfilVue : Fragment() {
         context = container!!.context
 
         val view = inflater.inflate(R.layout.fragment_profil, container, false)
-        mairPresentateur.attachView(requireActivity() as MainActivity)
-        val toggleTheme : Button = view.findViewById(R.id.ThemeToggle)
-        toggleTheme.setOnClickListener { mairPresentateur.toggleTheme() }
         return view
     }
 
@@ -56,7 +55,14 @@ class ProfilVue : Fragment() {
 
     }
     fun updateProfileComponents(DonneesProfil : ProfilUtilisateur){
-        imageProfil.setImageResource(DonneesProfil.imageId)
+        imageProfil.setImageResource(R.drawable.ic_search)
+        try {
+            // Use Picasso to load the image from the URL
+            Picasso.get().load(DonneesProfil.imageId).into(imageProfil)
+        } catch (e : Exception) {
+            Log.e("Image Error","Woopsie")
+        }
+
         nomProfil.setText(DonneesProfil.prenom+" "+DonneesProfil.nom)
         emailProfil.setText(DonneesProfil.email)
         adresseProfil.setText(DonneesProfil.adresse)
@@ -64,7 +70,6 @@ class ProfilVue : Fragment() {
     }
 
     override fun onDestroyView() {
-        mairPresentateur.detachView()
         super.onDestroyView()
     }
 }

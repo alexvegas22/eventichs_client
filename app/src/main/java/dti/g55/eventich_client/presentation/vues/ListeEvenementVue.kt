@@ -1,6 +1,7 @@
 package dti.g55.eventich_client.presentation.vues
 
 import android.app.DatePickerDialog
+import android.content.Context
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -30,14 +31,14 @@ import java.util.Date
 
 class ListeEvenementVue : Fragment(), IVueListeEvenement {
 
-    private val presentateur = ListeEvenementPresentateur(this)
+    private lateinit var presentateur : ListeEvenementPresentateur
     private lateinit var recycler: RecyclerView
 
     private lateinit var btnDateDebut: Button
     private lateinit var btnDateFin: Button
     private lateinit var inputRecherche: EditText
     private lateinit var animationChargement : LottieAnimationView
-
+    private lateinit var context: Context
     private lateinit var startDateSelectorDialog: DatePickerDialog
     private lateinit var endDateSelectorDialog: DatePickerDialog
 
@@ -46,7 +47,8 @@ class ListeEvenementVue : Fragment(), IVueListeEvenement {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-
+        context = container!!.context
+        presentateur = ListeEvenementPresentateur(this, context)
         return inflater.inflate(R.layout.fragment_liste_evenement, container, false)
     }
 
@@ -68,7 +70,7 @@ class ListeEvenementVue : Fragment(), IVueListeEvenement {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        presentateur = ListeEvenementPresentateur(this, context)
         recycler = view.findViewById(R.id.rvListeEvenements)
         btnDateDebut = view.findViewById(R.id.btnDateDebut)
         btnDateFin = view.findViewById(R.id.btnDateFin)

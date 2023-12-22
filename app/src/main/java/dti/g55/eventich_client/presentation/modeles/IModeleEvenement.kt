@@ -6,5 +6,5 @@ interface IModeleEvenement {
     var evenementCourant: Evenement
     suspend fun obtenirNbParticipants(evenement: Evenement): String
     fun verifierParticipationEvenement(idEvenement: Int, listeEvenementsInscrits: ArrayList<Evenement>): Boolean
-    suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: Int): Boolean
+    suspend fun rejoindreEvenement(idEvenement: Int, idUtilisateur: String): Boolean
 }

@@ -10,7 +10,8 @@ android {
     defaultConfig {
         applicationId = "dti.g55.eventich_client"
         minSdk = 24
-        targetSdk = 33
+        //noinspection ExpiredTargetSdkVersion
+        targetSdk = 32
         versionCode = 1
         versionName = "1.0"
 
@@ -41,16 +42,16 @@ android {
 dependencies {
     // Picasso : for url image fetch
     implementation("com.squareup.picasso:picasso:2.71828")
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.10.0")
+    implementation("com.google.android.material:material:1.11.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("androidx.navigation:navigation-fragment:2.7.4")
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.6")
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2")
-    implementation("androidx.annotation:annotation:1.6.0")
-    implementation("androidx.preference:preference:1.2.0")
+    implementation("androidx.annotation:annotation:1.7.1")
+    implementation("androidx.preference:preference-ktx:1.2.1")
     // Lottie : https://github.com/airbnb/lottie-android
     implementation ("com.airbnb.android:lottie:6.2.0")
     implementation ("com.squareup.okhttp3:okhttp:4.12.0")

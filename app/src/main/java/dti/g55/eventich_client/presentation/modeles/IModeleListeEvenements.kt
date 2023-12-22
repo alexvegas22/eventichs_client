@@ -1,6 +1,7 @@
 package dti.g55.eventich_client.presentation.modeles
 
 import dti.g55.eventich_client.domaine.entite.Evenement
+import dti.g55.eventich_client.domaine.entite.Organisation
 import java.util.Date
 
 interface IModeleListeEvenements {
@@ -11,8 +12,7 @@ interface IModeleListeEvenements {
     var filtre: String
     suspend fun retournerListeÉvénements(): ArrayList<Evenement>;
     suspend fun listeEvenementsInscrits(): ArrayList<Evenement>;
-    suspend fun filtrerOrganisation(): ArrayList<Evenement>;
     suspend fun getListeEvenementsEntreDates(dateDebut: Date, dateFin: Date): ArrayList<Evenement>;
     fun getListeFiltrer(liste: ArrayList<Evenement>, filtre: String): ArrayList<Evenement>;
-    suspend fun getEvenementParOrganisation(organisation: String): ArrayList<Evenement>
+    suspend fun getEvenementParOrganisation(organisation: Organisation): ArrayList<Evenement>
 }
